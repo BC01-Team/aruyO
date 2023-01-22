@@ -1,0 +1,8 @@
+
+__pycache__
+
+node_modules
+
+mongodb_data
+
+.env
