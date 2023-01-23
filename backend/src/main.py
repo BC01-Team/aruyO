@@ -5,8 +5,10 @@ from starlette.middleware.cors import CORSMiddleware
 
 
 from src.db import db
-# from bson.objectid import ObjectId
-# from bson.json_util import dumps, loads
+
+# log設定
+from src.utils.logger.logger import setup_logger
+logger = setup_logger(__name__)
 
 app = FastAPI()
 
@@ -25,6 +27,7 @@ app.add_middleware(
 # 接続テスト用　削除可
 @app.get("/")
 def read_root():
+    logger.debug("pass")
     return {"test": "get test ok"}
 
 # mongo_dbとの接続テスト用　削除可　postしたdataは下記
