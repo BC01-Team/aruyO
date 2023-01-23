@@ -8,9 +8,6 @@ COPY pyproject.toml pyproject.toml ./
 RUN poetry config virtualenvs.create false \
     && poetry install --no-root
 
-# RUN poetry config virtualenvs.in-project true
-# RUN if [ -f pyproject.toml ]; then poetry install; fi
-
 
 EXPOSE 8888
 
