@@ -6,7 +6,7 @@ def setup_logger(name):
     logger.setLevel(logging.DEBUG)
 
     # ファイルに出力するログレベルをWARNINGに設定。挙動みて変更可
-    fh = logging.FileHandler('./src/utils/test.log')
+    fh = logging.FileHandler('./src/utils/logger/test.log')
     fh.setLevel(logging.WARNING)
     fh_formatter = logging.Formatter(
         '%(levelname)s %(asctime)s [%(name)s] %(message)s')
