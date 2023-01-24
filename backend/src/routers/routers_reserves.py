@@ -1,5 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from src.utils.logger.logger import setup_logger
+from fastapi.encoders import jsonable_encoder
+
 import src.cruds.cruds_reserves as reserve_crud
 
 logger = setup_logger(__name__)
@@ -23,5 +25,12 @@ def get_reserve(id: str):
 
 
 # 予約情報変更
-# @router.put("/reserves/{id}")
-# async def update_reserve():
+@router.put("/reserves/{id}")
+def update_reserve(id: str, data: dict):  # dataはrequestbodyにreserveコレクションから_idを抜いたものをいれた。余計な部分が多いのでステータスだけにしたい。
+    reserve = jsonable_encoder(data)
+    logger.debug(reserve)
+    res = reserve_crud.update_reserve(id, reserve)
+    if res:
+        return res
+    raise HTTPException(status_code=404, detail="予約がありません")
+
