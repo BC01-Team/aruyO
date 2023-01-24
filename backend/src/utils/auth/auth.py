@@ -6,6 +6,9 @@ sys.path.append("../")
 # :/app/src# python utils/auth/auth.py 
 from src.db import db
 import uuid
+from fastapi import APIRouter, HTTPException, Response
+
+router = APIRouter()
 
 HOST = os.environ.get("REDIS_URL")
 
@@ -99,7 +102,7 @@ def get_user(body):
            return "error" #Noneがreturnされる
         return  user
 
-print(get_user(mock_data_find))
+# print(get_user(mock_data_find))
 # print(get_user(none_mock_data_find))
 
 # session_id発行 
@@ -121,11 +124,17 @@ print(r.get("X")) #None
 #cookie取り出す
 
 #api router
-#@router.post("/login")
+@router.get("/login")
+#find
+async def save_cookie(response: Response):
+    response.set_cookie(key="sample_cookie", value="sample_cookie_value")
+    return "ok"
+   
 
-
-#@router.post("logout")
-
+@router.post("/logout")
+async def save_cookie(response: Response):
+    response.set_cookie(key="sample_cookie", value="")
+    return "ok"
 
 
 # リクエストの都度行われる処理をする関数
