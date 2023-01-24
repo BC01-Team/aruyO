@@ -13,10 +13,10 @@ const Header = () => {
           </div>
           <div className="ml-10 space-x-4">
             <Link href="/signin">
-             <Button>ログイン</Button>
+              <Button>ログイン</Button>
             </Link>
             <Link href="/signup">
-              <Button style="Primary">会員登録</Button>
+              <Button style="primary">会員登録</Button>
             </Link>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 type ButtonProps = {
   children: ReactNode,
   type?: "button" | "submit",
-  style?: "Primary"
+  style?: "primary"
 };
 
 const Button = ({
@@ -17,7 +17,7 @@ const Button = ({
   return (
     <button
       type={type}
-      className={style === "Primary" ? primaryStyle : defaultStyle}
+      className={style === "primary" ? primaryStyle : defaultStyle}
     >
       {children}
     </button>
