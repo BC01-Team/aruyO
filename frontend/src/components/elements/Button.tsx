@@ -19,7 +19,7 @@ const Button = ({
   return (
     <button
       type={type}
-      className={style === "primary" ? primaryStyle : defaultStyle}
+      className={style === "primary" ? primaryStyle : defaultStyle} // style="primary"を指定した場合はprimaryStyleを適用、それ以外はdefaultStyleを適用
       onClick={onClick}
     >
       {children}

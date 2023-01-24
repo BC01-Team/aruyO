@@ -6,6 +6,7 @@ const SearchBox = () => {
   const [keyword, setKeyword] = useState<string>("");
 
   const getResultData = () => {
+    // APIができたら処理を書く
     console.log(keyword);
   };
 
@@ -20,7 +21,7 @@ const SearchBox = () => {
           name="search"
           id="search"
           className="block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 sm:text-sm mr-2"
-          placeholder="発電機　藤沢市"
+          placeholder="発電機　藤沢市" // 要検討
           onChange={(e) => setKeyword(e.target.value)}
         />
         <Button type="submit" onClick={getResultData}>検索</Button>
