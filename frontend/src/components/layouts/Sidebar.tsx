@@ -13,6 +13,7 @@ const classNames = (...classes: any[]) => {
 
 const Sidebar = () => {
   const handleOnClick = (clickedItem: string) => {
+    // ページ遷移時に"現在のページ"を変更
     navigation.forEach((item) => {
       if (item.current) {
         item.current = false;
