@@ -12,6 +12,7 @@ const Header = () => {
             </a>
           </div>
           <div className="ml-10 space-x-4">
+            {/* 非ログイン時はログインボタンと会員登録ボタンを表示 */}
             <Link href="/signin">
               <Button>ログイン</Button>
             </Link>
