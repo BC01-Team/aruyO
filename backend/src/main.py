@@ -1,9 +1,7 @@
 from fastapi import FastAPI, Body
-from typing import Union
-
 from starlette.middleware.cors import CORSMiddleware
 
-
+from src.routers import routers_reserves
 from src.db import db
 
 # log設定
@@ -13,7 +11,7 @@ logger = setup_logger(__name__)
 app = FastAPI()
 
 
-#origins = [ ] 一旦空
+# origins = [ ] 一旦空
 
 # CORS
 app.add_middleware(
@@ -23,6 +21,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
+
+# ルーティング設定
+app.include_router(routers_reserves.router)
 
 # 接続テスト用　削除可
 @app.get("/")
