@@ -4,7 +4,7 @@ type ButtonProps = {
   children: ReactNode,
   type?: "button" | "submit",
   style?: "primary",
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const Button = ({
