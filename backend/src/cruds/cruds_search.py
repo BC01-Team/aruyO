@@ -11,11 +11,11 @@ logger = setup_logger(__name__)
 collection_exhibits = db.exhibits
 
 
-# API_No.9 検索語が出品物の名前と完全一致する出品物を取得
+# API_No.9 検索語が出品物の名前と部分一致する出品物を取得
 def get_search_word(key: str):
     logger.debug("検索crud")
-    # mongoDB findでドキュメント取得し、listに追加
-    search_word = collection_exhibits.find({"info.name":key})
+    # mongoDB findでドキュメント取得、$regexで部分一致したものをlistに追加
+    search_word = collection_exhibits.find({"info.name":{"$regex":key}})
     search_word_result = []
     for document in search_word:
         logger.debug(document)
