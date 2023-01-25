@@ -35,6 +35,4 @@ def authenticate_user(email,password):
     print("ck",hashed_password)
     if not verify_password(password,hashed_password):
         return False
-    print(user['_id'])
-    return user['_id']
-
+    return user

@@ -20,8 +20,8 @@ def create_sessoion(body:auth_schema.RequestBody,response: Response):
   print(email, password)
 
   # user認証
-  user_id = auth_crud.authenticate_user(email,password)
-  if not user_id:
+  user = auth_crud.authenticate_user(email,password)
+  if not user:
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Incorrect email or password"
@@ -32,12 +32,24 @@ def create_sessoion(body:auth_schema.RequestBody,response: Response):
   print("session_id",session_id)
 
   # redisにセッション保存
-  r.set(session_id, user_id)
+  r.set(session_id, user["_id"])
   print("r.get", r.get(session_id))
 
   # session_id set_cookie してuser情報をreturnする
   response.set_cookie(key="session_id", value=session_id)
-  return {"message": "login ok"}
+  
+  res_user = {
+    "id": user["_id"],
+    "name": user["info"]["name"],
+    "latitude": user["info"]["latitude"],
+    "longitude": user["info"]["longitude"],
+    "staff_id": user["staff"][0]["id"],
+    "staff_name": user["staff"][0]["name"],
+    "admin": user["staff"][0]["role"]["admin"]
+    }
+  print("res", res_user)
+  
+  return {"user": res_user }
 
 # logout cookieに空文字挿入
 @router.post("/logout")
