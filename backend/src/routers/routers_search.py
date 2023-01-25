@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 
-# API_No.9 検索語が出品物の名前と完全一致する出品物を取得
+# mongoDB findでドキュメント取得、$regexで部分一致したものをlistに追加
 @router.get("/")
 def get_search_word(word: str):
     search_word_result = search_crud.get_search_word(key=word)
