@@ -1,4 +1,6 @@
 from fastapi import APIRouter, HTTPException
+from fastapi import Request, Response
+from fastapi.encoders import jsonable_encoder
 from src.utils.logger.logger import setup_logger
 
 import src.cruds.cruds_exhibits as exhibits_crud
@@ -10,6 +12,17 @@ router = APIRouter(
     prefix="/exhibits",  # エンドポイントの頭のURL http://localhost:8080/exhibit
     tags=["exhibits"],  # http://127.0.0.1/docsの分類
 )
+
+
+# API_No.5 出品物登録
+@router.post("/")
+def create_exhibit(request: Request, response: Response, data: dict):
+    exhibit = jsonable_encoder(data)
+    res = exhibits_crud.create_exhibit(exhibit)
+    logger.debug("出品物登録router")
+    if res:
+        return res
+    raise HTTPException(status_code=404, detail="出品物登録ができませんでした。")
 
 
 # API_No.6 出品物一覧取得
@@ -26,7 +39,6 @@ def get_exhibits():
 @router.get("/{id}")
 def get_exhibit(id: str):
     exhibit = exhibits_crud.get_exhibit(id=id)
-    logger.debug(exhibit)
     if exhibit is None:
         raise HTTPException(status_code=404, detail="指定の出品物がありませんでした。")
     logger.debug("出品物詳細router")
