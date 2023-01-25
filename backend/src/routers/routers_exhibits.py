@@ -22,7 +22,7 @@ def get_exhibits():
     return exhibits_list
 
 
-# API_No.6 出品物詳細取得
+# API_No.7 出品物詳細取得
 @router.get("/{id}")
 def get_exhibit(id: str):
     exhibit = exhibits_crud.get_exhibit(id=id)
