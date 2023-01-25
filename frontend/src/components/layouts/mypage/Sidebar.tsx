@@ -46,7 +46,7 @@ const Sidebar = () => {
               </div>
             ))}
           </nav>
-          <div className="flex justify-center ">
+          <div className="flex justify-center mb-28">
             <LogoutButton />
           </div>
         </div>
