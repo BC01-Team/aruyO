@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+from fastapi import Request, Response
 from src.utils.logger.logger import setup_logger
 from fastapi.encoders import jsonable_encoder
 
@@ -9,9 +10,13 @@ router = APIRouter()
 
 
 # 予約登録（借りる側）
-# @router.post("/reserves")
-# async def create_reserve():
-#     return
+@router.post("/reserves")
+def create_reserve(request: Request, response: Response, data: dict):
+    reserve = jsonable_encoder(data)
+    res = reserve_crud.create_reserve(reserve)
+    if res:
+        return res
+    raise HTTPException(status_code=404, detail="予約登録ができませんでした")
 
 
 # 予約詳細取得
