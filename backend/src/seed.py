@@ -1,31 +1,77 @@
 from db import db
 
 # ユーザー
-company = {
-    "info": {
-        "name": "株式会社メルカリ",
-        "Japan_Corporate_Number": "6010701027558",
-        "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
-        "hp_url": "https://www.google.com/",
-        "latitude": "35.660205",
-        "longitude": "139.729202",
-        "phone": "0123456789",
-        "email": "info@mercari.com",
-        "account": "stripe",
+company = [
+    {
+        "info": {
+            "name": "グリー株式会社",
+            "Japan_Corporate_Number": "8010401055923",
+            "address": "〒106-0032 東京都港区六本木6-11-1 六本木ヒルズゲートタワー",
+            "hp_url": "https://corp.gree.net/jp/ja/corporate/summary/",
+            "location": [35.658756, 139.731986],
+            "phone": "0123456789",
+            "email": "info@gree.com",
+            "account": "stripe"
+        },
+        "exhibits_id": ["63cd1b0420cfbda6799aaaaa"],
+        "borrower_history": ["63cd1b0420cfbda6799wwwww"],
+        "reservations_history": []
     },
-    "staff": [
-        {
-            "id": "1",
-            "name": "門後David",
-            "email": "david@mercari.com",
-            "password": "$2b$12$/13tMLgoH.Qn3rYOAbXK6.nfTwN/PXNDKp.2HsUqVkRkZJuW3m/iS",
-            "role": {"admin": "1", "exhibit": "1", "reservation": "1"},
-        }
-    ],
-    "exhibits_id": ["63cd1b0420cfbda6799aaaaa"],
-    "borrower_history": ["63cd1b0420cfbda6799wwwww"],
-    "reservations_history": [],
-}
+    {
+        "info": {
+            "name": "株式会社メルカリ",
+            "Japan_Corporate_Number": "6010701027558",
+            "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
+            "hp_url": "https://www.google.com/",
+            "location":[35.660205,139.729202],
+            "phone": "0123456789",
+            "email": "info@mercari.com",
+            "account": "stripe"
+        },
+        "staff": [
+            {
+                "id": "1",
+                "name": "門後David",
+                "email": "david@mercari.com",
+                "password": "$2b$12$/13tMLgoH.Qn3rYOAbXK6.nfTwN/PXNDKp.2HsUqVkRkZJuW3m/iS",
+                "role": {"admin": "1", "exhibit": "1", "reservation": "1"},
+            }
+        ],
+        "exhibits_id": ["63cd1b0420cfbda6799aaaaa"],
+        "borrower_history": ["63cd1b0420cfbda6799wwwww"],
+        "reservations_history": []
+    },
+    {
+        "info": {
+            "name": "株式会社カッシーナ・イクスシー",
+            "Japan_Corporate_Number": "9010401088996",
+            "address": "〒107-0062 東京都港区南青山2-13-10",
+            "hp_url": "www.cassina-ixc.jp",
+            "location":[35.6705225,139.7036485],
+            "phone": "0123456789",
+            "email": "info@cassina.com",
+            "account": "stripe"
+        },
+        "exhibits_id": ["63cd1b0420cfbda6799aaaaa"],
+        "borrower_history": [],
+        "reservations_history": []
+    },
+    {
+        "info": {
+            "name": "㈱ビームス 本社（BEAMS）",
+            "Japan_Corporate_Number": "6010401029425",
+            "address": "〒150-0001 東京都渋谷区神宮前1-5-8 神宮前タワービルディング",
+            "hp_url": "https://www.beams.co.jp",
+            "location":[35.6706882,139.6891846],
+            "phone": "0123456789",
+            "email": "info@beams.com",
+            "account": "stripe"
+        },
+        "exhibits_id": [],
+        "borrower_history": [],
+        "reservations_history": []
+    }
+]
 
 # 出品物
 exhibit = {
@@ -38,8 +84,7 @@ exhibit = {
         "price": "1000",
         "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
     },
-    "latitude": "35.660205",
-    "longitude": "139.729202",
+    "location":[35.660205,139.729202],
     "company_id": "63cd1b0420cfbda6799d59b1",
 }
 
@@ -76,7 +121,7 @@ collection_statuses = db.statuses
 
 
 # ドキュメント(値)を保存
-collection_companies.insert_many([company])
+collection_companies.insert_many(company)
 collection_exhibits.insert_many([exhibit])
 collection_reservations.insert_many([reservation])
 collection_statuses.insert_many([status])
