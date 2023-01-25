@@ -2,6 +2,9 @@ from fastapi import FastAPI, Body
 from starlette.middleware.cors import CORSMiddleware
 
 from src.routers import routers_reserves
+
+from src.utils.auth import auth #ディレクトリ構成考え中
+
 from src.routers import routers_userInfo
 from src.routers import routers_search
 from src.db import db
@@ -26,8 +29,12 @@ app.add_middleware(
 
 # ルーティング設定
 app.include_router(routers_reserves.router)
+
+app.include_router(auth.router)
+
 app.include_router(routers_userInfo.router)
 app.include_router(routers_search.router)
+
 
 # 接続テスト用　削除可
 @app.get("/")
