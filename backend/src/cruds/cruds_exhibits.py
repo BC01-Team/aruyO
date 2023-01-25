@@ -1,5 +1,6 @@
-from src.db import db
+from typing import Union
 from bson.objectid import ObjectId
+from src.db import db
 from src.utils.logger.logger import setup_logger
 from src.utils.serializer.serializer import db_collection_serializer
 
@@ -8,6 +9,17 @@ logger = setup_logger(__name__)
 
 # 出品物コレクションを取得
 collection_exhibits = db.exhibits
+
+
+# API_No.5 出品物登録
+def create_exhibit(data: dict) -> Union[dict, bool]:
+    logger.debug("出品物登録crud")
+    # mongoDB insert_oneでドキュメント登録後、find_oneで登録値を取得
+    exhibit = collection_exhibits.insert_one(data)
+    new_exhibit = collection_exhibits.find_one({"_id": exhibit.inserted_id})
+    if new_exhibit:
+        return db_collection_serializer(new_exhibit)
+    return False
 
 
 # API_No.6 出品物一覧取得
