@@ -22,7 +22,7 @@ def get_exhibits():
     return exhibits_list
 
 
-# API_No.6 出品物詳細取得
+# API_No.7 出品物詳細取得
 def get_exhibit(id: str):
     logger.debug("出品物詳細crud")
     # mongoDB findでドキュメント取得
