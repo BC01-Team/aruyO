@@ -35,7 +35,6 @@ r = redis.StrictRedis(connection_pool=pool)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
-# login password hash
 def get_password_hash(password):
     return pwd_context.hash(password)
 
@@ -111,7 +110,7 @@ def create_sessoion(body:RequestBody,response: Response):
 # redisにセッション保存
   user_str = json.dumps(user)
   user_bytes = bytes(user_str, 'utf-8')
-  r.set(session_id, user_bytes, ex=3000)
+  r.set(session_id, user_bytes, ex=6000)
   # r.expire(session_id,5) #有効期限5秒
   print("r", r.get(session_id))
 
