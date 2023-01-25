@@ -8,6 +8,7 @@ from src.db import db
 import uuid
 from fastapi import APIRouter, HTTPException, Response
 
+
 router = APIRouter()
 
 HOST = os.environ.get("REDIS_URL")
@@ -33,8 +34,9 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def get_password_hash(password):
     return pwd_context.hash(password)
 
+def verify_password(plain_password, hashed_password):
+    return pwd_context.verify(plain_password, hashed_password)
 
-print(get_password_hash("password"))
 "$2b$12$/13tMLgoH.Qn3rYOAbXK6.nfTwN/PXNDKp.2HsUqVkRkZJuW3m/iS"
 
 # db mock create
@@ -75,7 +77,7 @@ mock_data =  {
 
 
 # companyコレクション
-collection = db.company
+collection = db.companies
 
 # mock_data post
 def create_post(body):
@@ -84,7 +86,7 @@ def create_post(body):
 
 # create_post(mock_data)
 
-#find 
+#find "staff.password":"password"ハッシュ化した文字列
 mock_data_find = {
     "info.email": "info@mercari.com",
     "staff.password": "$2b$12$/13tMLgoH.Qn3rYOAbXK6.nfTwN/PXNDKp.2HsUqVkRkZJuW3m/iS"
@@ -95,24 +97,76 @@ none_mock_data_find = {
     "staff.password": "none"
     }
 
-def get_user(body):
-    # credentials_exception記載する　tryとraise
-    for user in collection.find(filter=body):
-        if user is None:
-           return "error" #Noneがreturnされる
-        return  user
+# user
+def get_user(email):
+    find_user = { "info.email": email }
+    for user in collection.find(filter=find_user):
+      return user
 
-# print(get_user(mock_data_find))
+print("user", get_user("info@mercari.com"))
+
+
+
+async def authenticate_user(email,password):
+    user =  await get_user(email)
+    if not user:
+      return False
+
+    hashed_password = user['staff'][0]["password"]
+
+    print("ck",hashed_password)
+    if not verify_password(password,hashed_password):
+        return False
+    
+    return user
+
+
+
 # print(get_user(none_mock_data_find))
+print("authenticate_user", authenticate_user("info@mercari.com","password"))
+
+
+
+
+
+
+
+# print(r.get("test"))
+# print(r.get("X")) #None
+
+
+
+
+#api router
+@router.get("/login")
+#find
+# user = async def get_user(email,);
 
 # session_id発行 
-session_id:str = str(uuid.uuid1())
-print(session_id)
+# session_id:str = str(uuid.uuid1())
+# print(session_id)
 
 # redisにセッション保存
-r.set("test", "test_value", ex=5) #有効期限5秒
-print(r.get("test"))
-print(r.get("X")) #None
+# r.set(session_id, user, ex=5) #有効期限5秒
+
+
+async def save_cookie(response: Response):
+    response.set_cookie(key="session_id", value=session_id) 
+
+    #user情報返す
+    return user
+   
+
+@router.post("/logout")
+async def save_cookie(response: Response):
+    response.set_cookie(key="sample_cookie", value="")
+    #status返す
+    return "ok" 
+
+
+# リクエストの都度行われる処理をする関数
+# cookieから取り出す
+# セッションからuser情報取得する
 
 
 
@@ -122,27 +176,4 @@ print(r.get("X")) #None
 #set_coockie session_id空
 
 #cookie取り出す
-
-#api router
-@router.get("/login")
-#find
-async def save_cookie(response: Response):
-    response.set_cookie(key="sample_cookie", value="sample_cookie_value")
-    return "ok"
-   
-
-@router.post("/logout")
-async def save_cookie(response: Response):
-    response.set_cookie(key="sample_cookie", value="")
-    return "ok"
-
-
-# リクエストの都度行われる処理をする関数
-# cookieから取り出す
-# セッションからuser情報取得する
-
-
-# 
-
-
 
