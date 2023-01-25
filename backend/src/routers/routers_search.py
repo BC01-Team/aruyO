@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 
-# mongoDB findでドキュメント取得、$regexで部分一致したものをlistに追加
+# API_No.9 検索語keyの部分一致一覧取得（info.フィールド3つのいずれかに含まれる）
 @router.get("/")
 def get_search_word(word: str):
     search_word_result = search_crud.get_search_word(key=word)
