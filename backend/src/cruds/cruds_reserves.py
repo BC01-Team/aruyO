@@ -9,7 +9,7 @@ logger = setup_logger(__name__)
 
 collection_reservations = db.reservations
 
-# 予約登録(api_no.10)
+# API_No.10 予約登録
 def create_reserve(data: dict) -> Union[dict, bool]:
     reserve = collection_reservations.insert_one(data)
     new_reserve = collection_reservations.find_one({"_id": reserve.inserted_id})
@@ -18,14 +18,14 @@ def create_reserve(data: dict) -> Union[dict, bool]:
     return False
 
 
-# 予約詳細取得
+# API_No.11 予約詳細取得
 def get_reserve(id: str):
     logger.debug(id)
     reserve = collection_reservations.find_one({"_id": ObjectId(id)})
     return db_collection_serializer(reserve)
 
 
-# 予約情報変更
+# API_No.12 予約情報変更
 def update_reserve(id: str, data: dict) -> Union[dict, bool]:
     reserve = collection_reservations.find_one({"_id": ObjectId(id)})
     if reserve:
