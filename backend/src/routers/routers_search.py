@@ -4,7 +4,6 @@ from src.utils.logger.logger import setup_logger
 import src.cruds.cruds_search as search_crud
 
 logger = setup_logger(__name__)
-router = APIRouter()
 
 
 router = APIRouter(
