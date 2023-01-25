@@ -3,7 +3,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 from src.routers import routers_reserves
 
-from src.utils.auth import auth #ディレクトリ構成考え中
+from src.routers import routers_auth 
 
 from src.routers import routers_userInfo
 from src.db import db
@@ -29,7 +29,7 @@ app.add_middleware(
 # ルーティング設定
 app.include_router(routers_reserves.router)
 
-app.include_router(auth.router)
+app.include_router(routers_auth.router)
 
 app.include_router(routers_userInfo.router)
 
