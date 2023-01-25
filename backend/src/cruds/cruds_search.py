@@ -1,6 +1,4 @@
-from typing import Union
 from src.db import db
-from bson.objectid import ObjectId
 from src.utils.logger.logger import setup_logger
 from src.utils.serializer.serializer import db_collection_serializer
 
@@ -20,7 +18,7 @@ def get_search_word(key: str):
             "$or": [
                 {"info.name": {"$regex": key}},
                 {"info.detail": {"$regex": key}},
-                {"info.requirements": {"$regex": key}}
+                {"info.requirements": {"$regex": key}},
             ]
         }
     )
