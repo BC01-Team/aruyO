@@ -18,7 +18,7 @@ company = {
             "id": "1",
             "name": "門後David",
             "email": "david@mercari.com",
-            "password": "####",
+            "password": "$2b$12$/13tMLgoH.Qn3rYOAbXK6.nfTwN/PXNDKp.2HsUqVkRkZJuW3m/iS",
             "role": {"admin": "1", "exhibit": "1", "reservation": "1"},
         }
     ],
