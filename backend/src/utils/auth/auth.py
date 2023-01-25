@@ -5,8 +5,13 @@ import sys
 sys.path.append("../")
 # :/app/src# python utils/auth/auth.py 
 from src.db import db
+from src.utils.serializer.serializer import db_collection_serializer
 import uuid
-from fastapi import APIRouter, HTTPException, Response
+from fastapi import APIRouter, HTTPException, Response, Cookie
+import asyncio
+from pydantic import BaseModel,Field
+import json
+from typing import Optional
 
 
 router = APIRouter()
@@ -39,43 +44,6 @@ def verify_password(plain_password, hashed_password):
 
 "$2b$12$/13tMLgoH.Qn3rYOAbXK6.nfTwN/PXNDKp.2HsUqVkRkZJuW3m/iS"
 
-# db mock create
-mock_data =  {
-      "info": {
-        "_id": "63cd1b0420cfbda6799d59b1",
-        "name": "株式会社メルカリ",
-        "Japan_Corporate_Number": "6010701027558",
-        "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
-        "hp_url": "https://www.google.com/",
-        "latitude": "35.660205",
-        "longitude": "139.729202",
-        "phone": "0123456789",
-        "email": "info@mercari.com",
-        "account": "stripe"
-      },
-      "staff": [
-        {
-          "id": "1",
-          "name": "門後David",
-          "email": "david@mercari.com",
-          "password": "$2b$12$/13tMLgoH.Qn3rYOAbXK6.nfTwN/PXNDKp.2HsUqVkRkZJuW3m/iS",
-          "role": {
-            "admin": "1",
-            "exhibit": "1",
-            "reservation": "1"
-          }
-        }
-      ],
-      "exhibits_id": [
-        "63cd1b0420cfbda6799aaaaa"
-      ],
-      "borrower_history": [
-        "63cd1b0420cfbda6799wwwww"
-      ],
-      "reservations_history": []
-    }
-
-
 # companyコレクション
 collection = db.companies
 
@@ -92,23 +60,20 @@ mock_data_find = {
     "staff.password": "$2b$12$/13tMLgoH.Qn3rYOAbXK6.nfTwN/PXNDKp.2HsUqVkRkZJuW3m/iS"
     }
 
-none_mock_data_find = {
-    "info.email": "none",
-    "staff.password": "none"
-    }
+
 
 # user
 def get_user(email):
     find_user = { "info.email": email }
-    for user in collection.find(filter=find_user):
-      return user
+    for data in collection.find(filter=find_user):
+      user = data
 
-print("user", get_user("info@mercari.com"))
+    return db_collection_serializer(user)
 
 
 
-async def authenticate_user(email,password):
-    user =  await get_user(email)
+def authenticate_user(email,password):
+    user =  get_user(email)
     if not user:
       return False
 
@@ -122,58 +87,62 @@ async def authenticate_user(email,password):
 
 
 
-# print(get_user(none_mock_data_find))
-print("authenticate_user", authenticate_user("info@mercari.com","password"))
 
-
-
-
-
-
-
-# print(r.get("test"))
-# print(r.get("X")) #None
-
-
+class RequestBody(BaseModel):
+  email: str = Field(example="info@mercari.com")
+  password: str = Field(example="password")
 
 
 #api router
-@router.get("/login")
-#find
-# user = async def get_user(email,);
+@router.post("/login")
+def create_sessoion(body:RequestBody,response: Response):
+  email = body.email
+  password = body.password
+  print(email, password)
+
+  # user認証
+  user = authenticate_user(email,password)
 
 # session_id発行 
-# session_id:str = str(uuid.uuid1())
-# print(session_id)
+  session_id:str = str(uuid.uuid1())
+  print("session_id",session_id)
+  print(user)
 
 # redisにセッション保存
-# r.set(session_id, user, ex=5) #有効期限5秒
+  user_str = json.dumps(user)
+  user_bytes = bytes(user_str, 'utf-8')
+  r.set(session_id, user_bytes, ex=3000)
+  # r.expire(session_id,5) #有効期限5秒
+  print("r", r.get(session_id))
 
+# session_id set_cookie user情報をreturnする
+  response.set_cookie(key="session_id", value=session_id)
+  return {"user": user }
 
-async def save_cookie(response: Response):
-    response.set_cookie(key="session_id", value=session_id) 
-
-    #user情報返す
-    return user
-   
 
 @router.post("/logout")
 async def save_cookie(response: Response):
-    response.set_cookie(key="sample_cookie", value="")
+    response.set_cookie(key="session_id", value="")
     #status返す
-    return "ok" 
+    return {"message": "logout ok"}
 
+
+r.set("hogekey","hogevalue",ex=10)
 
 # リクエストの都度行われる処理をする関数
+@router.get("/cookie")
+def get_cookie(session_id: Optional[str] = Cookie(None)):
 # cookieから取り出す
-# セッションからuser情報取得する
+    res =  {
+        "session_id": session_id
+    }
+    
+    session_id = res["session_id"]
+    print(session_id)
 
+# redisのsession_id存在CK
+    return r.get("hogekey")
 
+print("r.get",r.get("ff0136c0-9c7c-11ed-91de-0242ac170006"))
 
-#set_coockie session_id有
-
-
-#set_coockie session_id空
-
-#cookie取り出す
 
