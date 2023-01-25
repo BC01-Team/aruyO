@@ -1,10 +1,10 @@
 import Link from "next/link";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "../LogoutButton";
 
 const navigation = [
   { name: "ユーザー情報", href: "/mypage", current: true },
-  { name: "取引一覧", href: "/mypage", current: false },
-  { name: "登録物品一覧", href: '/mypage', current: false },
+  { name: "取引一覧", href: "/mypage/orders", current: false },
+  { name: "登録物品一覧", href: '/mypage/items', current: false }
 ];
 
 const classNames = (...classes: any[]) => {
@@ -31,8 +31,8 @@ const Sidebar = () => {
         <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
           <nav className="mt-32 flex-1 space-y-1 bg-white px-2">
             {navigation.map((item) => (
-              <div className="py-1">
-                <Link key={item.name} href={item.href}>
+              <div className="py-1" key={item.name}>
+                <Link href={item.href}>
                   <button className={classNames(
                     item.current ?
                       "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
