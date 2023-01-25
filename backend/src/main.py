@@ -3,6 +3,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 from src.routers import routers_reserves
 from src.routers import routers_userInfo
+from src.routers import routers_search
 from src.db import db
 
 # log設定
@@ -26,6 +27,7 @@ app.add_middleware(
 # ルーティング設定
 app.include_router(routers_reserves.router)
 app.include_router(routers_userInfo.router)
+app.include_router(routers_search.router)
 
 # 接続テスト用　削除可
 @app.get("/")
