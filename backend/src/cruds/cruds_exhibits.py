@@ -11,7 +11,7 @@ logger = setup_logger(__name__)
 collection_exhibits = db.exhibits
 
 
-# API_No.5 出品物登録
+# API_No.5 出品物登録（company_id未取得）
 def create_exhibit(data: dict) -> Union[dict, bool]:
     logger.debug("出品物登録crud")
     # mongoDB insert_oneでドキュメント登録後、find_oneで登録値を取得

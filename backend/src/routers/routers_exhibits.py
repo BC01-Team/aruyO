@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 
-# API_No.5 出品物登録
+# API_No.5 出品物登録（company_id未取得）
 @router.post("/")
 def create_exhibit(request: Request, response: Response, data: dict):
     exhibit = jsonable_encoder(data)
