@@ -9,6 +9,14 @@ logger = setup_logger(__name__)
 
 collection_reservations = db.reservations
 
+# 予約登録(api_no.10)
+def create_reserve(data: dict) -> Union[dict, bool]:
+    reserve = collection_reservations.insert_one(data)
+    new_reserve = collection_reservations.find_one({"_id": reserve.inserted_id})
+    if new_reserve:
+        return db_collection_serializer(new_reserve)
+    return False
+
 
 # 予約詳細取得
 def get_reserve(id: str):
