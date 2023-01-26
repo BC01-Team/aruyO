@@ -16,7 +16,7 @@ router = APIRouter(
 
 # API_No.2 アカウント情報取得
 @router.get("/{id}")
-def get_user(id: str, session_id: Optional[str] = Cookie(None)) -> list:
+def get_user(id: str, session_id: Optional[str] = Cookie(None)) -> dict:
     logger.debug("get_userパス通過、認証前")
     if auth.is_login(session_id):
         logger.debug("get_user認証後")
@@ -35,7 +35,7 @@ def create_item(
     response: Response,
     data: dict,
     session_id: Optional[str] = Cookie(None),
-) -> list:
+) -> dict:
     logger.debug("create_itemパス通過、認証前")
     if auth.is_login(session_id):
         logger.debug("create_item認証後")
@@ -66,7 +66,7 @@ def get_user_items(id: str, session_id: Optional[str] = Cookie(None)) -> list:
 @router.get("/{id}/items/{item_id}")
 def get_user_item(
     id: str, item_id: str, session_id: Optional[str] = Cookie(None)
-) -> list:
+) -> dict:
     logger.debug("get_user_itemパス通過、認証前")
     if auth.is_login(session_id):
         logger.debug("get_user_item認証後")
