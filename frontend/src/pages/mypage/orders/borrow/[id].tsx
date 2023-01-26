@@ -21,7 +21,7 @@ const MypageOrderDetailBorrower = () => {
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
   }, []);
 
   return (

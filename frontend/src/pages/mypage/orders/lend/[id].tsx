@@ -21,7 +21,7 @@ const MypageOrderDetailLender = () => {
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
   }, []);
 
   return (
