@@ -1,9 +1,10 @@
-import { useState, ChangeEvent } from 'react';
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
-import { axiosInstance } from '@/lib/axiosInstance';
-import SearchBox from '@/components/elements/SearchBox';
+import { useState, ChangeEvent } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { axiosInstance } from "@/lib/axiosInstance";
+import SearchBox from "@/components/elements/SearchBox";
+import { Loader } from "@googlemaps/js-api-loader";
 
 export default function Home() {
   const [keyword, setKeyword] = useState<string>("");
@@ -29,12 +30,30 @@ export default function Home() {
 
   console.log("results", results);
 
+  // google map 表示用
+  // const API_KEY: any = process.env.API_KEY
+  // console.log(API_KEY);
+  // const loader = new Loader({
+  //   apiKey: API_KEY,
+  //   version: "weekly",
+  // });
+
+  // loader.load().then(() => {
+  //   map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
+  //     center: { lat: -34.397, lng: 150.644 },
+  //     zoom: 8,
+  //   });
+  // });
+
   return (
     <>
       <Head>
         {/* メタディスクリプション要設定 */}
         <title>aruyO</title>
-        <meta name="description" content="ご近所同士で備品や設備を貸し借り。地域にあるリソースを可視化するマッチングプラットフォーム。" />
+        <meta
+          name="description"
+          content="ご近所同士で備品や設備を貸し借り。地域にあるリソースを可視化するマッチングプラットフォーム。"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* favicon要設定 */}
         <link rel="icon" href="/favicon.ico" />
@@ -45,22 +64,23 @@ export default function Home() {
         <SearchBox setKeyword={setKeyword} getResultData={getResultData} />
 
         {/* 動作確認用に以下のコードブロック使用中 */}
-        {results && results.map((item) => {
-          return (
-            <Link
-              key={item._id}
-              as={`/search/items/${item._id}`}
-              href={{ pathname: `/search/items/[id]`, query: item._id }}
-            >
-              <div>
-                <p>{item._id}</p>
-                <p>{item.info.name}</p>
-              </div>
-            </Link>
-          );
-        })}
+        {/* {results &&
+          results.map((item) => {
+            return (
+              <Link
+                key={item._id}
+                as={`/search/items/${item._id}`}
+                href={{ pathname: `/search/items/[id]`, query: item._id }}
+              >
+                <div>
+                  <p>{item._id}</p>
+                  <p>{item.info.name}</p>
+                </div>
+              </Link>
+            );
+          })} */}
         {/* ここまで */}
       </main>
     </>
   );
-};
+}
