@@ -9,8 +9,8 @@ logger = setup_logger(__name__)
 
 
 router = APIRouter(
-    prefix="/items",  # エンドポイントの頭のURL http://localhost:8080/items
-    tags=["items"],  # FastAPI Swagger /docsの分類
+    prefix="/users/{id}/items",  # エンドポイントの頭のURL
+    tags=["users"],  # FastAPI Swagger /docsの分類
 )
 
 

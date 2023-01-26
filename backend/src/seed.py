@@ -128,14 +128,15 @@ reservation = {
         "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
     },
     "period": {"start": "2023/2/1", "end": "2023/2/5"},
-    "payment": {"total": "5000", "method": "stripe", "status": "決済完了"},
+    "payment": {"total": "5000", "method": "口座振込", "status": "決済完了"},
     "lender": {"_id": "63cd1b0420cfbda6799d59b1", "evaluation": "3"},
     "borrower": {"_id": "63cd1b0420cfbda679911111", "evaluation": "3"},
+    "status": "予約確定"
 }
 
 # ステータス
 status = {
-    "payment": ["未決済", "決済完了", "stripe"],
+    "payment": ["未決済", "決済完了"],
     "reservation": ["募集中", "予約承認待ち", "予約確定", "利用中", "掲載停止"]
 }
 
