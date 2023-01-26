@@ -9,7 +9,7 @@ logger = setup_logger(__name__)
 
 
 router = APIRouter(
-    prefix="/users/{id}/items",  # エンドポイントの頭のURL
+    prefix="/items",  # エンドポイントの頭のURL
     tags=["users"],  # FastAPI Swagger /docsの分類
 )
 
