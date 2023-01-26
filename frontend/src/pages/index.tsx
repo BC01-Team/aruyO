@@ -5,9 +5,11 @@ import Link from 'next/link';
 import { axiosInstance } from '@/lib/axiosInstance';
 import SearchBox from '@/components/elements/SearchBox';
 
-export default function Home() {
+export default function Home({ items }) {
   const [keyword, setKeyword] = useState<string>("");
   const [results, setResults] = useState();
+
+  console.log(items);
 
   // 検索結果が0件だった時の処理方法、空で入力した場合は？
   // 表示後のresultsリセット？必要？
@@ -45,7 +47,21 @@ export default function Home() {
         <SearchBox setKeyword={setKeyword} getResultData={getResultData} />
 
         {/* 動作確認用に以下のコードブロック使用中 */}
-        {results && results.map((item) => {
+        {/* {results && results.map((item) => {
+          return (
+            <Link
+              key={item._id}
+              as={`/search/items/${item._id}`}
+              href={{ pathname: `/search/items/[id]`, query: item._id }}
+            >
+              <div>
+                <p>{item._id}</p>
+                <p>{item.info.name}</p>
+              </div>
+            </Link>
+          );
+        })} */}
+        {items.map((item) => {
           return (
             <Link
               key={item._id}
@@ -63,4 +79,14 @@ export default function Home() {
       </main>
     </>
   );
+};
+
+// 動作確認用　物品一覧取得
+export const getServerSideProps = async () => {
+  const res = await axiosInstance.get("/items");
+  const items = await res.data;
+
+  return {
+    props: { items }
+  }
 };
