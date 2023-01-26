@@ -1,5 +1,4 @@
 from fastapi import APIRouter, HTTPException, Cookie
-from fastapi import Request, Response
 from src.utils.logger.logger import setup_logger
 from fastapi.encoders import jsonable_encoder
 from typing import Optional
@@ -9,8 +8,8 @@ import src.utils.auth.auth as auth
 
 logger = setup_logger(__name__)
 router = APIRouter(
-    prefix="/reserves",  # エンドポイントの頭のURL http://localhost:8080/exhibit
-    tags=["reserves"],  # http://127.0.0.1/docsの分類
+    prefix="/reserves",  # エンドポイントの頭のURL
+    tags=["reserves"],  # FastAPI Swagger /docsの分類
 )
 
 
