@@ -28,7 +28,7 @@ const MypageOrderDetailBorrower = () => {
     <>
       <Sidebar />
       <MypageLayout>
-        <PageTitle>{order?.exhibits_copy?.name}</PageTitle>
+        <PageTitle>{order?.items_copy?.name}</PageTitle>
         <ContentsLayout>
           <p>借りる取引詳細ページ</p>
         </ContentsLayout>

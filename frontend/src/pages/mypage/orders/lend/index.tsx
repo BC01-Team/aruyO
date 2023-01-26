@@ -44,7 +44,7 @@ const MypageOrdersLender = ({ orders }: OrdersProps) => {
                           </div> */}
                           <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                             <div>
-                              <p className="truncate text-sm font-medium text-amber-600">{order?.exhibits_copy?.name}</p>
+                              <p className="truncate text-sm font-medium text-amber-600">{order?.items_copy?.name}</p>
                               <p className="mt-2 flex items-center text-sm text-gray-500">
                                 {/* 貸出先企業名を表示できたほうがいい */}
                                 <span className="truncate">貸出先企業: {order?.borrower?._id}</span>
