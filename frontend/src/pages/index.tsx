@@ -3,8 +3,9 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { axiosInstance } from "@/lib/axiosInstance";
+import Map from "@/components/elements/GoogleMap";
 import SearchBox from "@/components/elements/SearchBox";
-import { Loader } from "@googlemaps/js-api-loader";
+
 
 export default function Home() {
   const [keyword, setKeyword] = useState<string>("");
@@ -30,21 +31,7 @@ export default function Home() {
 
   console.log("results", results);
 
-  // google map 表示用
-  // const API_KEY: any = process.env.API_KEY
-  // console.log(API_KEY);
-  // const loader = new Loader({
-  //   apiKey: API_KEY,
-  //   version: "weekly",
-  // });
-
-  // loader.load().then(() => {
-  //   map = new google.maps.Map(document.getElementById("map") as HTMLElement, {
-  //     center: { lat: -34.397, lng: 150.644 },
-  //     zoom: 8,
-  //   });
-  // });
-
+ 
   return (
     <>
       <Head>
@@ -62,7 +49,7 @@ export default function Home() {
       <main>
         {/* デザインが来たら、随時修正 */}
         <SearchBox setKeyword={setKeyword} getResultData={getResultData} />
-
+        <Map/>
         {/* 動作確認用に以下のコードブロック使用中 */}
         {/* {results &&
           results.map((item) => {
