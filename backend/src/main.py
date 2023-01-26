@@ -1,10 +1,12 @@
 from fastapi import FastAPI, Body
 from starlette.middleware.cors import CORSMiddleware
-from src.utils.auth import auth #ディレクトリ構成考え中
+
 from src.routers import routers_userInfo
 from src.routers import routers_items
 from src.routers import routers_search
 from src.routers import routers_reserves
+from src.routers import routers_auth 
+from src.utils.auth import auth #ディレクトリ構成考え中
 from src.db import db
 
 # log設定
@@ -26,11 +28,12 @@ app.add_middleware(
 )
 
 # ルーティング設定
-app.include_router(auth.router)
 app.include_router(routers_userInfo.router)
 app.include_router(routers_items.router)
 app.include_router(routers_search.router)
 app.include_router(routers_reserves.router)
+app.include_router(routers_auth.router)
+app.include_router(auth.router)
 
 
 # 接続テスト用　削除可
