@@ -10,7 +10,15 @@ logger = setup_logger(__name__)
 collection_companies = db.companies
 collection_items = db.items
 collection_reservations = db.reservations
-collection_statuses = db.statuses
+# collection_statuses = db.statuses
+
+
+# API_No.2 アカウント情報取得
+def get_user(id: str):
+    logger.debug(id)
+    # mongoDB findでドキュメント取得
+    user = collection_companies.find_one({"_id": ObjectId(id)})
+    return db_collection_serializer(user)
 
 
 # API_No.5 物品登録

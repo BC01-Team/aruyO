@@ -12,6 +12,16 @@ router = APIRouter(
 )
 
 
+# API_No.2 アカウント情報取得
+@router.get("/{id}")
+def get_user(id: str):
+    user = usersInfo_crud.get_user(id=id)
+    if user is None:
+        raise HTTPException(status_code=404, detail="指定のアカウントが見つかりません。")
+    logger.debug("ユーザーrouter")
+    return user
+
+
 # API_No.5 物品登録（company_id未取得）
 @router.post("/{id}/items")
 def create_item(request: Request, response: Response, data: dict):
