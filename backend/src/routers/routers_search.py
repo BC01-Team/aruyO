@@ -7,14 +7,22 @@ logger = setup_logger(__name__)
 
 
 router = APIRouter(
-    prefix="/search",  # エンドポイントの頭のURL http://localhost:8080/search
+    prefix="/search",  # エンドポイントの頭のURL
     tags=["search"],  # FastAPI Swagger /docsの分類
 )
 
 
 # API_No.9 検索語keyの部分一致一覧取得（info.フィールド3つのいずれかに含まれる）
 @router.get("/")
-def get_search_word(word: str):
+def get_search_word(word: str): # Union型で検索語が空でも検索できるようにする
+  if word == null:
+      items_list = search_crud.get_items()
+      if not items_list:  # listが空[]の場合
+          raise HTTPException(status_code=404, detail="出品物がありませんでした。")
+      logger.debug("出品物一覧router")
+      return items_list
+
+  else:
     search_word_result = search_crud.get_search_word(key=word)
     if not search_word_result:  # listが空[]の場合
         raise HTTPException(
