@@ -13,7 +13,7 @@ company = [
             "email": "info@gree.com",
             "account": "stripe"
         },
-        "exhibits_id": ["63cd1b0420cfbda6799aaaaa"],
+        "items_id": ["63cd1b0420cfbda6799aaaaa"],
         "borrower_history": ["63cd1b0420cfbda6799wwwww"],
         "reservations_history": []
     },
@@ -34,10 +34,10 @@ company = [
                 "name": "門後David",
                 "email": "david@mercari.com",
                 "password": "$2b$12$/13tMLgoH.Qn3rYOAbXK6.nfTwN/PXNDKp.2HsUqVkRkZJuW3m/iS",
-                "role": {"admin": "1", "exhibit": "1", "reservation": "1"},
+                "role": {"admin": "1", "item": "1", "reservation": "1"},
             }
         ],
-        "exhibits_id": ["63cd1b0420cfbda6799aaaaa"],
+        "items_id": ["63cd1b0420cfbda6799aaaaa"],
         "borrower_history": ["63cd1b0420cfbda6799wwwww"],
         "reservations_history": []
     },
@@ -52,7 +52,7 @@ company = [
             "email": "info@cassina.com",
             "account": "stripe"
         },
-        "exhibits_id": ["63cd1b0420cfbda6799aaaaa"],
+        "items_id": ["63cd1b0420cfbda6799aaaaa"],
         "borrower_history": [],
         "reservations_history": []
     },
@@ -67,14 +67,14 @@ company = [
             "email": "info@beams.com",
             "account": "stripe"
         },
-        "exhibits_id": [],
+        "items_id": [],
         "borrower_history": [],
         "reservations_history": []
     }
 ]
 
 # 出品物
-exhibit = [
+item = [
     {
         "info": {
             "name": "ホワイトボード",
@@ -117,7 +117,7 @@ exhibit = [
 
 # 予約
 reservation = {
-    "exhibits_copy": {
+    "items_copy": {
         "_id": "63cd1b0420cfbda6799aaaaa",
         "name": "ホワイトボード",
         "picture": "https://sws/s3/picture1.jpeg",
@@ -142,14 +142,14 @@ status = {
 
 # コレクションを作成(= db.の後ろがコレクション名)
 collection_companies = db.companies
-collection_exhibits = db.exhibits
+collection_items = db.items
 collection_reservations = db.reservations
 collection_statuses = db.statuses
 
 
 # ドキュメント(値)を保存
 collection_companies.insert_many(company)
-collection_exhibits.insert_many(exhibit)
+collection_items.insert_many(item)
 collection_reservations.insert_many([reservation])
 collection_statuses.insert_many([status])
 
@@ -158,7 +158,7 @@ collection_statuses.insert_many([status])
 for data in collection_companies.find():
     print(data)
 
-for data in collection_exhibits.find():
+for data in collection_items.find():
     print(data)
 
 for data in collection_reservations.find():
