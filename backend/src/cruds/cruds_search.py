@@ -6,14 +6,14 @@ from bson.son import SON
 logger = setup_logger(__name__)
 
 # 出品物コレクションを取得
-collection_exhibits = db.exhibits
+collection_items = db.items
 
 
 # API_No.9 検索語keyの部分一致一覧取得（info.フィールド3つのいずれかに含まれる）
 def get_search_word(key: str):
     logger.debug("検索crud")
     # mongoDB findでドキュメント取得、$regexで部分一致したドキュメントをlistに追加
-    search_word = collection_exhibits.find(
+    search_word = collection_items.find(
         {
             "$or": [
                 {"info.name": {"$regex": key}},
@@ -40,7 +40,7 @@ def get_search_near(data) -> list:
     # $maxDistanceで距離指定（ラジアン距離：日本ではおおよそ1km＝0.009らしい）。
     # 取得結果はlimitで指定。
     query = {"location": SON([("$near", location ), ("$maxDistance", 0.1)])}
-    for document in collection_exhibits.find(query).limit(5):
+    for document in collection_items.find(query).limit(5):
         # 自社の物品は排除する
         if document["location"] != location:
             nears.append(db_collection_serializer(document))
