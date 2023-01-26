@@ -1,8 +1,7 @@
 from fastapi import FastAPI, Body
 from starlette.middleware.cors import CORSMiddleware
 
-from src.routers import routers_userInfo
-from src.routers import routers_items
+from src.routers import routers_user_info
 from src.routers import routers_search
 from src.routers import routers_reserves
 from src.routers import routers_auth 
@@ -28,8 +27,7 @@ app.add_middleware(
 )
 
 # ルーティング設定
-app.include_router(routers_userInfo.router)
-app.include_router(routers_items.router)
+app.include_router(routers_user_info.router)
 app.include_router(routers_search.router)
 app.include_router(routers_reserves.router)
 app.include_router(routers_auth.router)
