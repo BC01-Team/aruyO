@@ -1,15 +1,13 @@
-import { useState } from "react";
-import axios from "axios";
+import { Dispatch, SetStateAction, ChangeEvent } from "react";
 import Button from "./Button";
 
-const SearchBox = () => {
-  const [keyword, setKeyword] = useState<string>("");
+type Props = {
+  setKeyword: Dispatch<SetStateAction<string>>,
+  getResultData: (e: ChangeEvent<HTMLInputElement>) => Promise<void>
+  // getResultData: () => void
+};
 
-  const getResultData = () => {
-    // APIができたら処理を書く
-    console.log(keyword);
-  };
-
+const SearchBox = ({ setKeyword, getResultData}: Props) => {
   return (
     <form className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 p-10">
       <div className="mx-auto max-w-3xl flex justify-center">
@@ -24,6 +22,7 @@ const SearchBox = () => {
           placeholder="発電機　藤沢市" // 要検討
           onChange={(e) => setKeyword(e.target.value)}
         />
+       {/* 型エラー要修正 */}
         <Button type="submit" onClick={getResultData}>検索</Button>
       </div>
     </form>

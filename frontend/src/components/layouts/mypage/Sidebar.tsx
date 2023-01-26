@@ -3,7 +3,7 @@ import LogoutButton from "../LogoutButton";
 
 const navigation = [
   { name: "ユーザー情報", href: "/mypage", current: true },
-  { name: "取引一覧", href: "/mypage/orders", current: false },
+  { name: "取引一覧", href: "/mypage/orders/lend", current: false },
   { name: "登録物品一覧", href: '/mypage/items', current: false }
 ];
 
