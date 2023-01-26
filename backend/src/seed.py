@@ -13,7 +13,7 @@ company = [
             "email": "info@gree.com",
             "account": "stripe"
         },
-        "exhibits_id": ["63cd1b0420cfbda6799aaaaa"],
+        "items_id": ["63cd1b0420cfbda6799aaaaa"],
         "borrower_history": ["63cd1b0420cfbda6799wwwww"],
         "reservations_history": []
     },
@@ -34,10 +34,10 @@ company = [
                 "name": "門後David",
                 "email": "david@mercari.com",
                 "password": "$2b$12$/13tMLgoH.Qn3rYOAbXK6.nfTwN/PXNDKp.2HsUqVkRkZJuW3m/iS",
-                "role": {"admin": "1", "exhibit": "1", "reservation": "1"},
+                "role": {"admin": "1", "item": "1", "reservation": "1"},
             }
         ],
-        "exhibits_id": ["63cd1b0420cfbda6799aaaaa"],
+        "items_id": ["63cd1b0420cfbda6799aaaaa"],
         "borrower_history": ["63cd1b0420cfbda6799wwwww"],
         "reservations_history": []
     },
@@ -52,7 +52,7 @@ company = [
             "email": "info@cassina.com",
             "account": "stripe"
         },
-        "exhibits_id": ["63cd1b0420cfbda6799aaaaa"],
+        "items_id": ["63cd1b0420cfbda6799aaaaa"],
         "borrower_history": [],
         "reservations_history": []
     },
@@ -67,14 +67,14 @@ company = [
             "email": "info@beams.com",
             "account": "stripe"
         },
-        "exhibits_id": [],
+        "items_id": [],
         "borrower_history": [],
         "reservations_history": []
     }
 ]
 
 # 出品物
-exhibit = [
+item = [
     {
         "info": {
             "name": "ホワイトボード",
@@ -117,7 +117,7 @@ exhibit = [
 
 # 予約
 reservation = {
-    "exhibits_copy": {
+    "items_copy": {
         "_id": "63cd1b0420cfbda6799aaaaa",
         "name": "ホワイトボード",
         "picture": "https://sws/s3/picture1.jpeg",
@@ -128,28 +128,29 @@ reservation = {
         "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
     },
     "period": {"start": "2023/2/1", "end": "2023/2/5"},
-    "payment": {"total": "5000", "method": "stripe", "status": "決済完了"},
+    "payment": {"total": "5000", "method": "口座振込", "status": "決済完了"},
     "lender": {"_id": "63cd1b0420cfbda6799d59b1", "evaluation": "3"},
     "borrower": {"_id": "63cd1b0420cfbda679911111", "evaluation": "3"},
+    "status": "予約確定"
 }
 
 # ステータス
 status = {
-    "payment": ["未決済", "決済完了", "stripe"],
+    "payment": ["未決済", "決済完了"],
     "reservation": ["募集中", "予約承認待ち", "予約確定", "利用中", "掲載停止"]
 }
 
 
 # コレクションを作成(= db.の後ろがコレクション名)
 collection_companies = db.companies
-collection_exhibits = db.exhibits
+collection_items = db.items
 collection_reservations = db.reservations
 collection_statuses = db.statuses
 
 
 # ドキュメント(値)を保存
 collection_companies.insert_many(company)
-collection_exhibits.insert_many(exhibit)
+collection_items.insert_many(item)
 collection_reservations.insert_many([reservation])
 collection_statuses.insert_many([status])
 
@@ -158,7 +159,7 @@ collection_statuses.insert_many([status])
 for data in collection_companies.find():
     print(data)
 
-for data in collection_exhibits.find():
+for data in collection_items.find():
     print(data)
 
 for data in collection_reservations.find():

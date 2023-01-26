@@ -7,8 +7,8 @@ logger = setup_logger(__name__)
 
 
 router = APIRouter(
-    prefix="/search",  # エンドポイントの頭のURL http://localhost:8080/exhibit
-    tags=["search"],  # http://127.0.0.1/docsの分類
+    prefix="/search",  # エンドポイントの頭のURL http://localhost:8080/search
+    tags=["search"],  # FastAPI Swagger /docsの分類
 )
 
 
