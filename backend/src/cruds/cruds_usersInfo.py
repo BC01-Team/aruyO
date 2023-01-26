@@ -45,7 +45,6 @@ def get_user_items(id: str):
 
 
 # API_No.7 物品詳細取得
-# 会社_idから会社名もgetして返したい　to Yuka
 def get_user_item(item_id: str):
     logger.debug(item_id)
     # mongoDB findでドキュメント取得
