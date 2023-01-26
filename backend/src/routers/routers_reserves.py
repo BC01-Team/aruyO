@@ -6,11 +6,14 @@ from fastapi.encoders import jsonable_encoder
 import src.cruds.cruds_reserves as reserve_crud
 
 logger = setup_logger(__name__)
-router = APIRouter()
+router = APIRouter(
+    prefix="/reserves",  # エンドポイントの頭のURL http://localhost:8080/exhibit
+    tags=["reserves"],  # http://127.0.0.1/docsの分類
+)
 
 
 # API_No.10 予約登録
-@router.post("/reserves")
+@router.post("/")
 def create_reserve(request: Request, response: Response, data: dict):
     reserve = jsonable_encoder(data)
     res = reserve_crud.create_reserve(reserve)
@@ -20,7 +23,7 @@ def create_reserve(request: Request, response: Response, data: dict):
 
 
 # API_No.11 予約詳細取得
-@router.get("/reserves/{id}")
+@router.get("/{id}")
 def get_reserve(id: str):
     reserve = reserve_crud.get_reserve(id=id)
     if reserve is None:
@@ -30,7 +33,7 @@ def get_reserve(id: str):
 
 
 # API_No.12 予約情報変更
-@router.put("/reserves/{id}")
+@router.put("/{id}")
 def update_reserve(id: str, data: dict):  # dataはrequestbodyにreserveコレクションから_idを抜いたものをいれた。余計な部分が多いのでステータスだけにしたい。
     reserve = jsonable_encoder(data)
     logger.debug(reserve)
