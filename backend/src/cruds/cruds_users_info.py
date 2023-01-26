@@ -15,6 +15,7 @@ collection_reservations = db.reservations
 
 # API_No.2 アカウント情報取得
 def get_user(id: str):
+    logger.debug("id")
     logger.debug(id)
     # mongoDB findでドキュメント取得
     user = collection_companies.find_one({"_id": ObjectId(id)})
