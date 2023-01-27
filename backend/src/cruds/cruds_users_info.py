@@ -15,7 +15,6 @@ collection_reservations = db.reservations
 
 # API_No.2 アカウント情報取得
 def get_user(id: str):
-    logger.debug("id")
     logger.debug(id)
     # mongoDB findでドキュメント取得
     user = collection_companies.find_one({"_id": ObjectId(id)})
@@ -23,9 +22,8 @@ def get_user(id: str):
 
 
 # API_No.5 物品登録
-# company_id未取得
 def create_item(data: dict) -> Union[dict, bool]:
-    logger.debug("物品登録crud")
+    logger.debug(data)
     # mongoDB insert_oneでドキュメント登録後、find_oneで登録値を取得
     item = collection_items.insert_one(data)
     new_item = collection_items.find_one({"_id": item.inserted_id})

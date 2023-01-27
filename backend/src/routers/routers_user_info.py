@@ -28,7 +28,7 @@ def get_user(id: str, session_id: Optional[str] = Cookie(None)) -> dict:
     raise HTTPException(status_code=400, detail="ログイン情報がありません")
 
 
-# API_No.5 物品登録（company_id未取得）
+# API_No.5 物品登録
 @router.post("/{id}/items")
 def create_item(
     request: Request,
