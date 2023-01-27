@@ -30,7 +30,6 @@ export const sample_qr: any = () => {
   
   const handleChangeStatus = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(result)
     let putStatus: string = "";
     if (reserveStatus === "予約確定") {
       putStatus = "予約中";
