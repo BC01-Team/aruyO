@@ -5,9 +5,10 @@ import Link from "next/link";
 import { axiosInstance } from "@/lib/axiosInstance";
 import Map from "@/components/elements/GoogleMap";
 import SearchBox from "@/components/elements/SearchBox";
-
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
   const [keyword, setKeyword] = useState<string>("");
   const [results, setResults] = useState();
 
@@ -18,20 +19,22 @@ export default function Home() {
     e.preventDefault();
     console.log(keyword);
 
-    await axiosInstance
-      .get(`/search/?word=${keyword}`)
-      .then((res) => {
-        console.log(res.data);
-        setResults(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // await axiosInstance
+    //   .get(`/search/?word=${keyword}`)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     setResults(res.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    // 検索結果表示ページで検索するためにキーワードをqueryで渡してページ遷移する
+    router.push({ pathname: "/search", query: { keyword: keyword } });
   };
 
   console.log("results", results);
 
- 
   return (
     <>
       <Head>
@@ -49,7 +52,7 @@ export default function Home() {
       <main>
         {/* デザインが来たら、随時修正 */}
         <SearchBox setKeyword={setKeyword} getResultData={getResultData} />
-        <Map/>
+        <Map />
         {/* 動作確認用に以下のコードブロック使用中 */}
         {/* {results &&
           results.map((item) => {
