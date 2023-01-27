@@ -2,26 +2,33 @@ from fastapi import APIRouter, HTTPException
 from fastapi.encoders import jsonable_encoder
 from src.utils.logger.logger import setup_logger
 import src.cruds.cruds_search as search_crud
+from typing import Union
 
 logger = setup_logger(__name__)
 
 
 router = APIRouter(
-    prefix="/search",  # エンドポイントの頭のURL http://localhost:8080/search
+    prefix="/search",  # エンドポイントの頭のURL
     tags=["search"],  # FastAPI Swagger /docsの分類
 )
 
 
 # API_No.9 検索語keyの部分一致一覧取得（info.フィールド3つのいずれかに含まれる）
 @router.get("/")
-def get_search_word(word: str):
-    search_word_result = search_crud.get_search_word(key=word)
-    if not search_word_result:  # listが空[]の場合
-        raise HTTPException(
-            status_code=404, detail="一致する結果が見つかりませんでした。キーワードを変えて再検索してください。"
-        )
-    logger.debug("検索router")
-    return search_word_result
+def get_search_word(word: Union[str, None]):
+    logger.debug(word)
+    if word is None:  # 検索語が未入力の場合、新規登録物品100件をを返す
+        items_list = search_crud.get_items()
+        if not items_list:  # listが空[]の場合
+            raise HTTPException(status_code=404, detail="出品物がありませんでした。")
+        return items_list
+    else:  # 検索語を部分一致検索して返す
+        search_word_result = search_crud.get_search_word(key=word)
+        if not search_word_result:  # listが空[]の場合
+            raise HTTPException(
+                status_code=404, detail="一致する結果が見つかりませんでした。キーワードを変えて再検索してください。"
+            )
+        return search_word_result
 
 
 # 近傍検索　引数としてユーザーの会社情報を受け取る。検索範囲は一旦固定に。
