@@ -47,13 +47,13 @@ const MypageOrdersLender = ({ orders }: OrdersProps) => {
                               <p className="truncate text-sm font-medium text-amber-600">{order?.items_copy?.name}</p>
                               <p className="mt-2 flex items-center text-sm text-gray-500">
                                 {/* 貸出先企業名を表示できたほうがいい */}
-                                <span className="truncate">貸出先企業: {order?.borrower?._id}</span>
+                                <span className="truncate">相手先: {order?.borrower?._id}</span>
                               </p>
                             </div>
                             <div className="hidden md:block">
                               <div>
                                 <div className="flex">
-                                  <p className="text-sm text-gray-900 mr-2">開始日: {order?.period?.start}</p>
+                                  <p className="text-sm text-gray-900 mr-2">受取日: {order?.period?.start}</p>
                                   <p className="text-sm text-gray-900">返却日: {order?.period?.end}</p>
                                 </div>
                                 <p className="mt-2 flex items-center text-sm text-gray-500">{order?.payment?.status}</p>
