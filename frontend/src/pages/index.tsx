@@ -47,21 +47,7 @@ export default function Home({ items }) {
         <SearchBox setKeyword={setKeyword} getResultData={getResultData} />
 
         {/* 動作確認用に以下のコードブロック使用中 */}
-        {/* {results && results.map((item) => {
-          return (
-            <Link
-              key={item._id}
-              as={`/search/items/${item._id}`}
-              href={{ pathname: `/search/items/[id]`, query: item._id }}
-            >
-              <div>
-                <p>{item._id}</p>
-                <p>{item.info.name}</p>
-              </div>
-            </Link>
-          );
-        })} */}
-        {items.map((item) => {
+        {results && results.map((item) => {
           return (
             <Link
               key={item._id}
@@ -75,6 +61,20 @@ export default function Home({ items }) {
             </Link>
           );
         })}
+        {/* {items.map((item) => {
+          return (
+            <Link
+              key={item._id}
+              as={`/search/items/${item._id}`}
+              href={{ pathname: `/search/items/[id]`, query: item._id }}
+            >
+              <div>
+                <p>{item._id}</p>
+                <p>{item.info.name}</p>
+              </div>
+            </Link>
+          );
+        })} */}
         {/* ここまで */}
       </main>
     </>
@@ -82,11 +82,11 @@ export default function Home({ items }) {
 };
 
 // 動作確認用　物品一覧取得
-export const getServerSideProps = async () => {
-  const res = await axiosInstance.get("/items");
-  const items = await res.data;
+// export const getServerSideProps = async () => {
+//   const res = await axiosInstance.get("/items");
+//   const items = await res.data;
 
-  return {
-    props: { items }
-  }
-};
+//   return {
+//     props: { items }
+//   }
+// };
