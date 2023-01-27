@@ -11,11 +11,11 @@ company = [
             "location": [35.658756, 139.731986],
             "phone": "0123456789",
             "email": "info@gree.com",
-            "account": "stripe"
+            "account": "stripe",
         },
         "items_id": ["63cd1b0420cfbda6799aaaaa"],
         "borrower_history": ["63cd1b0420cfbda6799wwwww"],
-        "reservations_history": []
+        "reservations_history": [],
     },
     {
         "info": {
@@ -23,10 +23,10 @@ company = [
             "Japan_Corporate_Number": "6010701027558",
             "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
             "hp_url": "https://www.google.com/",
-            "location":[35.660205,139.729202],
+            "location": [35.660205, 139.729202],
             "phone": "0123456789",
             "email": "info@mercari.com",
-            "account": "stripe"
+            "account": "stripe",
         },
         "staff": [
             {
@@ -39,7 +39,7 @@ company = [
         ],
         "items_id": ["63cd1b0420cfbda6799aaaaa"],
         "borrower_history": ["63cd1b0420cfbda6799wwwww"],
-        "reservations_history": []
+        "reservations_history": [],
     },
     {
         "info": {
@@ -47,14 +47,14 @@ company = [
             "Japan_Corporate_Number": "9010401088996",
             "address": "〒107-0062 東京都港区南青山2-13-10",
             "hp_url": "www.cassina-ixc.jp",
-            "location":[35.6705225,139.7036485],
+            "location": [35.6705225, 139.7036485],
             "phone": "0123456789",
             "email": "info@cassina.com",
-            "account": "stripe"
+            "account": "stripe",
         },
         "items_id": ["63cd1b0420cfbda6799aaaaa"],
         "borrower_history": [],
-        "reservations_history": []
+        "reservations_history": [],
     },
     {
         "info": {
@@ -62,15 +62,15 @@ company = [
             "Japan_Corporate_Number": "6010401029425",
             "address": "〒150-0001 東京都渋谷区神宮前1-5-8 神宮前タワービルディング",
             "hp_url": "https://www.beams.co.jp",
-            "location":[35.6706882,139.6891846],
+            "location": [35.6706882, 139.6891846],
             "phone": "0123456789",
             "email": "info@beams.com",
-            "account": "stripe"
+            "account": "stripe",
         },
         "items_id": [],
         "borrower_history": [],
-        "reservations_history": []
-    }
+        "reservations_history": [],
+    },
 ]
 
 # 出品物
@@ -78,41 +78,53 @@ item = [
     {
         "info": {
             "name": "ホワイトボード",
-            "picture": "https://sws/s3/picture1.jpeg",
+            "picture": [
+                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-front.jpg",
+                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-back.jpg",
+            ],
             "detail": "使用後は書いたものを消してください",
             "requirements": "平日日中のみ",
             "take_out": "true",
             "price": "1000",
             "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
         },
-    "location":[35.660205,139.729202],
-    "company_id": "63cd1b0420cfbda6799d59b1"
+        "location": [35.660205, 139.729202],
+        "company_id": "63cd1b0420cfbda6799d59b1",
     },
     {
         "info": {
             "name": "裁断機",
-            "picture": "https://sws/s3/picture2.jpeg",
+            "picture": [
+                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/%E8%A3%81%E6%96%AD%E6%A9%9F.gif"
+            ],
             "detail": "A2まで裁断可能。",
             "requirements": "平日日中のみ",
             "take_out": "true",
             "price": "1000",
             "address": "〒150-0001 東京都渋谷区神宮前1-5-8 神宮前タワービルディング",
         },
-    "location":[35.6706882,139.6891846],
-    "company_id": "63d124217a5c4bfaed6fe402"
+        "location": [35.6706882, 139.6891846],
+        "company_id": "63d124217a5c4bfaed6fe402",
     },
     {
         "info": {
             "name": "送風機",
-            "picture": "https://sws/s3/picture3.jpeg",
+            "picture": [
+                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/%E5%A4%A7%E5%AD%A6_%E5%B7%A5%E4%BD%9C%E6%A9%9F%E6%A2%B0.png",
+                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/%E5%A4%A7%E5%AD%A6_%E5%B7%A5%E4%BD%9C%E6%A9%9F%E6%A2%B0.png",
+                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/%E7%99%BA%E9%9B%BB%E6%A9%9F.jpeg",
+                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/3Dprinter_front.png",
+                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/3Dprinter_side.png",
+                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/3Dprinter_specification.png"
+            ],
             "detail": "口径:200φ、電源:単相100ｖ、風量:17ｍ3/min(50Hz)、重量:9kg、羽枚数:5枚",
             "take_out": "true",
             "price": "2000",
             "address": "〒107-0062 東京都港区南青山2-13-10",
         },
-    "location":[35.6705225,139.7036485],
-    "company_id": "63d124217a5c4bfaed6fe401"
-    }
+        "location": [35.6705225, 139.7036485],
+        "company_id": "63d124217a5c4bfaed6fe401",
+    },
 ]
 
 # 予約
@@ -125,19 +137,19 @@ reservation = {
         "requirements": "平日日中のみ",
         "take_out": "true",
         "price": "1000",
-        "address": "〒106-6108 東京都港区六本木６丁目１０番１号"
+        "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
     },
     "period": {"start": "2023/2/1", "end": "2023/2/5"},
     "payment": {"total": "5000", "method": "口座振込", "status": "決済完了"},
     "lender": {"_id": "63cd1b0420cfbda6799d59b1", "evaluation": "3"},
     "borrower": {"_id": "63cd1b0420cfbda679911111", "evaluation": "3"},
-    "status": "予約確定"
+    "status": "予約確定",
 }
 
 # ステータス
 status = {
     "payment": ["未決済", "決済完了"],
-    "reservation": ["募集中", "予約承認待ち", "予約確定", "利用中", "掲載停止"]
+    "reservation": ["募集中", "予約承認待ち", "予約確定", "利用中", "掲載停止"],
 }
 
 
