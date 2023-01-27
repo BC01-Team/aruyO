@@ -29,6 +29,10 @@ const ReserveItem = () => {
       });
   }, []);
 
+  const getDays = () => {
+    
+  }
+
   const onSubmit = async (data: FieldValues) => {
     console.log(data);
     const items_copy = item?.info;
@@ -46,6 +50,21 @@ const ReserveItem = () => {
       status: "予約承認待ち"
     };
 
+
+    // 文字列から型を変更
+    const date1 = new Date(startDate);
+    const date2 = new Date(endDate);
+
+    // 料金計算　単価×日数
+    console.log("日付", startDate, typeof startDate);
+    console.log("変換", date1, typeof date1);
+
+    let result = ( date2 - date1 ) / 86400000 + 1;
+    console.log("結果", result);
+
+    const totalAmount = item?.info?.price * result;
+    console.log(totalAmount);
+
     await axiosInstance
       .post("/reserves", orderData)
       .then((res) => {
@@ -61,10 +80,28 @@ const ReserveItem = () => {
       <h1>予約画面</h1>
       <p>{item?.info?.name}</p>
       <p>{item?.info?.price}</p>
-      <div className="bg-amber-500">
+      <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input className="border" {...register('startDate')} />
-          <input  className="border" {...register('endDate')} />
+          <input type="date" className="border-gray-300" {...register('startDate')} />
+          <input type="date" className="border-gray-300" {...register('endDate')} />
+          {/* <div className="flex items-center justify-center">
+            <div className="datepicker relative form-floating mb-3 xl:w-96">
+              <input type="text"
+                className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                placeholder="Select a date"
+                {...register('startDate')}
+              />
+              <label className="text-gray-700">受取日</label>
+            </div>
+            <div className="datepicker relative form-floating mb-3 xl:w-96">
+              <input type="text"
+                className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                placeholder="Select a date"
+                {...register('endDate')}
+              />
+              <label className="text-gray-700">返却日</label>
+            </div>
+          </div> */}
           <Button type="submit">予約</Button>
         </form>
       </div>
