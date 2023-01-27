@@ -4,7 +4,8 @@ import {
   useState,
   useContext,
 } from "react";
-import axios from "axios";
+import { axiosInstance } from "./../lib/axiosInstance";
+import { useRouter } from "next/router";
 
 export type UserType = any | null;
 
@@ -30,6 +31,7 @@ const AuthContext = createContext<AuthContextType>({
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = (props:any) => {
+  const router = useRouter();
   const { children } = props;
   const [user, setUser] = useState(null);
 
@@ -38,11 +40,13 @@ export const AuthProvider = (props:any) => {
       email: email,
       password: password,
     };
-      axios
-        .post("http://localhost:8888/login", data, { withCredentials: true })
+      axiosInstance
+        .post("/login", data, { withCredentials: true })
         .then((res) => {
           console.log(res.data.user);
-          setUser(res.data.user);
+          setUser(res.data.user)
+
+          
         })
         .catch((e) => {
           console.log(e);
@@ -53,13 +57,14 @@ export const AuthProvider = (props:any) => {
   console.log("auth.tsx,user",user)
 
   const logout = () => {
-    axios
-      .post("http://localhost:8888/logout", { withCredentials: true })
-      .then((res) =>
-      {
-        console.log(res.data.user);
-        setUser(null);
+    axiosInstance
+      .post("/logout", {
+        withCredentials: true,
       })
+      .then((res) => {
+        setUser(null);
+        router.push("/")
+      }).catch(e => console.log(e));
   } 
   
   const value = {
