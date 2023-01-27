@@ -125,7 +125,7 @@ reservation = {
         "requirements": "平日日中のみ",
         "take_out": "true",
         "price": "1000",
-        "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
+        "address": "〒106-6108 東京都港区六本木６丁目１０番１号"
     },
     "period": {"start": "2023/2/1", "end": "2023/2/5"},
     "payment": {"total": "5000", "method": "口座振込", "status": "決済完了"},
@@ -137,7 +137,7 @@ reservation = {
 # ステータス
 status = {
     "payment": ["未決済", "決済完了"],
-    "reservation": ["募集中", "予約承認待ち", "予約確定", "利用中", "掲載停止"]
+    "reservation": ["募集中", "予約承認待ち", "予約確定", "利用中", "掲載停止","返却完了"]
 }
 
 
