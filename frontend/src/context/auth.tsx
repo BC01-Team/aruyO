@@ -51,10 +51,10 @@ export const AuthProvider = (props: AuthProps) => {
       password: password,
     };
     axiosInstance
-      .post("/login", data, { withCredentials: true })
+      .post("/login", data)
       .then((res) => {
         setUser(res.data.user);
-        router.push(`/mypage`);
+        router.push(`/mypage/`);
       })
       .catch((e) => {
         console.log(e);
