@@ -1,29 +1,56 @@
-import { GetServerSideProps } from "next";
 import { useState, ChangeEvent, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { axiosInstance } from "@/lib/axiosInstance";
 import Map from "@/components/elements/GoogleMap";
 import SearchBox from "@/components/elements/SearchBox";
+import { useRecoilValue } from "recoil";
+import { userState } from "@/lib/atom";
 
-
-
-const Search = (props) => {
+const Search = () => {
   const router = useRouter();
   const [keyword, setKeyword] = useState(router.query.keyword);
   const [currentKeyword, setCurrentKeyword] = useState(router.query.keyword);
-  const [results, setResults] = useState( props.results );
+  const [results, setResults] = useState();
 
-  const getResultData = async (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    console.log(keyword);
+  const user = useRecoilValue(userState);
+  const dataSet = {
+    key: keyword,
+    info: { location: {} },
+  };
+  console.log("key:", dataSet.key);
+  if (user) {
+    dataSet.info = {
+      location: user.location,
+    };
+    console.log("location:", dataSet.info.location);
+  }
 
-    await axiosInstance
-      .get(`/search/?word=${keyword}`)
+  // トップページで検索ボタンを押したときに、キーワードを持ってきて、ここで初回の検索実行
+  useEffect(() => {
+    axiosInstance
+      .post("/search", dataSet)
       .then((res) => {
         console.log(res.data);
         setResults(res.data);
-        setCurrentKeyword(keyword)
+        setCurrentKeyword(keyword);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  // 結果ページから再度検索をするときはこちら。　=>useEffectの設定で初回検索と２回目以降をまとめられないか？
+  const getResultData = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    console.log(keyword);
+
+    axiosInstance
+      .post("/search", dataSet)
+      .then((res) => {
+        console.log(res.data);
+        setResults(res.data);
+        setCurrentKeyword(keyword);
       })
       .catch((error) => {
         console.log(error);
@@ -39,9 +66,9 @@ const Search = (props) => {
       <div class="flex">
         <Map results={results} />
         <div class="flex flex-col">
-        {results &&
-          results.map((item) => {
-            return (
+          {results &&
+            results.map((item) => {
+              return (
                 <Link
                   key={item._id}
                   as={`/search/items/${item._id}`}
@@ -52,22 +79,34 @@ const Search = (props) => {
                     <p>{item.info.name}</p>
                   </div>
                 </Link>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps =async (context) => {
-  const res = await axiosInstance.get(`/search/?word=${context.query.keyword}`);
-  // 検索結果が空の時、ステータス404が返ってくるためここで落ちる。"204 No Content"もしくは"200 OK"で「検索結果は０件です」等に変更したらいいかも。
-  const results = await res.data;
+//componentで使用する際下記記載
 
-  return {
-    props: {results }
-  }
-}
+// userのみ使用する場合は、25行目
+
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const dataSet = {};
+//   dataSet.key = context.query.keyword;
+//   dataSet.info.location = user.location;
+//   console.log("key:", dataSet.key);
+//   console.log("location:", dataSet.info.location);
+//   const res = await axiosInstance.post(
+//     `/search/?word=${context.query.keyword}`,
+//     dataSet
+//   );
+//   // 検索結果が空の時、ステータス404が返ってくるためここで落ちる。"204 No Content"もしくは"200 OK"で「検索結果は０件です」等に変更したらいいかも。
+//   const results = await res.data;
+
+//   return {
+//     props: { results },
+//   };
+// };
 
 export default Search;
