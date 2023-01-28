@@ -4,8 +4,10 @@ import {
   useState,
   useContext,
 } from "react";
-import { axiosInstance } from "./../lib/axiosInstance";
+import { axiosInstance } from "../lib/axiosInstance";
 import { useRouter } from "next/router";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userState } from "../lib/atom"
 
 export type UserType = any | null;
 
@@ -14,8 +16,8 @@ export type AuthProps = {
 }
 
 export type AuthContextType = {
-  user: any;
-  setUser: React.Dispatch<React.SetStateAction<any>>;
+  user: UserType;
+  setUser: any;
   login: any,
   logout: any
 };
@@ -33,7 +35,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = (props:any) => {
   const router = useRouter();
   const { children } = props;
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useRecoilState(userState);
 
   const login = (email: string, password: string) => {
     const data = {
@@ -45,8 +47,7 @@ export const AuthProvider = (props:any) => {
         .then((res) => {
           console.log(res.data.user);
           setUser(res.data.user)
-
-          
+          router.push("/mypage");
         })
         .catch((e) => {
           console.log(e);
@@ -76,3 +77,4 @@ export const AuthProvider = (props:any) => {
   
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
