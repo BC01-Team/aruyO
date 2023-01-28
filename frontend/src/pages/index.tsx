@@ -12,7 +12,7 @@ export default function Home() {
   const [keyword, setKeyword] = useState<string>("");
   const [results, setResults] = useState();
 
-  console.log(items);
+  // console.log(items);
 
   // 検索結果が0件だった時の処理方法、空で入力した場合は？
   // 表示後のresultsリセット？必要？
