@@ -4,19 +4,30 @@ import {
   useState,
   useContext,
 } from "react";
-import axios from "axios";
+import { axiosInstance } from "../lib/axiosInstance";
+import { useRouter } from "next/router";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userState } from "../lib/atom"
 
-export type UserType = any | null;
+type User = {
+  id: string;
+  name: string;
+  location: [];
+  staff_id: string;
+  staff_name: string;
+};
 
-export type AuthProps = {
+type UserType = User | null;
+
+type AuthProps = {
   children: ReactNode;
 }
 
-export type AuthContextType = {
-  user: any;
-  setUser: React.Dispatch<React.SetStateAction<any>>;
-  login: any,
-  logout: any
+type AuthContextType = {
+  user: UserType;
+  setUser: React.Dispatch<React.SetStateAction<UserType>>;
+  login: any
+  logout: () => void;
 };
 
 
@@ -29,45 +40,49 @@ const AuthContext = createContext<AuthContextType>({
 
 export const useAuth = () => useContext(AuthContext);
 
-export const AuthProvider = (props:any) => {
+export const AuthProvider = (props: AuthProps) => {
+  const router = useRouter();
   const { children } = props;
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useRecoilState(userState);
 
   const login = (email: string, password: string) => {
     const data = {
       email: email,
       password: password,
     };
-      axios
-        .post("http://localhost:8888/login", data, { withCredentials: true })
-        .then((res) => {
-          console.log(res.data.user);
-          setUser(res.data.user);
-        })
-        .catch((e) => {
-          console.log(e);
-          alert("メールアドレスまたはパスワードを確認してください");
-        });
-  }  
+    axiosInstance
+      .post("/login", data, { withCredentials: true })
+      .then((res) => {
+        setUser(res.data.user);
+        router.push(`/mypage`);
+      })
+      .catch((e) => {
+        console.log(e);
+        alert("メールアドレスまたはパスワードを確認してください");
+      });
+  };
 
-  console.log("auth.tsx,user",user)
+  console.log("auth.tsx,user", user);
 
   const logout = () => {
-    axios
-      .post("http://localhost:8888/logout", { withCredentials: true })
-      .then((res) =>
-      {
-        console.log(res.data.user);
-        setUser(null);
+    axiosInstance
+      .post("/logout", {
+        withCredentials: true,
       })
-  } 
-  
+      .then((res) => {
+        setUser(null);
+        router.push("/");
+      })
+      .catch((e) => console.log(e));
+  };
+
   const value = {
     user,
     setUser,
     login,
-    logout
+    logout,
   };
-  
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
