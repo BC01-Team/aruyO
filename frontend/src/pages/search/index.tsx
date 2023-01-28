@@ -13,12 +13,15 @@ const Search = () => {
   const [currentKeyword, setCurrentKeyword] = useState(router.query.keyword);
   const [results, setResults] = useState();
 
+  // 検索APIに渡すdataSetの作成（初回時、２回目以降も共通処理）
   const user = useRecoilValue(userState);
   const dataSet = {
     key: keyword,
     info: { location: {} },
   };
   console.log("key:", dataSet.key);
+
+  // ユーザーのログイン情報を取得し、ログイン情報がある場合は位置情報をdataSetに追加する。
   if (user) {
     dataSet.info = {
       location: user.location,
@@ -26,7 +29,7 @@ const Search = () => {
     console.log("location:", dataSet.info.location);
   }
 
-  // トップページで検索ボタンを押したときに、キーワードを持ってきて、ここで初回の検索実行
+  // （初回の検索実行）トップページで検索ボタンを押したときに、キーワードを持ってきて、ここでAPI呼び出し
   useEffect(() => {
     axiosInstance
       .post("/search", dataSet)
@@ -40,7 +43,7 @@ const Search = () => {
       });
   }, []);
 
-  // 結果ページから再度検索をするときはこちら。　=>useEffectの設定で初回検索と２回目以降をまとめられないか？
+  // （結果ページからの再検索）　=>useEffectの設定で初回検索と２回目以降をまとめられないか？
   const getResultData = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     console.log(keyword);
