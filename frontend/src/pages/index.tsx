@@ -52,9 +52,98 @@ export default function Home() {
       </Head>
 
       <main>
-        {/* デザインが来たら、随時修正 */}
-        <SearchBox setKeyword={setKeyword} getResultData={getResultData} />
-        <Map />
+        <section>
+          <div className="flex-col mt-4 mx-10">
+            <img
+              className="w-fit"
+              src="/img/topPage/topImage.jpg"
+              alt=""
+            />
+          </div>
+          {/* <SearchBox setKeyword={setKeyword} getResultData={getResultData} /> */}
+        </section>
+        <section>
+          <div className="relative mx-12">
+            <img
+              className="absolute top-0 right-0 w-1/6 sm:w-32"
+              src="/img/topPage/camera.png"
+            />
+            <div className="my-8">
+              <div className="mx-auto text-center">
+                <img
+                  className="mx-auto -mb-6"
+                  src="/img/topPage/underLine.png"
+                />
+                <p className=" text-gray-500 font-sans font-bold text-xs md:text-xl">
+                  おすすめの商品
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-wrap">
+              <div className="mx-auto">
+                <div className="px-3">
+                  <img className="" src="/img/topPage/moc/category_1.jpg" />
+                  <p className="mx-auto">ソファー1</p>
+                </div>
+              </div>
+              <div className="mx-auto">
+                <div className="px-3">
+                  <img className="" src="/img/topPage/moc/category_1.jpg" />
+                  <p className="mx-auto">ソファー2</p>
+                </div>
+              </div>
+              <div className="mx-auto">
+                <div className="px-3">
+                  <img className="" src="/img/topPage/moc/category_1.jpg" />
+                  <p className="mx-auto">ソファー3</p>
+                </div>
+              </div>
+              <div className="mx-auto">
+                <div className="px-3">
+                  <img className="" src="/img/topPage/moc/category_1.jpg" />
+                  <p className="mx-auto">ソファー4</p>
+                </div>
+              </div>
+              <div className="mx-auto">
+                <div className="px-3">
+                  <img className="" src="/img/topPage/moc/category_1.jpg" />
+                  <p className="mx-auto">ソファー5</p>
+                </div>
+              </div>
+              <div className="mx-auto">
+                <div className="px-3">
+                  <img className="" src="/img/topPage/moc/category_1.jpg" />
+                  <p className="mx-auto">ソファー6</p>
+                </div>
+              </div>
+              <div className="mx-auto">
+                <div className="px-3">
+                  <img className="" src="/img/topPage/moc/category_1.jpg" />
+                  <p className="mx-auto">ソファー7</p>
+                </div>
+              </div>
+              <div className="mx-auto">
+                <div className="px-3">
+                  <img className="" src="/img/topPage/moc/category_1.jpg" />
+                  <p className="mx-auto">ソファー8</p>
+                </div>
+              </div>
+              <div className="mx-auto">
+                <div className="px-3">
+                  <img className="" src="/img/topPage/moc/category_1.jpg" />
+                  <p className="mx-auto">ソファー9</p>
+                </div>
+              </div>
+              <div className="mx-auto">
+                <div className="px-3">
+                  <img className="" src="/img/topPage/moc/category_1.jpg" />
+                  <p className="mx-auto">ソファー10</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* 動作確認用に以下のコードブロック使用中 */}
         {/* {results &&
           results.map((item) => {
