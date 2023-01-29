@@ -34,7 +34,7 @@ const MypageOrderBorrower = () => {
             withCredentials: true,
           })
         ).data;
-        console.log("取得成功"),
+        
         setLoading(false);
         setOrders(res);
       };
