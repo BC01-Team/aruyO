@@ -57,6 +57,8 @@ export default function Home({ items }) {
               <div>
                 <p>{item._id}</p>
                 <p>{item.info.name}</p>
+                <img src={item.info.pictures[0]} />
+                <img src={item.info.pictures[1]} />
               </div>
             </Link>
           );
