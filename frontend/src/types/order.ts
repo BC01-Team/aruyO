@@ -1,6 +1,6 @@
 export type Order = {
   _id?: string
-  exhibits_copy?: {
+  items_copy?: {
     _id: string,
     name: string,
     picture: string,

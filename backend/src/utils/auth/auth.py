@@ -24,6 +24,8 @@ def is_login(session_id: Optional[str] = Cookie(None)):
 # cookieからsession_id取り出す
     res = {"session_id": session_id}
     session_id = res["session_id"]
+    if session_id is None:
+       return False
     print(session_id)
 # session_idの存在ck
     if r.exists(session_id) == 0:

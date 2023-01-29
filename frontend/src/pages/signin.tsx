@@ -4,26 +4,13 @@ import { useAuth } from "../context/auth";
 
 
 const Signin = () => {
-  const { user, login } = useAuth();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const onSignin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     login(email, password);
-    // const data = {
-    //   email: email,
-    //   password: password,
-    // };
-    // email:info@mercari.com password:password
-    // axios
-    //   .post("http://localhost:8888/login", data, { withCredentials: true })
-    //   .then((res) => {
-    //     console.log(res.data.user);
-    //     //
-    //     setUser(res.data.user);
-    //     console.log(user)
-    //   })
   };
   return (
     <div className="h-screen w-screen flex justify-center items-center">
