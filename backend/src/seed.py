@@ -78,7 +78,7 @@ item = [
     {
         "info": {
             "name": "ホワイトボード",
-            "picture": [
+            "pictures": [
                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-front.jpg",
                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-back.jpg"
             ],
@@ -94,7 +94,7 @@ item = [
     {
         "info": {
             "name": "裁断機",
-            "picture": [
+            "pictures": [
                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/%E8%A3%81%E6%96%AD%E6%A9%9F.gif"
             ],
             "detail": "A2まで裁断可能。",
@@ -109,7 +109,7 @@ item = [
     {
         "info": {
             "name": "送風機",
-            "picture": [
+            "pictures": [
                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/%E5%A4%A7%E5%AD%A6_%E5%B7%A5%E4%BD%9C%E6%A9%9F%E6%A2%B0.png",
                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/%E5%A4%A7%E5%AD%A6_%E5%B7%A5%E4%BD%9C%E6%A9%9F%E6%A2%B0.png",
                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/%E7%99%BA%E9%9B%BB%E6%A9%9F.jpeg",
