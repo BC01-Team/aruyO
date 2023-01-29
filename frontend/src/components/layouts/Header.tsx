@@ -6,7 +6,6 @@ import { userState } from "../../lib/atom";
 
 const Header = () => {
   const user = useRecoilValue(userState);
-  console.log("Header",user)
   return (
     <>
       <header className="sticky top-0 bg-amber-600 absolute z-50">
