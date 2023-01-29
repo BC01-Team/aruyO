@@ -62,7 +62,6 @@ export const AuthProvider = (props: AuthProps) => {
       });
   };
 
-  console.log("auth.tsx,user", user);
 
   const logout = () => {
     axiosInstance
