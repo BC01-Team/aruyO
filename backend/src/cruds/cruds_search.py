@@ -56,3 +56,32 @@ def get_search_near(data) -> list:
         if document["location"] != location:
             nears.append(db_collection_serializer(document))
     return nears
+
+
+# キーワード検索+距離検索
+def get_serch_both(data) -> list:
+    location = data["info"]["location"]
+    logger.debug(location)
+    key = data["key"]
+    logger.debug(key)
+    # mongoDB findでドキュメント取得、$regexで部分一致したドキュメントをlistに追加
+    list = collection_items.find(
+        {
+            "$and":[
+                {
+                    "$or": [
+                        {"info.name": {"$regex": key}},
+                        {"info.detail": {"$regex": key}},
+                        {"info.requirements": {"$regex": key}},
+                    ]  
+                },
+                {
+                    "location": SON([("$near", location), ("$maxDistance", 0.1)])
+                }
+            ]
+        }
+    )
+    search_result = []
+    for document in list:
+        search_result.append(db_collection_serializer(document))
+    return search_result
