@@ -1,8 +1,12 @@
 import Button from "../elements/Button";
+import { useAuth } from "./../../context/auth";
 
 const LogoutButton = () => {
-  const onSubmitButton = () => {
-    // 認証周りが整備できたら処理を書く
+  const { logout } = useAuth();
+
+  const onSubmitButton = async () => {
+    await logout()
+
     console.log("logoutボタンがクリックされました");
   };
 
