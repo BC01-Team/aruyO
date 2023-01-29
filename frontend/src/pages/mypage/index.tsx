@@ -8,19 +8,19 @@ import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 // 認証周りができたら、動的にする。テスト用のため矛盾あり。
 const user_id = "63d607e9f7e435916eb7ae4e";
 
-export async function getServerSideProps() {
-  const ENDPOINT = "http://localhost:8888/users/63d607e9f7e435916eb7ae4e";
+// export async function getServerSideProps() {
+//   const ENDPOINT = "http://localhost:8888/users/63d607e9f7e435916eb7ae4e";
 
-  const data = await axios.get(ENDPOINT).then((res) => res.data);
+//   const data = await axios.get(ENDPOINT).then((res) => res.data);
 
-  // 404や500を受け取ればレスポンスがあるので正常と判断しエラーは出ず .thenに進む。
-  // const data = await fetch(ENDPOINT).then(res => res.json());
-  console.log(data);
+//   // 404や500を受け取ればレスポンスがあるので正常と判断しエラーは出ず .thenに進む。
+//   // const data = await fetch(ENDPOINT).then(res => res.json());
+//   console.log(data);
 
-  return {
-    props: { data },
-  };
-}
+//   return {
+//     props: { data },
+//   };
+// }
 
 const user = [
   {
@@ -50,7 +50,7 @@ const user = [
   },
 ];
 
-const Mypage = ({ data }) => {
+const Mypage = () => {
   return (
     <>
       <Sidebar />
@@ -110,10 +110,10 @@ const Mypage = ({ data }) => {
                             <p className="truncate text-sm font-medium text-amber-600">
                               {user.staff[0].name}
                             </p>
-                            <p className="mt-2 flex user-center text-sm text-gray-500">
-                              <span className="truncate">
-                                {user.staff[0].email}
-                              </span>
+                            <p>
+                              管理者 {user.staff[0].role.admin} / 貸す{" "}
+                              {user.staff[0].role.item} / 借りる{" "}
+                              {user.staff[0].role.reservation}
                             </p>
                           </div>
                           <div className="hidden md:block">
@@ -121,7 +121,11 @@ const Mypage = ({ data }) => {
                               <p className="text-sm text-gray-900">
                                 表示させる項目は要検討
                               </p>
-                              <p>管理者 {user.staff[0].role.admin}</p>
+                              <p className="mt-2 flex user-center text-sm text-gray-500">
+                                <span className="truncate">
+                                  {user.staff[0].email}
+                                </span>
+                              </p>
                             </div>
                           </div>
                         </div>
