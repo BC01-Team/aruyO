@@ -60,14 +60,13 @@ const MypageOrderDetailBorrower = ({ result }: OrderProps) => {
   const [order, setOrder] = useState<any>();
   const [reserveStatus, setReserveStatus] = useState<string>();
   const user = useRecoilValue(userState);
-  const orderId = router.query.id;
   const [loading, setLoading] = useState(false);
   // const []
 
+  const orderId = router.query.id;
   useEffect(() => {
-    setLoading(true)
-    if (orderId)
-    {
+    setLoading(true);
+    if (orderId) {
       const fetchDate = async () => {
         //予約詳細取得
         const reserveInfo = await(
@@ -77,81 +76,100 @@ const MypageOrderDetailBorrower = ({ result }: OrderProps) => {
         ).data;
 
         //相手先企業情報取得
-        const lenderId = reserveInfo.lender._id
+        const lenderId = reserveInfo.lender._id;
         const lenderInfo = await(
           await axiosInstance.get(`/users/${lenderId}`, {
             withCredentials: true,
           })
         ).data;
-        const res = [reserveInfo,lenderInfo]
-        console.log("res", res)
-        
-        setLoading(false);
+
+        const res = [reserveInfo, lenderInfo];
         setOrder(res);
+        setLoading(false);
+      };
 
-        //qrTextの生成
-
-      }
       fetchDate();
-      console.log("order",order);
     }
-    },[])
+  }, [orderId]);
+
+  console.log("orderレンダリング", order);
 
   return (
     <>
-      {!loading  && (
+      {!loading && order && user && order[0].borrower._id === user.id && (
         <>
           <Sidebar />
           <MypageLayout>
-            <PageTitle>予約詳細</PageTitle>
+            <div>
+              <PageTitle>予約詳細</PageTitle>
+            </div>
             <ContentsLayout>
-              画像
-              <img
-                className="h-12 w-12 rounded-full"
-                // src={order.items_copy?.picture}
-                alt=""
-              />
+              {order[0].items_copy?.picture.map((imgUrl:string, index:number) => (
+                <img
+                  className="h-12 w-12 rounded-full"
+                  src={imgUrl}
+                  alt=""
+                  key={index}
+                />
+              ))}
               <div>
-                <PageTitle>予約情報</PageTitle>
+                <h3>予約番号</h3>
+                <p className="truncate text-sm font-medium text-amber-600">
+                  {orderId}
+                </p>
               </div>
-              {/*品名*/}
-              {/* <p className="truncate text-sm font-medium text-amber-600">
-            {order.items_copy?.name} */}
-              {/*貸出先企業名*/}
-              <p className="mt-2 flex items-center text-sm text-gray-500">
-                <span className="truncate">貸出先企業名: {"取得方法検討"}</span>
-              </p>
-              {/*貸出先担当者名*/}
-              <p className="mt-2 flex items-center text-sm text-gray-500">
-                <span className="truncate">
-                  貸出先担当者名: {"取得方法検討"}
-                </span>
-              </p>
-              {/*貸出先連絡先*/}
-              <p className="mt-2 flex items-center text-sm text-gray-500">
-                <span className="truncate">貸出先連絡先: {"取得方法検討"}</span>
-              </p>
-              {/*貸出日*/}
-              <p className="mt-2 flex items-center text-sm text-gray-500">
-                {/* <span className="truncate">貸出日: {order.period?.start}</span> */}
-              </p>
-              {/*返却日*/}
-              <p className="mt-2 flex items-center text-sm text-gray-500">
-                {/* <span className="truncate">返却日: {order.period?.end}</span> */}
-              </p>
-              {/*金額*/}
-              <p className="mt-2 flex items-center text-sm text-gray-500">
-                {/* <span className="truncate">金額: {order.payment?.total}</span> */}
-              </p>
-              {/*支払ステータス*/}
-              <p className="mt-2 flex items-center text-sm text-gray-500">
-                <span className="truncate">
-                  {/* 支払ステータス: {order.payment?.status} */}
-                </span>
+              <div>
+                <h3>貸出企業</h3>
+                <p className="truncate text-sm font-medium text-amber-600">
+                  {order[1].info?.name}
+                </p>
+                <p className="mt-2 flex items-center text-sm text-gray-500">
+                  <span className="truncate">
+                    連絡先: {order[1].info?.phone}
+                  </span>
+                </p>
+              </div>
+              <div>
+                <h3>物品名</h3>
+                <p className="truncate text-sm font-medium text-amber-600">
+                  {order[0].items_copy?.name}
+                </p>
+              </div>
+              <div>
+                <h3>そのほか</h3>
+                <p className="mt-2 flex items-center text-sm text-gray-500">
+                  <span className="truncate">
+                    貸出日: {order[0].period?.start}
+                  </span>
+                </p>
+                <p className="mt-2 flex items-center text-sm text-gray-500">
+                  <span className="truncate">
+                    返却日: {order[0].period?.end}
+                  </span>
+                </p>
+                <p className="mt-2 flex items-center text-sm text-gray-500">
+                  <span className="truncate">
+                    金額: {order[0].payment?.total}
+                  </span>
+                </p>
+                <p className="mt-2 flex items-center text-sm text-gray-500">
+                  <span className="truncate">
+                    支払: {order[0].payment?.status}
+                  </span>
+                </p>
+              </div>
+              <div>
+                <h3>ステータス</h3>
+              </div>
+              <p className="truncate text-sm font-medium text-amber-600">
+                {order[0].status}
               </p>
               {/*予約ステータスにより表示切替 2列　status渡す*/}
-              {/* <>{order?.status}</> */}
-              {/* <QrGenerator qrText={order.items_copy?._id} /> */}
+              { order[0].status !== "予約確定" && order[0].status !== "貸出中" ? (<></>):(
+                    <QrGenerator
+                      qrText={`予約番号：${order[0]._id}, 品名:${order[0].items_copy?.name}, 貸出日:${order[0].period?.start}, 返却日:${order[0].period.start}`}
+                    />
+                  )}
             </ContentsLayout>
           </MypageLayout>
         </>
