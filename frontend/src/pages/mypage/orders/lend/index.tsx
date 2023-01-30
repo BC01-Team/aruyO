@@ -19,6 +19,7 @@ const MypageOrdersLender = ({}: OrdersProps) => {
   const [orders, setOrders] = useState(null);
   const [loading, setLoading] = useState(false);
   const user = useRecoilValue(userState);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     setLoading(true);

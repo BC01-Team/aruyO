@@ -9,8 +9,6 @@ const EvaluationRadioButton = ({ type }: any) => {
   console.log(orderId);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(value);
-    console.log(type);
     if (type === "borrower") {
       const data = {
         borrower: { evaluation: value },
