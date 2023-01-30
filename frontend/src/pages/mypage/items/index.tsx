@@ -12,8 +12,9 @@ import { axiosInstance } from "@/lib/axiosInstance";
 
 const MypageItems = () => {
   const [hydrated, setHydrated] = useState(false);
-  const [items, setItems] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [items, setItems] = useState(null);
+  // ログイン認証からuserId取得
   const user = useRecoilValue(userState);
 
   useEffect(() => {
@@ -44,10 +45,10 @@ const MypageItems = () => {
           <>
             <Sidebar />
             <MypageLayout>
-              <PageTitle>登録物品一覧</PageTitle>
+              <div className="font-bold text-2xl text-center mt-10 mb-6">登録物品一覧</div>
               <ContentsLayout>
-                <div className="overflow-hidden bg-white shadow sm:rounded-md">
-                  <ul role="list" className="divide-y divide-gray-200">
+                <div className="overflow-hidden">
+                  <ul role="list" className="">
                     {items.map((item, index) => {
                       return (
                         <li key={index}>
@@ -58,11 +59,11 @@ const MypageItems = () => {
                               query: item._id,
                             }}
                           >
-                            <div className="flex items-center px-4 py-4 sm:px-6">
-                              <div className="flex min-w-0 flex-1 items-center">
+                            <div className="flex items-center px-4 py-2 sm:px-6">
+                              <div className="flex min-w-0 flex-1 items-center rounded border-none p-4 bg-slate-100 max-w-6xl h-28">
                                 <div className="flex-shrink-0">
                                   <img
-                                    className="h-12 w-12 rounded-full"
+                                    className="h-20 w-20"
                                     src={item.info.pictures[0]}
                                     alt=""
                                   />
