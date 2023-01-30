@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { axiosInstance } from "@/lib/axiosInstance";
 import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
 import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
+import ProtectRoute from "@/components/layouts/ProtectRoute";
+
 
 // type Item = {
 //   _id?: string;
@@ -24,6 +26,7 @@ import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 
 const MypageItemDetail = () => {
   const router = useRouter();
+  const [hydrated, setHydrated] = useState(false);
   // const [item, setItem] = useState<Item>();
 
   useEffect(() => {
@@ -36,19 +39,25 @@ const MypageItemDetail = () => {
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
+    
+    setHydrated(true);
   }, []);
 
+  if (!hydrated) return null;
+
   return (
-    <>
-      <Sidebar />
-      <MypageLayout>
-        <PageTitle>{router.query.id}</PageTitle>
-        <ContentsLayout>
-          <p>詳細ページ</p>
-        </ContentsLayout>
-      </MypageLayout>
-    </>
+    <ProtectRoute>
+      <>
+        <Sidebar />
+        <MypageLayout>
+          <PageTitle>{router.query.id}</PageTitle>
+          <ContentsLayout>
+            <p>詳細ページ</p>
+          </ContentsLayout>
+        </MypageLayout>
+      </>
+    </ProtectRoute>
   );
 };
 

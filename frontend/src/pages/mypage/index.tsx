@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useState, ChangeEvent } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
 import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
+import ProtectRoute from "@/components/layouts/ProtectRoute";
 
 // 認証周りができたら、動的にする。テスト用のため矛盾あり。
 const user_id = "63d607e9f7e435916eb7ae4e";
@@ -51,13 +53,22 @@ const user = [
 ];
 
 const Mypage = () => {
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  if (!hydrated) return null;
+
   return (
-    <>
-      <Sidebar />
-      <MypageLayout>
-        <PageTitle>マイページトップ</PageTitle>
-        <ContentsLayout>
-          <div className="overflow-hidden bg-white shadow sm:rounded-md">
+    <ProtectRoute>
+      <>
+        <Sidebar />
+        <MypageLayout>
+          <PageTitle>マイページトップ</PageTitle>
+          <ContentsLayout>
+            <div className="overflow-hidden bg-white shadow sm:rounded-md">
             <ul role="list" className="divide-y divide-gray-200">
               {user.map((user, index) => {
                 return (
@@ -136,9 +147,10 @@ const Mypage = () => {
               })}
             </ul>
           </div>
-        </ContentsLayout>
-      </MypageLayout>
-    </>
+          </ContentsLayout>
+        </MypageLayout>
+      </>
+    </ProtectRoute>
   );
 };
 

@@ -1,3 +1,4 @@
+import { useState ,useEffect } from "react";
 import Link from "next/link";
 import Button from "../elements/Button";
 import { useRecoilValue } from "recoil";
@@ -5,7 +6,14 @@ import { userState } from "../../lib/atom";
 
 const Header = () => {
   const user = useRecoilValue(userState);
-  console.log("Header",user)
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  if (!hydrated) return null;
+
   return (
     <>
       <header className="sticky top-0 bg-amber-600 absolute z-50">
