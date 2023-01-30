@@ -19,9 +19,7 @@ const mock_data = {
   status: "予約確定",
 };
 
-//文字列にしてQrImageに渡す
-const qrText = `予約番号：${mock_data._id}, 品名:${mock_data.name}, 貸出日:${mock_data.period.start}, 返却日:${mock_data.period.start}`;
-console.log(qrText);
+
 
 
 export const sample_qr: any = () => {
