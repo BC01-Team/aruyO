@@ -24,6 +24,7 @@
     "next": "13.1.4",
     "next-qrcode": "^2.4.0",
     "react": "18.2.0",
+    "react-datepicker": "^4.8.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.42.1",
     "react-zxing": "^1.1.0",
@@ -37,6 +38,7 @@
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "@types/google.maps": "^3.51.0",
+    "@types/react-datepicker": "^4.8.0",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.4"
