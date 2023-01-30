@@ -7,17 +7,41 @@ import MypageLayout from "@/components/layouts/mypage/MypageLayout";
 import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import Button from "@/components/elements/Button";
+import { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userState } from "../../../../lib/atom";
 
 type OrdersProps = {
   orders: Order[]
 };
 
-// 認証周りができたら、動的にする。テスト用のため矛盾あり。
-const lenderId = "63cd1b0420cfbda6799d59b1";
+const MypageOrdersLender = ({}: OrdersProps) => {
+  const [orders, setOrders] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const user = useRecoilValue(userState);
 
-const MypageOrdersLender = ({ orders }: OrdersProps) => {
+  useEffect(() => {
+    setLoading(true);
+    if (user) {
+      const lenderId = user.id;
+      const fetchDate = async () => {
+        const res = await(
+          await axiosInstance.get(`/users/${lenderId}/lent`, {
+            withCredentials: true,
+          })
+        ).data;
+        setLoading(false);
+        setOrders(res);
+      };
+      fetchDate();
+    }
+  }, []);
+    
+    console.log(orders);
   return (
     <>
+      {!loading && orders && (
+      <div>
       <Sidebar />
       <MypageLayout>
         {/* 適当なタイトルに変更する */}
@@ -35,29 +59,46 @@ const MypageOrdersLender = ({ orders }: OrdersProps) => {
                   <li key={index}>
                     <Link
                       as={`/mypage/orders/lend/${order._id}`}
-                      href={{ pathname: `/mypage/orders/lend/[id]`, query: order._id }}
+                      href={{
+                        pathname: `/mypage/orders/lend/[id]`,
+                        query: order._id,
+                      }}
                     >
                       <div className="flex items-center px-4 py-4 sm:px-6">
                         <div className="flex min-w-0 flex-1 items-center">
-                          {/* <div className="flex-shrink-0">
-                            <img className="h-12 w-12 rounded-full" src={item.info.picture} alt="" />
-                          </div> */}
+                          <div className="flex-shrink-0">
+                            <img
+                              className="h-12 w-12 rounded-full"
+                              src={order?.items_copy.picture[0]}
+                              alt=""
+                            />
+                          </div>
                           <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                             <div>
-                              <p className="truncate text-sm font-medium text-amber-600">{order?.items_copy?.name}</p>
+                              <p className="truncate text-sm font-medium text-amber-600">
+                                {order?.items_copy?.name}
+                              </p>
                               <p className="mt-2 flex items-center text-sm text-gray-500">
-                                {/* 貸出先企業名を表示できたほうがいい */}
-                                <span className="truncate">相手先: {order?.borrower?._id}</span>
+                                <span className="truncate">
+                                  金額: {order?.payment?.total} 円
+                                </span>
                               </p>
                             </div>
                             <div className="hidden md:block">
                               <div>
                                 <div className="flex">
-                                  <p className="text-sm text-gray-900 mr-2">受取日: {order?.period?.start}</p>
-                                  <p className="text-sm text-gray-900">返却日: {order?.period?.end}</p>
+                                  <p className="text-sm text-gray-900 mr-2">
+                                    受取日: {order?.period?.start}
+                                  </p>
+                                  <p className="text-sm text-gray-900">
+                                    返却日: {order?.period?.end}
+                                  </p>
                                 </div>
-                                <p className="mt-2 flex items-center text-sm text-gray-500">{order?.payment?.status}</p>
+                                <p className="mt-2 flex items-center text-sm text-gray-500">
+                                  {order?.payment?.status}
+                                </p>
                               </div>
+                              <div>{order?.status}</div>
                             </div>
                           </div>
                         </div>
@@ -70,17 +111,12 @@ const MypageOrdersLender = ({ orders }: OrdersProps) => {
           </div>
         </ContentsLayout>
       </MypageLayout>
+    </div>
+        )}
+      {loading && <div>ロード中</div>}
     </>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await axiosInstance.get(`/users/${lenderId}/lent`);
-  const orders = await res.data;
-
-  return {
-    props: { orders }
-  }
-};
 
 export default MypageOrdersLender;
