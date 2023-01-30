@@ -14,43 +14,6 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { userState } from "../../../../lib/atom";
 import { GetServerSideProps } from "next";
 
-// userのみ使用する場合は、25行目
-//  const [user, setUser] = useRecoilState(userState);
-//  const user = useRecoilValue(userState);
-
-// const order = {
-//   _id: "63d4a9aed1b46130cb3cf95b",
-//   items_copy: {
-//     _id: "63cd1b0420cfbda6799aaaaa",
-//     name: "ホワイトボード",
-//     picture: "https://sws/s3/picture1.jpeg",
-//     detail: "使用後は書いたものを消してください",
-//     requirements: "平日日中のみ",
-//     take_out: "true",
-//     price: "1000",
-//     address: "〒106-6108 東京都港区六本木６丁目１０番１号",
-//   },
-//   period: {
-//     start: "2023/2/1",
-//     end: "2023/2/5",
-//   },
-//   payment: {
-//     total: "5000",
-//     method: "口座振込",
-//     status: "決済完了",
-//   },
-//   lender: {
-//     _id: "63d4a9add1b46130cb3cf955",
-//     evaluation: "3",
-//   },
-//   borrower: {
-//     //true
-//     _id: "63d4a9add1b46130cb3cf955",
-//     evaluation: "3",
-//   },
-//   status: "予約確定",
-// };
-// 借りる側！borrower
 type OrderProps = {
   result: Order;
 };
@@ -61,7 +24,6 @@ const MypageOrderDetailBorrower = ({ result }: OrderProps) => {
   const [reserveStatus, setReserveStatus] = useState<string>();
   const user = useRecoilValue(userState);
   const [loading, setLoading] = useState(false);
-  // const []
 
   const orderId = router.query.id;
   useEffect(() => {

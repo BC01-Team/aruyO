@@ -72,9 +72,13 @@ const MypageOrderBorrower = () => {
                         >
                           <div className="flex items-center px-4 py-4 sm:px-6">
                             <div className="flex min-w-0 flex-1 items-center">
-                              {/* <div className="flex-shrink-0">
-                            <img className="h-12 w-12 rounded-full" src={item.info.picture} alt="" />
-                          </div> */}
+                              <div className="flex-shrink-0">
+                                <img
+                                  className="h-12 w-12 rounded-full"
+                                  src={order?.items_copy.picture[0]}
+                                  alt=""
+                                />
+                              </div>
                               <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                                 <div>
                                   <p className="truncate text-sm font-medium text-amber-600">
@@ -102,6 +106,7 @@ const MypageOrderBorrower = () => {
                                     </p>
                                   </div>
                                 </div>
+                                <div>{order?.status}</div>
                               </div>
                             </div>
                           </div>
