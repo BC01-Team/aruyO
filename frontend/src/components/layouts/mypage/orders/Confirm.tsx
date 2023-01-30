@@ -20,10 +20,8 @@ const Confirm = ({ result, status, setStatus, orderId }: Props) => {
 
   const handleStatusChange = (e: any) => {
     e.preventDefault();
-    console.log("orderId", orderId);
     if ((e.target.value === "予約確定")) {
-        console.log("貸出中前pass");
-    //読み込みしたQRとorderIdの一致確認
+    //読み込みしたQRとorderIdの一致確認する
         const data = {
           status: "貸出中",
         };
@@ -32,14 +30,13 @@ const Confirm = ({ result, status, setStatus, orderId }: Props) => {
           .then((res) => router.push(`/mypage/orders/lend`));
     } else if ((e.target.value === "貸出中")) {
       //読み込みしたQRとorderIdの一致確認
-        console.log("返却完了前pass")
         const data = {
           status: "返却完了",
         };
         axiosInstance
           .put(`/reserves/status/${orderId}`, data)
           .then((res) =>
-            router.push(`/mypage/orders/evaluation/${orderId}`)
+            router.push(`/mypage/orders/lend/evaluation/${orderId}`)
           );
     }
   };
