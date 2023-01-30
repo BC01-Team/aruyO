@@ -51,7 +51,8 @@ export const AuthProvider = (props: AuthProps) => {
       password: password,
     };
     axiosInstance
-      .post("/login", data)
+      .post("/login", data, {withCredentials: true
+})
       .then((res) => {
         setUser(res.data.user);
         router.push(`/mypage/`);
@@ -65,9 +66,7 @@ export const AuthProvider = (props: AuthProps) => {
 
   const logout = () => {
     axiosInstance
-      .post("/logout", {
-        withCredentials: true,
-      })
+      .post("/logout", )
       .then((res) => {
         setUser(null);
         router.push("/");
