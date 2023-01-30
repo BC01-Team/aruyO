@@ -26,14 +26,14 @@ const MypageOrderDetailLender = () => {
     if (orderId) {
       const fetchDate = async () => {
         //予約詳細取得
-        const reserveInfo = await (
+        const reserveInfo =  (
           await axiosInstance.get(`/reserves/${orderId}`, {
             withCredentials: true,
           })
         ).data;
         //相手先企業情報取得
         const borrowerId = reserveInfo.borrower._id;
-        const borrowerInfo = await(
+        const borrowerInfo = (
           await axiosInstance.get(`/users/${borrowerId}`, {
             withCredentials: true,
           })
@@ -46,13 +46,6 @@ const MypageOrderDetailLender = () => {
       fetchDate();
     }
   }, [orderId]);
-
-  // useEffect(() =>
-  // {
-  //   () => setStatus(order[0].status);
-  // },[order])
-
-  // console.log(status);
 
   return (
     <>
