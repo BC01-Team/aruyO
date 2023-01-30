@@ -59,8 +59,8 @@ const MypageItems = () => {
                               query: item._id,
                             }}
                           >
-                            <div className="flex items-center px-4 py-2 sm:px-6">
-                              <div className="flex min-w-0 flex-1 items-center rounded border-none p-4 bg-slate-100 max-w-6xl h-28">
+                            <div className="flex flex-col md:flex-row items-center px-4 py-2 sm:px-6">
+                              <div className="flex flex-1 item-center rounded border-none p-4 bg-slate-100 max-w-6xl min-w-full h-28">
                                 <div className="flex-shrink-0">
                                   <img
                                     className="h-20 w-20"
