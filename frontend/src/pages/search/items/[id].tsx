@@ -24,7 +24,7 @@ const ItemDetail = () => {
   const today = new Date();
   registerLocale('ja', ja);
 
-  const itemId = router.query.id || router.asPath.split('/')[3];
+  const itemId = router.query.id || router.asPath.split('/')[3]; // URLからIDを取得
   const {
     handleSubmit,
     // formState: { errors },
@@ -84,7 +84,7 @@ const ItemDetail = () => {
   };
 
   if (!hydrated) return null;
-  if (!item) return <Loading />;
+  if (!item) return <Loading />; // itemがセットされるまでローディングを表示
 
   return (
     <div className="bg-white">
