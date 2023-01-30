@@ -39,8 +39,9 @@ const user = [
 
 const Mypage = () => {
   const [hydrated, setHydrated] = useState(false);
-  const [userInfo, setUserInfo] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
+  // ログイン認証からuserId取得
   const user = useRecoilValue(userState);
 
   useEffect(() => {

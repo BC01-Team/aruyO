@@ -18,9 +18,11 @@ type ItemProps = {
 
 const MypageItemDetail = ({ result }: ItemProps) => {
   const [hydrated, setHydrated] = useState(false);
-  const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [item, setItem] = useState(null);
+  // ログイン認証からuserId取得
   const user = useRecoilValue(userState);
+  // urlからitemIdを取得
   const router = useRouter();
   const itemId = router.query.id;
 
@@ -54,7 +56,7 @@ const MypageItemDetail = ({ result }: ItemProps) => {
           <>
             <Sidebar />
             <MypageLayout>
-              <PageTitle>ユーザー物品詳細{router.query.id}</PageTitle>
+              <PageTitle>ユーザー物品詳細</PageTitle>
               <ContentsLayout>
                 <div className="overflow-hidden bg-white shadow sm:rounded-md">
                   <ul role="list" className="divide-y divide-gray-200">
@@ -69,11 +71,23 @@ const MypageItemDetail = ({ result }: ItemProps) => {
                         <div className="flex items-center px-4 py-4 sm:px-6">
                           <div className="flex min-w-0 flex-1 items-center">
                             <div className="flex-shrink-0">
-                              <img
-                                className="h-12 w-12 rounded-full"
-                                src={item.info.pictures[0]}
-                                alt=""
-                              />
+                              {item.info.pictures.map((picture, index) => {
+                                return (
+                                  <li key={index}>
+                                    <div className="flex items-center px-4 py-4 sm:px-6">
+                                      <div className="flex min-w-0 flex-1 items-center">
+                                        <div className="flex-shrink-0">
+                                          <img
+                                            className="h-20 w-20"
+                                            src={picture}
+                                            alt=""
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </li>
+                                );
+                              })}
                             </div>
                             <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                               <div>
