@@ -6,21 +6,21 @@ import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 
 // 認証周りができたら、動的にする。テスト用のため矛盾あり。
-// const user_id = "63d607e9f7e435916eb7ae4e";
+const user_id = "63d607e9f7e435916eb7ae4e";
 
-export async function getServerSideProps(context) {
-  const ENDPOINT = "http://localhost:8888/users/63d607e9f7e435916eb7ae4e";
+// export async function getServerSideProps() {
+//   const ENDPOINT = "http://localhost:8888/users/63d607e9f7e435916eb7ae4e";
 
-  const data = await axios.get(ENDPOINT).then((res) => res.data);
+//   const data = await axios.get(ENDPOINT).then((res) => res.data);
 
-  // 404や500を受け取ればレスポンスがあるので正常と判断しエラーは出ず .thenに進む。
-  // const data = await fetch(ENDPOINT).then(res => res.json());
-  console.log(data);
+//   // 404や500を受け取ればレスポンスがあるので正常と判断しエラーは出ず .thenに進む。
+//   // const data = await fetch(ENDPOINT).then(res => res.json());
+//   console.log(data);
 
-  return {
-    props: { data },
-  };
-}
+//   return {
+//     props: { data },
+//   };
+// }
 
 const user = [
   {
