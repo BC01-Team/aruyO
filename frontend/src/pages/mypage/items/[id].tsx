@@ -8,18 +8,21 @@ import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
 import { Item } from "@/types/item";
 //componentで使用する際下記記載
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userState } from "@/lib/atom";
 import { axiosInstance } from "@/lib/axiosInstance";
 
-const itemId = "63d607e9f7e435916eb7ae51";
+type ItemProps = {
+  result: Item;
+};
 
-const MypageItemDetail = ({ result }: OrderProps) => {
-  const router = useRouter();
+const MypageItemDetail = ({ result }: ItemProps) => {
   const [hydrated, setHydrated] = useState(false);
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(false);
   const user = useRecoilValue(userState);
+  const router = useRouter();
+  const itemId = router.query.id;
 
   useEffect(() => {
     setHydrated(true);
