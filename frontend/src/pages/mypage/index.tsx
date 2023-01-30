@@ -4,6 +4,7 @@ import MypageLayout from "@/components/layouts/mypage/MypageLayout";
 import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
+import { User } from "@/types/user";
 import { useRecoilValue } from "recoil";
 import { userState } from "@/lib/atom";
 import { axiosInstance } from "@/lib/axiosInstance";
