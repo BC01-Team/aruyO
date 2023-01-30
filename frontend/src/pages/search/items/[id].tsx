@@ -10,6 +10,7 @@ import { classNames } from "@/lib/class-names";
 import { Tab } from '@headlessui/react'
 import Button from "@/components/elements/Button";
 import PageTitle from "@/components/elements/PageTitle";
+import Loading from "@/components/elements/Loading";
 import DatePicker, { registerLocale } from "react-datepicker";
 import ja from "date-fns/locale/ja";
 
@@ -17,31 +18,30 @@ const ItemDetail = () => {
   const router = useRouter();
   const [item, setItem] = useState<Item>();
   const user = useRecoilValue(userState);
+  const [hydrated, setHydrated] = useState(false);
   const [dateRange, setDateRange] = useState<any>([null, null]);
   const [startDate, endDate] = dateRange;
   const today = new Date();
   registerLocale('ja', ja);
 
+  const itemId = router.query.id || router.asPath.split('/')[3];
   const {
     handleSubmit,
     // formState: { errors },
   } = useForm();
 
   useEffect(() => {
-    const itemId = router.query.id;
-
-    console.log("item detail page");
-
     axiosInstance
       .get(`/items/${itemId}`, { withCredentials: true })
       .then((res) => {
         setItem(res.data);
-        console.log(item);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+
+    setHydrated(true);
+  }, [itemId]);
 
   const getTotalAmount = (price: number) => {
     const days = ( endDate - startDate ) / 86400000 + 1;
@@ -82,6 +82,9 @@ const ItemDetail = () => {
         console.log(error);
       })
   };
+
+  if (!hydrated) return null;
+  if (!item) return <Loading />;
 
   return (
     <div className="bg-white">
