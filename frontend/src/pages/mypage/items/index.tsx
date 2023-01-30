@@ -3,6 +3,15 @@ import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
 import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
+import Link from "next/link";
+import { axiosInstance } from "@/lib/axiosInstance";
+import { Item } from "@/types/item";
+import MypageLayout from "@/components/layouts/mypage/MypageLayout";
+import PageTitle from "@/components/layouts/mypage/PageTitle";
+import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
+import { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userState } from "../../../../lib/atom";
 
 const items = [
   {
@@ -58,9 +67,39 @@ const items = [
   },
 ];
 
+
+
+
 const MypageItems = () => {
+  const Items = () => {
+    const [items, setItems] = useState(null)
+    const [loading, setLoading] = useState(false);
+    const user = useRecoilValue(userState);
+    
+    useEffect(() => {
+      setLoading(true);
+      if (user) {
+        const userId = user.id
+        const fetchDate = async () => {
+          const res = await(
+            await axiosInstance.get(`/users/${userId}/items`, {
+              withCredentials: true,
+            })
+          ).data;
+          
+          setLoading(false);
+          setItems(res);
+        };
+        fetchDate();
+        console.log(items);
+      }
+    }, []);
+  
+
   return (
     <>
+      {!loading && items && (
+        <>
       <Sidebar />
       <MypageLayout>
         <PageTitle>登録物品一覧</PageTitle>
@@ -116,6 +155,10 @@ const MypageItems = () => {
         </ContentsLayout>
       </MypageLayout>
     </>
+    
+    )}
+    {loading && <div>ロード中</div>}
+  </>
   );
 };
 
