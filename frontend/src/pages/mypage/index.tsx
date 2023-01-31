@@ -9,34 +9,6 @@ import { useRecoilValue } from "recoil";
 import { userState } from "@/lib/atom";
 import { axiosInstance } from "@/lib/axiosInstance";
 
-const user = [
-  {
-    info: {
-      name: "株式会社メルカリ",
-      Japan_Corporate_Number: "6010701027558",
-      address: "〒106-6108 東京都港区六本木６丁目１０番１号",
-      hp_url: "https://about.mercari.com/",
-      location: [35.660205, 139.729202],
-      phone: "0123456789",
-      email: "info@mercari.com",
-      account: "stripe",
-    },
-    staff: [
-      {
-        id: "1",
-        name: "門後David",
-        email: "david@mercari.com",
-        password:
-          "$2b$12$/13tMLgoH.Qn3rYOAbXK6.nfTwN/PXNDKp.2HsUqVkRkZJuW3m/iS",
-        role: { admin: "1", item: "1", reservation: "1" },
-      },
-    ],
-    items_id: ["63cd1b0420cfbda6799aaaaa"],
-    borrower_history: ["63cd1b0420cfbda6799wwwww"],
-    reservations_history: [],
-  },
-];
-
 const Mypage = () => {
   const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
