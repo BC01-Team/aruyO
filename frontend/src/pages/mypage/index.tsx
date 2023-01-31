@@ -22,13 +22,17 @@ const Mypage = () => {
     if (user) {
       const userId = user.id;
       const fetchDate = async () => {
-        const res = await (
-          await axiosInstance.get(`/users/${userId}`, {
+        await axiosInstance
+          .get(`/users/${userId}`, {
             withCredentials: true,
           })
-        ).data;
-
-        setUserInfo(res);
+          .then((res) => {
+            console.log(res.data);
+            setUserInfo(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         setLoading(false);
       };
       fetchDate();
