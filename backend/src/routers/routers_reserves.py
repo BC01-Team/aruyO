@@ -50,3 +50,14 @@ def update_reserve(id: str, data: dict):  # dataはrequestbodyにreserveコレ�
         raise HTTPException(status_code=404, detail="予約がありません")
     raise HTTPException(status_code=400, detail="ログイン情報がありません")
 
+
+# API_No. 予約ステータス変更　QR
+@router.put("/status/{id}")
+def update_reserve(id: str, data: dict):
+    reserve = jsonable_encoder(data)
+    logger.debug(reserve)
+    res = reserve_crud.update_reserve(id, reserve)
+    if res:
+        return res
+    raise HTTPException(status_code=404, detail="予約がありません")
+
