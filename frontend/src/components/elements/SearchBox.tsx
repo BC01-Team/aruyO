@@ -47,8 +47,8 @@ const SearchBox = () => {
   };
 
   return (
-    <form className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 p-10">
-      <div className="mx-auto max-w-3xl flex justify-center">
+    <form className="mx-auto ">
+      <div className="flex justify-between relative ">
         <label htmlFor="search" className="sr-only">
           検索
         </label>
@@ -56,12 +56,16 @@ const SearchBox = () => {
           type="text"
           name="search"
           id="search"
-          className="block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 sm:text-sm mr-2"
+          className="w-80 h-10 rounded-full"
           placeholder="なにをお探しですか？"
           onChange={(e) => setKeyword(e.target.value)}
         />
         {/* 型エラー要修正 */}
-        <Button onClick={Search}>検索</Button>
+        <button className="absolute right-0 top-0 mt-3 mr-4" onClick={Search}>
+          {/* <Button style="primary"  */}
+            <img src="/img/searchMark.png"/ >
+          {/* </Button> */}
+        </button>
       </div>
     </form>
   );
