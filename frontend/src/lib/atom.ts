@@ -23,3 +23,10 @@ export const userState = atom({
 // userのみ使用する場合は、25行目
 //  const [user, setUser] = useRecoilState(userState);
 //  const user = useRecoilValue(userState);
+
+
+// 検索結果を入れるためのstate
+export const searchState = atom({
+  key:"search",
+  default:undefined
+  });
