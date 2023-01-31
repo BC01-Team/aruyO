@@ -4,8 +4,8 @@ from starlette.middleware.cors import CORSMiddleware
 from src.routers import routers_user_info
 from src.routers import routers_search
 from src.routers import routers_reserves
-from src.routers import routers_auth 
-from src.routers import routers_items 
+from src.routers import routers_auth
+from src.routers import routers_items
 
 from src.db import db
 
