@@ -13,14 +13,14 @@ const QrImage = ({ qrText }: Props) => {
         level: "M",
         margin: 3,
         scale: 4,
-        width: 120,
+        width: 200,
         color: {
-          dark: "#010599FF",
+          dark: "#000000",
           light: "#FFBF60FF",
         },
       }}
     />
-  )
+  );
 };
 
 export default QrImage;
