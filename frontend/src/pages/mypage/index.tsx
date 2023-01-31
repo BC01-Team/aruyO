@@ -32,6 +32,14 @@ const Mypage = () => {
           })
           .catch((error) => {
             console.log(error);
+            if (
+              error.response.status === 400 ||
+              error.response.status === 404
+            ) {
+              console.log(error.response.data.detail);
+              setErrorMessage(error.response.data.detail);
+              // errorMessage表示コードは未記入
+            }
           });
         setLoading(false);
       };

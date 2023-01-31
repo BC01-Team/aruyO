@@ -56,7 +56,7 @@ def get_user_items(id: str, session_id: Optional[str] = Cookie(None)) -> list:
         logger.debug("get_user_items認証後")
         res = users_crud.get_user_items(id=id)
         if not res:  # listが空[]の場合
-            raise HTTPException(status_code=404, detail="物品がありませんでした。")
+            raise HTTPException(status_code=404, detail="登録物品がありませんでした。")
         logger.debug(res)
         return res
     raise HTTPException(status_code=400, detail="ログイン情報がありません")
