@@ -17,32 +17,40 @@ type Props = {
   orderId: string;
   borrowerId: string;
 };
-//http://localhost:3000/mypage/orders/lend/63d861fec58985055a680dcd
+//http://localhost:3000/mypage/orders/lend/${予約番号}
 const Confirm = ({ result, status, setStatus, orderId, borrowerId }: Props) => {
   const router = useRouter();
 
   const handleStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    const QrOrderId = result.split(",")[0].substring(5);
+    console.log(result);
+    console.log(QrOrderId);
     if (status === "予約確定") {
       //読み込みしたQRとorderIdの一致確認する
-      const data = {
-        status: "貸出中",
-      };
-      axiosInstance
-        .put(`/reserves/status/${orderId}`, data)
+      if (orderId === QrOrderId){
+        const data = {
+          status: "貸出中",
+        };
+        axiosInstance.put(`/reserves/status/${orderId}`, data)
         .then((res) => router.push(`/mypage/orders/lend`));
+      }
     } else if (status === "貸出中") {
       //読み込みしたQRとorderIdの一致確認
-      const data = {
-        status: "返却完了",
-      };
-      axiosInstance
-        .put(`/reserves/status/${orderId}`, data)
-        .then((res) =>
-          router.push(`/mypage/orders/lend/evaluation/${orderId}&${borrowerId}`)
-        );
+      if (orderId === QrOrderId) {
+        const data = {
+          status: "返却完了",
+        };
+        axiosInstance
+          .put(`/reserves/status/${orderId}`, data)
+          .then((res) =>
+            router.push(
+              `/mypage/orders/lend/evaluation/${orderId}&${borrowerId}`
+            )
+          );
+      }
     }
-  }; //http:localhost:3000/mypage/orders/lend/63d861fec58985055a680dcd
+  }; 
 
   return status === "予約確定" ? (
     <div>
@@ -51,7 +59,7 @@ const Confirm = ({ result, status, setStatus, orderId, borrowerId }: Props) => {
           <PageTitle>取引詳細</PageTitle>
           <div className="border-t-4 w-6 py-2 border-black"></div>
           <div className="mt-6">
-            <p>予約No. {orderId}</p>
+            <p>予約番号 : {orderId}</p>
             <p>{result}</p>
           </div>
           <div className="text-lg mt-5 font-semibold">
@@ -69,7 +77,7 @@ const Confirm = ({ result, status, setStatus, orderId, borrowerId }: Props) => {
         <PageTitle>取引詳細</PageTitle>
         <div className="border-t-4 w-6 py-2 border-black"></div>
         <div className="mt-6">
-          <p>予約No. {orderId}</p>
+          <p>予約番号 : {orderId}</p>
           <p>{result}</p>
         </div>
         <div className="text-lg mt-5 font-semibold">
