@@ -44,16 +44,20 @@ const MypageItemDetail = ({ result }: ItemProps) => {
           })
           .catch((error) => {
             console.log(error);
-            if (error.response.status === 400 || error.response.status === 404) {
+            if (
+              error.response.status === 400 ||
+              error.response.status === 404
+            ) {
               console.log(error.response.data.detail);
               setErrorMessage(error.response.data.detail);
               // errorMessage表示コードは未記入
             }
-            setLoading(false);
           });
-        fetchDate();
-      }
-    }, [itemId]);
+        setLoading(false);
+      };
+      fetchDate();
+    }
+  }, [itemId]);
 
   if (!hydrated) return null;
 
