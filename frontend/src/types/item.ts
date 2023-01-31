@@ -2,7 +2,7 @@ export type Item = {
   _id?: string,
   info?: {
     name: string,
-    picture: string,
+    picture: Array<string>,
     detail: string,
     requirements: string,
     take_out: string,
