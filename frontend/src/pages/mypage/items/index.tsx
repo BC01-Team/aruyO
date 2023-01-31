@@ -14,7 +14,7 @@ const MypageItems = () => {
   const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
   // ログイン認証からuserId取得
   const user = useRecoilValue(userState);
 

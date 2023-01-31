@@ -20,6 +20,7 @@ const MypageItemDetail = ({ result }: ItemProps) => {
   const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [item, setItem] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   // ログイン認証からuserId取得
   const user = useRecoilValue(userState);
   // urlからitemIdを取得
@@ -33,19 +34,26 @@ const MypageItemDetail = ({ result }: ItemProps) => {
       const userId = user.id;
       const fetchDate = async () => {
         // 物品詳細取得
-        const res = await (
-          await axiosInstance.get(`/users/${userId}/items/${itemId}`, {
+        await axiosInstance
+          .get(`/users/${userId}/items/${itemId}`, {
             withCredentials: true,
           })
-        ).data;
-
-        setItem(res);
-        setLoading(false);
-      };
-
-      fetchDate();
-    }
-  }, [itemId]);
+          .then((res) => {
+            console.log(res.data);
+            setItem(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+            if (error.response.status === 400 || error.response.status === 404) {
+              console.log(error.response.data.detail);
+              setErrorMessage(error.response.data.detail);
+              // errorMessage表示コードは未記入
+            }
+            setLoading(false);
+          });
+        fetchDate();
+      }
+    }, [itemId]);
 
   if (!hydrated) return null;
 
