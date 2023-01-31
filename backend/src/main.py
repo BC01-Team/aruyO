@@ -4,7 +4,8 @@ from starlette.middleware.cors import CORSMiddleware
 from src.routers import routers_user_info
 from src.routers import routers_search
 from src.routers import routers_reserves
-from src.routers import routers_auth 
+from src.routers import routers_auth
+from src.routers import routers_items
 
 from src.db import db
 
@@ -31,6 +32,7 @@ app.include_router(routers_user_info.router)
 app.include_router(routers_search.router)
 app.include_router(routers_reserves.router)
 app.include_router(routers_auth.router)
+app.include_router(routers_items.router)
 
 
 # 接続テスト用　削除可
