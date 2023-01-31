@@ -32,7 +32,7 @@ def create_sessoion(body:auth_schema.RequestBody,response: Response):
   print("session_id",session_id)
 
   # redisにセッション保存
-  r.set(session_id, user["_id"])
+  r.set(session_id, user["_id"], ex=72000)
   print("r.get", r.get(session_id))
 
   # session_id set_cookie してuser情報をreturnする
