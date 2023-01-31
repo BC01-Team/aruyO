@@ -24,7 +24,7 @@ const QrReader = ({
   return (
     <div>
       {status === "予約確定" ? (
-        <Button onClick={onClickToggle}>チェックインを開始する</Button>
+        <Button onClick={onClickToggle}>チェックインの手続き</Button>
       ) : (
         <Button onClick={onClickToggle}>チェックアウトをする</Button>
       )}

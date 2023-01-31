@@ -51,10 +51,11 @@ export const AuthProvider = (props: AuthProps) => {
       password: password,
     };
     axiosInstance
-      .post("/login", data, { withCredentials: true })
+      .post("/login", data, {withCredentials: true
+})
       .then((res) => {
         setUser(res.data.user);
-        router.push(`/mypage`);
+        router.push(`/mypage/`);
       })
       .catch((e) => {
         console.log(e);
@@ -62,13 +63,10 @@ export const AuthProvider = (props: AuthProps) => {
       });
   };
 
-  console.log("auth.tsx,user", user);
 
   const logout = () => {
     axiosInstance
-      .post("/logout", {
-        withCredentials: true,
-      })
+      .post("/logout", )
       .then((res) => {
         setUser(null);
         router.push("/");
