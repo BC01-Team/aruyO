@@ -1,8 +1,9 @@
 import { useState ,useEffect } from "react";
 import Link from "next/link";
-import Button from "../elements/Button";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../lib/atom";
+import Button from "../elements/Button";
+import SearchBox from "@/components/elements/SearchBox";
 
 const Header = () => {
   const user = useRecoilValue(userState);
@@ -13,6 +14,7 @@ const Header = () => {
   }, []);
 
   if (!hydrated) return null;
+;
 
   return (
     <>
@@ -23,6 +25,9 @@ const Header = () => {
               <a href="/">
                 <span className="text-3xl text-white">aruyo</span>
               </a>
+            </div>
+            <div>
+              <SearchBox />
             </div>
             <div className="ml-10 space-x-4">
               {/* ログイン時と未ログイン時でボタンの表示を切り替え */}
@@ -41,7 +46,7 @@ const Header = () => {
                 </div>
               ) : (
                 <div>
-                  <Link href="/signin" className="mr-4" >
+                  <Link href="/signin" className="mr-4">
                     <Button>ログイン</Button>
                   </Link>
                   <Link href="/signup">
