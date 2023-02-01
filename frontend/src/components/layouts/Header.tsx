@@ -16,7 +16,7 @@ const Header = () => {
   if (!hydrated) return null;
   return (
     <>
-      <header className="border-b border-gray-400 mb-16">
+      <header className="z-50 border-b border-gray-400 mb-16">
         <div className="container flex items-center md:h-20  p-5 flex-col md:flex-row">
           <div className="flex">
             <a href="/">
