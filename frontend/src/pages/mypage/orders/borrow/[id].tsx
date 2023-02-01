@@ -175,27 +175,32 @@ const MypageOrderDetailBorrower = ({ result }: OrderProps) => {
                         </h4>
                       </div>
                       <div className="my-8">
-                      {/*予約ステータスにより表示切替 2列　status渡す*/}
-                      {order[0].status !== "予約確定" &&
-                      order[0].status !== "貸出中" ? (
-                        <></>
-                      ) : (
-                        <QrGenerator
-                          qrText={`予約番号：${order[0]._id}, 品名:${order[0].items_copy?.name}, 貸出日:${order[0].period?.start}, 返却日:${order[0].period.start}`}
-                        />
-                      )}
-                      {order[0]?.status === "返却完了" && (
-                        <>
-                          <Link
-                            href={{
-                              pathname: "/mypage/orders/borrow/evaluation/[id]",
-                              query: { id: `${orderId}&${order[0]?.lender._id}`},
-                            }}
-                          >
-                            <Button>取引を評価</Button>
-                          </Link>
-                        </>
-                      )}
+                        {/*予約ステータスにより表示切替 2列　status渡す*/}
+                        {order[0].status !== "予約確定" &&
+                        order[0].status !== "貸出中" ? (
+                          <></>
+                        ) : (
+                          <QrGenerator
+                            qrText={`予約番号：${order[0]._id}, 品名:${order[0].items_copy?.name}, 貸出日:${order[0].period?.start}, 返却日:${order[0].period.start}`}
+                          />
+                        )}
+                        
+                        {order[0]?.status === "返却完了" &&
+                          !order[0]?.lender.evaluation && (
+                            <>
+                              <Link
+                                href={{
+                                  pathname:
+                                    "/mypage/orders/borrow/evaluation/[id]",
+                                  query: {
+                                    id: `${orderId}&${order[0]?.lender._id}`,
+                                  },
+                                }}
+                              >
+                                <Button>取引を評価</Button>
+                              </Link>
+                            </>
+                          )}
                       </div>
                     </div>
                   </div>
