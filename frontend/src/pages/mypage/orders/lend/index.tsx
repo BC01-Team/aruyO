@@ -73,7 +73,7 @@ const MypageOrdersLender = ({}: OrdersProps) => {
                               <div className="flex-shrink-0">
                                 <img
                                   className="h-20 w-20"
-                                  src={order?.items_copy.picture[0]}
+                                  src={order?.items_copy.pictures[0]}
                                   alt=""
                                 />
                               </div>
