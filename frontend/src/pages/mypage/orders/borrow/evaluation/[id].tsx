@@ -5,13 +5,10 @@ import React, {
   Dispatch,
   SetStateAction,
 } from "react";
-import { useRouter } from "next/router";
 import EvaluationButton from "@/components/layouts/mypage/orders/Evaluation";
 import PageTitle from "@/components/layouts/mypage/PageTitle";
 
 const Evaluation = () => {
-  const router = useRouter();
-  const orderId = router.query;
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
     setHydrated(true);
@@ -24,10 +21,10 @@ const Evaluation = () => {
         <div className="flex flex-col items-center">
           <PageTitle>取引評価</PageTitle>
           <div className="text-lg mt-5 font-semibold">
-            <h1>借りた人を評価してください</h1>
+            <h1>貸した人を評価してください</h1>
           </div>
           <div className="mt-3">
-            <EvaluationButton type={"borrower"} />
+            <EvaluationButton type={"lender"} />
           </div>
         </div>
       </div>
