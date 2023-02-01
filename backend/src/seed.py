@@ -3,6 +3,7 @@ from db import db
 # ユーザー
 company = [
     {
+        "_id": "63d9c4525d4c2596f1501c7c",
         "info": {
             "name": "グリー株式会社",
             "Japan_Corporate_Number": "8010401055923",
@@ -18,6 +19,7 @@ company = [
         "reservations_history": [],
     },
     {
+        "_id": "63d9c4525d4c2596f1501c7d",
         "info": {
             "name": "株式会社メルカリ",
             "Japan_Corporate_Number": "6010701027558",
@@ -42,6 +44,7 @@ company = [
         "reservations_history": [],
     },
     {
+        "_id": "63d9c4525d4c2596f1501c7e",
         "info": {
             "name": "株式会社カッシーナ・イクスシー",
             "Japan_Corporate_Number": "9010401088996",
@@ -57,6 +60,7 @@ company = [
         "reservations_history": [],
     },
     {
+        "_id": "63d9c4525d4c2596f1501c7f",
         "info": {
             "name": "㈱ビームス 本社（BEAMS）",
             "Japan_Corporate_Number": "6010401029425",
@@ -70,7 +74,7 @@ company = [
         "items_id": [],
         "borrower_history": [],
         "reservations_history": [],
-    }
+    },
 ]
 
 # 出品物
@@ -124,7 +128,7 @@ item = [
         },
         "location": [35.6705225, 139.7036485],
         "company_id": "63d9bf7b1c47ae4a25777403",
-    }
+    },
 ]
 
 # 予約
@@ -145,13 +149,13 @@ reservation = {
     "payment": {"total": 7000, "method": "Stripe", "status": "未決済"},
     "lender": {"_id": "63d9bf7b1c47ae4a25777403", "evaluation": ""},
     "borrower": {"_id": "63d9bf7b1c47ae4a25777403", "evaluation": ""},
-    "status": "予約承認待ち"
+    "status": "予約承認待ち",
 }
 
 # ステータス
 status = {
     "payment": ["未決済", "決済完了"],
-    "reservation": ["募集中", "予約承認待ち", "予約確定", "利用中", "掲載停止", "返却完了"]
+    "reservation": ["募集中", "予約承認待ち", "予約確定", "利用中", "掲載停止", "返却完了"],
 }
 
 
