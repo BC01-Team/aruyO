@@ -39,25 +39,6 @@ def get_search_word(key: str):
         search_key_result.append(db_collection_serializer(document))
     return search_key_result
 
-
-# 近傍検索
-# ユーザーの会社位置を起点とし、物品リスト内のlocation情報との近傍検索
-def get_search_near(data) -> list:
-    nears = []
-    # ユーザーの会社の位置情報（緯度経度）を取り出す
-    location = data["info"]["location"]
-    logger.debug(location)
-    # 検索ターゲット(物品の"location")：検索起点（会社の"info.location"）でqueryに代入
-    # $maxDistanceで距離指定（ラジアン距離：日本ではおおよそ1km＝0.009らしい）。
-    # 取得結果はlimitで指定。
-    query = {"location": SON([("$near", location), ("$maxDistance", 0.1)])}
-    for document in collection_items.find(query).limit(5):
-        # 自社の物品は排除する
-        if document["location"] != location:
-            nears.append(db_collection_serializer(document))
-    return nears
-
-
 # キーワード検索+距離検索
 def get_serch_both(data) -> list:
     location = data["info"]["location"]
@@ -82,6 +63,8 @@ def get_serch_both(data) -> list:
         }
     )
     search_result = []
-    for document in list:
-        search_result.append(db_collection_serializer(document))
+    if list:
+        for document in list:
+            search_result.append(db_collection_serializer(document))
+            logger.debug(search_result)
     return search_result
