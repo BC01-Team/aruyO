@@ -16,14 +16,14 @@ logger = setup_logger(__name__)
 app = FastAPI()
 
 
-# origins = [ ] 一旦空
+origins = ["http://localhost:3000"]
 
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"]
 )
 
