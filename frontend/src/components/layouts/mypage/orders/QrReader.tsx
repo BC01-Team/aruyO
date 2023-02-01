@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, Dispatch, SetStateAction } from "react";
-import ScanModal from "../elements/ScanModal";
-import QrCamera from "../elements/QrCamera";
+import ScanModal from "@/components/elements/ScanModal";
+import QrCamera from "@/components/elements/QrCamera";
 import axios from "axios";
 import Button from "@/components/elements/Button";
 type Props = {

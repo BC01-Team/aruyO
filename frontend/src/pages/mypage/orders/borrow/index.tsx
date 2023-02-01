@@ -1,4 +1,3 @@
-import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { axiosInstance } from "@/lib/axiosInstance";
 import { Order } from "@/types/order";
@@ -8,33 +7,32 @@ import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import Button from "@/components/elements/Button";
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userState } from "../../../../lib/atom";
+import Loading from "@/components/elements/Loading";
+
 
 
 type OrdersProps = {
   orders: Order[]
 };
 
-// 認証周りができたら、動的にする。テスト用のため矛盾あり。
-// const borrowerId = "63d4a9add1b46130cb3cf955";
-
 const MypageOrderBorrower = () => {
-  const [orders, setOrders] = useState(null)
+  const [orders, setOrders] = useState(null);
   const [loading, setLoading] = useState(false);
   const user = useRecoilValue(userState);
-  
+
   useEffect(() => {
     setLoading(true);
     if (user) {
-      const borrowerId = user.id
+      const borrowerId = user.id;
       const fetchDate = async () => {
-        const res = await(
+        const res = await (
           await axiosInstance.get(`/users/${borrowerId}/borrow`, {
             withCredentials: true,
           })
         ).data;
-        
+
         setLoading(false);
         setOrders(res);
       };
@@ -43,6 +41,7 @@ const MypageOrderBorrower = () => {
     }
   }, []);
 
+  if (loading) return <Loading />; 
   console.log(orders);
   return (
     <>
@@ -50,16 +49,17 @@ const MypageOrderBorrower = () => {
         <>
           <Sidebar />
           <MypageLayout>
-            {/* 適当なタイトルに変更する */}
-            <PageTitle>借りる取引一覧</PageTitle>
+            <div className="font-bold text-2xl text-center mt-10 mb-6">
+              借りるもの
+            </div>
             <ContentsLayout>
               <div className="my-8">
                 <Link href="/mypage/orders/lend">
-                  <Button>貸す取引をみる</Button>
+                  <Button>貸すものをみる</Button>
                 </Link>
               </div>
-              <div className="overflow-hidden bg-white shadow sm:rounded-md">
-                <ul role="list" className="divide-y divide-gray-200">
+              <div className="overflow-hidden">
+                <ul role="list" className="">
                   {orders.map((order, index: number) => {
                     return (
                       <li key={index}>
@@ -70,26 +70,32 @@ const MypageOrderBorrower = () => {
                             query: order._id,
                           }}
                         >
-                          <div className="flex items-center px-4 py-4 sm:px-6">
-                            <div className="flex min-w-0 flex-1 items-center">
+                          <div className="flex flex-col md:flex-row items-center px-4 py-2 sm:px-6">
+                            <div className="flex flex-1 item-center rounded border-none p-4 bg-slate-100 max-w-6xl min-w-full h-28">
                               <div className="flex-shrink-0">
                                 <img
-                                  className="h-12 w-12 rounded-full"
+                                  className="className=h-20 w-20"
                                   src={order?.items_copy.picture[0]}
                                   alt=""
                                 />
                               </div>
-                              <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                              <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-3 md:gap-4">
                                 <div>
                                   <p className="truncate text-sm font-medium text-amber-600">
                                     {order?.items_copy?.name}
                                   </p>
-                                  <p className="mt-2 flex items-center text-sm text-gray-500">
-                                    {/* 借入？先企業名を表示できたほうがいい */}
+                                  <p className="truncate text-sm text-gray-900 mr-2">
+                                    金額{" "}
+                                    {Number(
+                                      order?.payment?.total
+                                    ).toLocaleString()}
+                                    円
+                                  </p>
+                                  {/* <p className="mt-2 flex items-center text-sm text-gray-500">
                                     <span className="truncate">
                                       相手先: {order?.lender?._id}
                                     </span>
-                                  </p>
+                                  </p> */}
                                 </div>
                                 <div className="hidden md:block">
                                   <div>
@@ -101,12 +107,16 @@ const MypageOrderBorrower = () => {
                                         返却日: {order?.period?.end}
                                       </p>
                                     </div>
-                                    <p className="mt-2 flex items-center text-sm text-gray-500">
+                                    <p className="mt-2 flex items-center text-sm text-gray-900 ">
                                       {order?.payment?.status}
                                     </p>
                                   </div>
                                 </div>
-                                <div>{order?.status}</div>
+                                <p className="text-base text-gray-900">
+                                  <span className="border-black border-solid border-2 ">
+                                    {order?.status}
+                                  </span>
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -120,25 +130,10 @@ const MypageOrderBorrower = () => {
           </MypageLayout>
         </>
       )}
-      {loading && <div>ロード中</div>}
+      {/* {loading && <div>ロード中</div>} */}
     </>
   );
 };
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const cookie = context.req?.headers.cookie;
-//   console.log(cookie)
-//   const res = await axiosInstance.get(`/users/${borrowerId}/borrow`, {
-//     headers: {
-//       cookie: cookie!
-//     }
-//   })
-  
-//   const orders = await res.data;
-
-//   return {
-//     props: { orders }
-//   }
-// };
 
 export default MypageOrderBorrower;
