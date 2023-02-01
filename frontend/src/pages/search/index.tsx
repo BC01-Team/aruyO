@@ -9,12 +9,12 @@ const SearchResult = () => {
   const router = useRouter();
   const keyword = router.query.keyword;
   const result = useRecoilValue(searchState);
-
+  
   return (
     <>
       <p className="text-center">
         <h1 className="mx-auto text-2xl my-10 font-sans font-bold">
-          {keyword}の検索結果
+          {keyword}の検索結果【{result.length}件】
         </h1>
       </p>
       <div className="flex mx-20">
