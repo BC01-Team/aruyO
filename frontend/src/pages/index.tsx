@@ -18,7 +18,6 @@ export default function Home() {
           content="ご近所同士で備品や設備を貸し借り。地域にあるリソースを可視化するマッチングプラットフォーム。"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* favicon要設定 */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
