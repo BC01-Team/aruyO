@@ -72,7 +72,7 @@ const MypageOrderDetailBorrower = ({ result }: OrderProps) => {
                     <Tab.Group as="div" className="flex flex-col-reverse">
                       <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
                         <Tab.List className="grid grid-cols-4 gap-6">
-                          {order[0].items_copy?.picture.map(
+                          {order[0].items_copy?.pictures.map(
                             (picture, index) => (
                               <Tab
                                 key={index}
@@ -105,7 +105,7 @@ const MypageOrderDetailBorrower = ({ result }: OrderProps) => {
                       </div>
 
                       <Tab.Panels className="aspect-w-1 aspect-h-1 w-full">
-                        {order[0].items_copy?.picture.map((picture, index) => (
+                        {order[0].items_copy?.pictures.map((picture, index) => (
                           <Tab.Panel key={index}>
                             <img
                               src={picture}
