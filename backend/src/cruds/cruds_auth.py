@@ -19,7 +19,8 @@ def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
 def get_user(email):
-    find_user = { "info.email": email }
+    # find_user = { "info.email": email }
+    find_user = {"staff": {"$elemMatch": {"email":email}}}
     print("find_user", find_user)
     user = collection.find_one(find_user)
     print("user",user)
