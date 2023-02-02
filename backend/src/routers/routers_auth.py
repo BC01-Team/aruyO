@@ -44,7 +44,6 @@ def create_sessoion(body:auth_schema.RequestBody,response: Response):
     "location": user["info"]["location"],
     "staff_id": user["staff"][0]["id"],
     "staff_name": user["staff"][0]["name"],
-    "admin": user["staff"][0]["role"]["admin"]
     }
   print("res", res_user)
   
