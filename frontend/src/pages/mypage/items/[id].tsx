@@ -16,7 +16,7 @@ type ItemProps = {
   result: Item;
 };
 
-const MypageItemDetail = ({ result }: ItemProps) => {
+const MyPageItemDetail = ({ result }: ItemProps) => {
   const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [item, setItem] = useState(null);
@@ -139,4 +139,4 @@ const MypageItemDetail = ({ result }: ItemProps) => {
   );
 };
 
-export default MypageItemDetail;
+export default MyPageItemDetail;

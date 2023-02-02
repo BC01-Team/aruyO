@@ -2,15 +2,13 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
-import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
-import { Items } from "@/types/item";
 import { useRecoilValue } from "recoil";
 import { userState } from "@/lib/atom";
 import { axiosInstance } from "@/lib/axiosInstance";
 
-const MypageItems = () => {
+const MyPageItems = () => {
   const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState(null);
@@ -123,4 +121,4 @@ const MypageItems = () => {
   );
 };
 
-export default MypageItems;
+export default MyPageItems;
