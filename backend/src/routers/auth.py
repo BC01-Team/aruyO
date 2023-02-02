@@ -2,11 +2,11 @@
 import src.utils.redis.redis as r
 import uuid
 from fastapi import APIRouter, HTTPException, Response, status
-import src.cruds.cruds_auth as auth_crud
-import src.schemas.schemas_auth as auth_schema
 from src.utils.logger.logger import setup_logger
 from src.utils.redis.redis import r
 
+import src.cruds.auth as auth_crud
+import src.schemas.auth as auth_schema
 
 logger = setup_logger(__name__)
 router = APIRouter()
