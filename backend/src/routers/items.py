@@ -1,10 +1,8 @@
 from fastapi import APIRouter, HTTPException, Cookie
-from fastapi import Request, Response
-from fastapi.encoders import jsonable_encoder
 from src.utils.logger.logger import setup_logger
 from typing import Optional
 
-import src.cruds.cruds_items as items_crud
+import src.cruds.items as items_crud
 import src.utils.auth.auth as auth
 
 logger = setup_logger(__name__)
