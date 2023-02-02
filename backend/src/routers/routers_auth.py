@@ -53,5 +53,5 @@ def create_sessoion(body:auth_schema.RequestBody,response: Response):
 # logout cookieに空文字挿入
 @router.post("/logout")
 async def save_cookie(response: Response):
-    response.set_cookie(key="session_id", value="")
-    return {"message": "logout ok"}
+  response.set_cookie(key="session_id", value="")
+  return {"message": "logout ok"}

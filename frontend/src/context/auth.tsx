@@ -66,7 +66,7 @@ export const AuthProvider = (props: AuthProps) => {
 
   const logout = () => {
     axiosInstance
-      .post("/logout", )
+      .post("/logout",{logout}, { withCredentials: true })
       .then((res) => {
         setUser(null);
         router.push("/");
