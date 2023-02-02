@@ -3,7 +3,6 @@ from db import db
 # ユーザー
 company = [
     {
-        "_id": "63d9c4525d4c2596f1501c7c",
         "info": {
             "name": "グリー株式会社",
             "Japan_Corporate_Number": "8010401055923",
@@ -19,7 +18,6 @@ company = [
         "reservations_history": [],
     },
     {
-        "_id": "63d9c4525d4c2596f1501c7d",
         "info": {
             "name": "株式会社メルカリ",
             "Japan_Corporate_Number": "6010701027558",
@@ -44,7 +42,6 @@ company = [
         "reservations_history": [],
     },
     {
-        "_id": "63d9c4525d4c2596f1501c7e",
         "info": {
             "name": "株式会社カッシーナ・イクスシー",
             "Japan_Corporate_Number": "9010401088996",
@@ -60,7 +57,6 @@ company = [
         "reservations_history": [],
     },
     {
-        "_id": "63d9c4525d4c2596f1501c7f",
         "info": {
             "name": "㈱ビームス 本社（BEAMS）",
             "Japan_Corporate_Number": "6010401029425",
@@ -89,7 +85,7 @@ item = [
             "detail": "使用後は書いたものを消してください",
             "requirements": "平日日中のみ",
             "take_out": "true",
-            "price": "1000",
+            "price": 1000,
             "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
         },
         "location": [35.660205, 139.729202],
@@ -104,7 +100,7 @@ item = [
             "detail": "A2まで裁断可能。",
             "requirements": "平日日中のみ",
             "take_out": "true",
-            "price": "1000",
+            "price": 1000,
             "address": "〒150-0001 東京都渋谷区神宮前1-5-8 神宮前タワービルディング",
         },
         "location": [35.6706882, 139.6891846],
@@ -123,7 +119,7 @@ item = [
             ],
             "detail": "口径:200φ、電源:単相100ｖ、風量:17ｍ3/min(50Hz)、重量:9kg、羽枚数:5枚",
             "take_out": "true",
-            "price": "2000",
+            "price": 2000,
             "address": "〒107-0062 東京都港区南青山2-13-10",
         },
         "location": [35.6705225, 139.7036485],
