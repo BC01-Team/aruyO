@@ -58,29 +58,53 @@ const ItemDetail = () => {
     return format_str;
   };
 
-  const onSubmit = async (_data: FieldValues) => {
-    const items_copy = item?.info;
-    const total = getTotalAmount(Number(item?.info?.price));
-    const lenderId = item?.company_id;
-    const borrowerId = user.id;
+  // const onSubmit = async (_data: FieldValues) => {
+  //   const items_copy = item?.info;
+  //   const total = getTotalAmount(Number(item?.info?.price));
+  //   const lenderId = item?.company_id;
+  //   const borrowerId = user.id;
 
-    const orderData = {
-      items_copy,
-      period: {start: getStringFromDate(startDate), end: getStringFromDate(endDate)},
-      payment: {total: total, method: "Stripe", status: "未決済"},
-      lender: {_id: lenderId, evaluation: ""},
-      borrower: {_id: borrowerId, evaluation: ""},
-      status: "予約承認待ち"
+  //   const orderData = {
+  //     items_copy,
+  //     period: {start: getStringFromDate(startDate), end: getStringFromDate(endDate)},
+  //     payment: {total: total, method: "Stripe", status: "未決済"},
+  //     lender: {_id: lenderId, evaluation: ""},
+  //     borrower: {_id: borrowerId, evaluation: ""},
+  //     status: "予約承認待ち"
+  //   };
+
+  //   await axiosInstance
+  //     .post("/reserves", orderData, { withCredentials: true })
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
+  // };
+
+  // フロントからStripe用APIが叩けるか動作確認
+  const onSubmit = async (_data: FieldValues) => {
+    const connectedId = "acct_1MWZMz2eYfpnkUc7";
+    const items_copy = item?.info;
+    const data = {
+      account: connectedId,
+      item_name: items_copy?.name,
+      item_description: `受取日: ${startDate} 〜 返却日: ${endDate}  計: ${( endDate - startDate ) / 86400000 + 1}日`,
+      item_image: items_copy?.pictures[0],
+      base_price: Number(items_copy?.price),
+      quantity: ( endDate - startDate ) / 86400000 + 1
     };
 
     await axiosInstance
-      .post("/reserves", orderData, { withCredentials: true })
+      .post("/stripe/create-checkout-session", data, { withCredentials: true })
       .then((res) => {
         console.log(res);
+        router.push(res.data.checkout_session_url);
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
   };
 
   if (!hydrated) return null;
@@ -96,7 +120,7 @@ const ItemDetail = () => {
             {/* 画像選択 */}
             <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
               <Tab.List className="grid grid-cols-4 gap-6">
-                {item?.info?.picture.map((picture, index) => (
+                {item?.info?.pictures?.map((picture, index) => (
                   <Tab
                     key={index}
                     className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
@@ -121,7 +145,7 @@ const ItemDetail = () => {
             </div>
 
             <Tab.Panels className="aspect-w-1 aspect-h-1 w-full">
-              {item?.info?.picture.map((picture, index) => (
+              {item?.info?.pictures?.map((picture, index) => (
                 <Tab.Panel key={index}>
                   <img
                     src={picture}
