@@ -1,5 +1,4 @@
 from src.utils.serializer.serializer import db_collection_serializer
-import uuid
 from src.db import db
 from passlib.context import CryptContext
 import redis
