@@ -24,7 +24,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed inset-y-0 flex w-64 flex-col absolute">
+    <div className="z-30  inset-y-0 flex w-64 flex-col ">
     {/* PC版固定サイドバー、SP版別途用意する必要あり */}
     {/* <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col"> */} 
       <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white">

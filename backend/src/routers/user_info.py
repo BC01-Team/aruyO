@@ -1,10 +1,9 @@
 from fastapi import APIRouter, HTTPException, Cookie
-from fastapi import Request, Response
 from fastapi.encoders import jsonable_encoder
 from src.utils.logger.logger import setup_logger
 from typing import Optional
 
-import src.cruds.cruds_users_info as users_crud
+import src.cruds.users_info as users_crud
 import src.utils.auth.auth as auth
 
 logger = setup_logger(__name__)
@@ -31,8 +30,6 @@ def get_user(id: str, session_id: Optional[str] = Cookie(None)) -> dict:
 # API_No.5 物品登録
 @router.post("/{id}/items")
 def create_item(
-    request: Request,
-    response: Response,
     data: dict,
     session_id: Optional[str] = Cookie(None),
 ) -> dict:

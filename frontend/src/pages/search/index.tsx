@@ -17,8 +17,8 @@ const SearchResult = () => {
           {keyword}の検索結果【{result.length}件】
         </h1>
       </p>
-      <div className="flex mx-20">
-        <div className="w-1/2 ml-40">
+      <div className="flex justify-between mx-20 mb-30">
+        <div className="grid md:grid-cols-4 md:gap-4 w-1/2">
           {result &&
             result.map((item) => {
               return (
@@ -28,14 +28,14 @@ const SearchResult = () => {
                   href={{ pathname: `/search/items/[id]`, query: item._id }}
                 >
                   <div>
-                    <p>{item._id}</p>
+                    <img src={item.info.pictures[0]} className="w-full"/>
                     <p>{item.info.name}</p>
                   </div>
                 </Link>
               );
             })}
         </div>
-        <div className="w-1/2">
+        <div className="w-1/2 min-h-screen ml-20">
           <Map results={result} />
         </div>
       </div>

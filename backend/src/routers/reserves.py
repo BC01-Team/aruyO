@@ -3,7 +3,7 @@ from src.utils.logger.logger import setup_logger
 from fastapi.encoders import jsonable_encoder
 from typing import Optional
 
-import src.cruds.cruds_reserves as reserve_crud
+import src.cruds.reserves as reserve_crud
 import src.utils.auth.auth as auth
 
 logger = setup_logger(__name__)
