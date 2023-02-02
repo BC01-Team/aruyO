@@ -131,9 +131,9 @@ item = [
 reservation = {
     "items_copy": {
         "name": "ホワイトボード",
-        "pictures": [
-            "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-front.jpg",
-            "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-back.jpg",
+        "pictures":  [
+                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-front.jpg",
+                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-back.jpg"
         ],
         "detail": "使用後は書いたものを消してください",
         "requirements": "平日日中のみ",
@@ -151,7 +151,7 @@ reservation = {
 # ステータス
 status = {
     "payment": ["未決済", "決済完了"],
-    "reservation": ["募集中", "予約承認待ち", "予約確定", "利用中", "掲載停止", "返却完了"],
+    "reservation": ["募集中", "予約承認待ち", "予約確定", "利用中", "掲載停止","返却完了","評価完了"]
 }
 
 
