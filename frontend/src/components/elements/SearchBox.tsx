@@ -11,7 +11,7 @@ type DataSet = {
 };
 
 const SearchBox = () => {
-  const [keyword, setKeyword] = useState<string>();
+  const [keyword, setKeyword] = useState<string>("");
   const user = useRecoilValue(userState);
   const router = useRouter();
   const [result, setResult] = useRecoilState(searchState);

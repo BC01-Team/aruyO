@@ -62,7 +62,7 @@ const MypageOrderDetailBorrower = ({ result }: OrderProps) => {
     <ProtectRoute>
       <>
         {!loading && order && user && order[0].borrower._id === user.id && (
-          <>
+          <div className="flex">
             <Sidebar />
             <MypageLayout>
               <ContentsLayout>
@@ -214,7 +214,7 @@ const MypageOrderDetailBorrower = ({ result }: OrderProps) => {
                 </div>
               </ContentsLayout>
             </MypageLayout>
-          </>
+          </div>
         )}
         {/* {loading && <div>ロード中</div>} */}
       </>

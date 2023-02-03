@@ -65,7 +65,7 @@ const MyPageItemDetail = ({ result }: ItemProps) => {
     <ProtectRoute>
       <>
         {!loading && item && (
-          <>
+          <div className="flex">
             <Sidebar />
             <MypageLayout>
               <PageTitle>ユーザー物品詳細</PageTitle>
@@ -131,7 +131,7 @@ const MyPageItemDetail = ({ result }: ItemProps) => {
                 </div>
               </ContentsLayout>
             </MypageLayout>
-          </>
+          </div>
         )}
         {loading && <div>ロード中</div>}
       </>
