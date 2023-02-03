@@ -47,10 +47,10 @@ const MypageOrderBorrower = () => {
     <ProtectRoute>
       <>
         {!loading && orders && (
-          <>
+          <div className="flex">
             <Sidebar />
             <MypageLayout>
-              <div className="font-bold text-2xl text-center mt-10 mb-6">
+              <div className="font-bold text-2xl text-center mb-6">
                 借りるもの
               </div>
               <ContentsLayout>
@@ -129,7 +129,7 @@ const MypageOrderBorrower = () => {
                 </div>
               </ContentsLayout>
             </MypageLayout>
-          </>
+          </div>
         )}
         {/* {loading && <div>ロード中</div>} */}
       </>
