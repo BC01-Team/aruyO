@@ -130,7 +130,7 @@ item = [
 # 予約
 reservation = {
     "items_copy": {
-        "_id": "63cd1b0420cfbda6799aaaaa",
+        "_id": "63d607e9f7e435916eb7ae51",
         "name": "ホワイトボード",
         "pictures":  [
                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-front.jpg",
@@ -144,8 +144,8 @@ reservation = {
     },
     "period": {"start": "2023/2/1", "end": "2023/2/5"},
     "payment": {"total": "5000", "method": "口座振込", "status": "決済完了"},
-    "lender": {"_id": "63cd1b0420cfbda6799d59b1", "evaluation": "3"},
-    "borrower": {"_id": "63cd1b0420cfbda679911111", "evaluation": "3"},
+    "lender": {"_id": "63d9c4525d4c2596f1501c79", "evaluation": "3"},
+    "borrower": {"_id": "63d9c4525d4c2596f1501c7d", "evaluation": "3"},
     "status": "予約確定"
 }
 
@@ -164,8 +164,8 @@ collection_statuses = db.statuses
 
 
 # ドキュメント(値)を保存
-collection_companies.insert_many(company)
-collection_items.insert_many(item)
+# collection_companies.insert_many(company)
+# collection_items.insert_many(item)
 collection_reservations.insert_many([reservation])
 collection_statuses.insert_many([status])
 
