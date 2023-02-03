@@ -130,10 +130,11 @@ item = [
 # 予約
 reservation = {
     "items_copy": {
+        "_id": "63d607e9f7e435916eb7ae51",
         "name": "ホワイトボード",
-        "pictures":  [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-front.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-back.jpg"
+        "pictures": [
+            "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-front.jpg",
+            "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-back.jpg",
         ],
         "detail": "使用後は書いたものを消してください",
         "requirements": "平日日中のみ",
@@ -143,15 +144,15 @@ reservation = {
     },
     "period": {"start": "2023/02/09", "end": "2023/02/15"},
     "payment": {"total": 7000, "method": "Stripe", "status": "未決済"},
-    "lender": {"_id": "63d9bf7b1c47ae4a25777403", "evaluation": ""},
-    "borrower": {"_id": "63d9bf7b1c47ae4a25777403", "evaluation": ""},
+    "lender": {"_id": " 63d9c4525d4c2596f1501c7a", "evaluation": ""},
+    "borrower": {"_id": "63d9c4525d4c2596f1501c72", "evaluation": ""},
     "status": "予約承認待ち",
 }
 
 # ステータス
 status = {
     "payment": ["未決済", "決済完了"],
-    "reservation": ["募集中", "予約承認待ち", "予約確定", "利用中", "掲載停止","返却完了","評価完了"]
+    "reservation": ["募集中", "予約承認待ち", "予約確定", "利用中", "掲載停止", "返却完了", "評価完了"],
 }
 
 
