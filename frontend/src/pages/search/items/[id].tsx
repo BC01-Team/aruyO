@@ -93,11 +93,12 @@ const ItemDetail = () => {
       item_description: `受取日: ${startDate} 〜 返却日: ${endDate}  計: ${( endDate - startDate ) / 86400000 + 1}日`,
       item_image: items_copy?.pictures[0],
       base_price: Number(items_copy?.price),
-      quantity: ( endDate - startDate ) / 86400000 + 1
+      quantity: ( endDate - startDate ) / 86400000 + 1,
+      metadata: items_copy
     };
 
     await axiosInstance
-      .post("/stripe/create-checkout-session", data, { withCredentials: true })
+      .post("create-checkout-session", data, { withCredentials: true })
       .then((res) => {
         console.log(res);
         router.push(res.data.checkout_session_url);
