@@ -42,10 +42,10 @@ const MypageItems = () => {
     <ProtectRoute>
       <>
         {!loading && items && (
-          <>
+          <div className="flex">
             <Sidebar />
             <MypageLayout>
-              <div className="font-bold text-2xl text-center mt-10 mb-6">登録物品一覧</div>
+              <div className="font-bold text-2xl text-center mb-6">登録物品一覧</div>
               <ContentsLayout>
                 <div className="overflow-hidden">
                   <ul role="list" className="">
@@ -100,7 +100,7 @@ const MypageItems = () => {
                 </div>
               </ContentsLayout>
             </MypageLayout>
-          </>
+          </div>
         )}
         {loading && <div>ロード中</div>}
       </>
