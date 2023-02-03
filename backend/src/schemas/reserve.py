@@ -1,28 +1,34 @@
 import datetime
 import enum
-from typing import Union
-from pydantic import BaseModel, Field, validator  # バリデーションチェック
+from pydantic import BaseModel, Field  # バリデーションチェック
 from src.utils.logger.logger import setup_logger
 
-# BaseModel はFastAPIのスキーマモデルであることを表す
-# pydantic 名前: type宣言 = 値設定
-# 第一引数はデフォルト値, 省略（...）時は必須になる
+# BaseModelはFastAPIのスキーマモデルであることを表す
+# pydantic 名前:type宣言=値設定。Fieldの第一引数はデフォルト値, 省略（...）時は必須項目になる
+
+
+# TODO 調査一時停止。_idだとrequirement=true(必須)にならないが、idだと必須になる。
+# TODO strの見直し。決済に合わせる
 
 
 class Items_Copy(BaseModel):
     _id: str = Field(..., max_length=24)
     name: str = Field(..., max_length=200)
     pictures: list[str]
-    detail: str = Field(..., max_length=500)
-    requirements: str = Field(..., max_length=200)
-    take_out: bool
-    price: int = Field(0, ge=0, le=1000000)
+    detail: str = Field(max_length=500)
+    requirements: str = Field(max_length=200)
+    take_out: str
+    # take_out: bool
+    price: str
+    # price: int = Field(0, ge=0, le=1000000)
     address: str = Field(..., max_length=200)
 
 
 class Period(BaseModel):
-    start: datetime.date = Field(datetime.date.today())
-    end: datetime.date = Field(datetime.date.today())
+    start: str
+    end: str
+    # start: datetime.date = Field(datetime.date.today())
+    # end: datetime.date = Field(datetime.date.today())
 
 
 class PaymentStatus(str, enum.Enum):
@@ -31,29 +37,31 @@ class PaymentStatus(str, enum.Enum):
 
 
 class Payment(BaseModel):
-    total: int = Field(0, ge=0, le=1000000)
+    total: str
+    # total: int = Field(0, ge=0, le=1000000)
     method: str = Field(..., max_length=50)
     status: PaymentStatus = Field(PaymentStatus.status0)
 
 
 class Lender(BaseModel):
     _id: str = Field(..., max_length=24)
-    evaluation: int = Field(0, ge=0, le=5)
+    evaluation: str
+    # evaluation: int = Field(0, ge=0, le=5)
 
 
 class Borrower(BaseModel):
     _id: str = Field(..., max_length=24)
-    evaluation: int = Field(0, ge=0, le=5)
+    evaluation: str
+    # evaluation: int = Field(0, ge=0, le=5)
 
 
 class ReserveStatus(str, enum.Enum):
     status0: str = "募集中"
     status1: str = "予約承認待ち"
     status2: str = "予約確定"
-    status3: str = "利用中"
+    status3: str = "貸出中"
     status4: str = "掲載停止"
     status5: str = "返却完了"
-    status6: str = "評価完了"
 
 
 class ReserveCreate(BaseModel):
@@ -98,6 +106,6 @@ class ReserveCreateResponse(ReserveCreate):
         }
 
 
-# スキーマ確認 返り値はJSON
 logger = setup_logger(__name__)
 # logger.debug(ReserveCreateResponse.schema())
+# NOTE スキーマ確認用。ファイル実行すればJSONでschemaを確認できる。

@@ -89,7 +89,7 @@ item = [
             "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
         },
         "location": [35.660205, 139.729202],
-        "company_id": "63d9bf7b1c47ae4a25777403",
+        "company_id": "63d9c4525d4c2596f1501c7d",
     },
     {
         "info": {
@@ -104,7 +104,7 @@ item = [
             "address": "〒150-0001 東京都渋谷区神宮前1-5-8 神宮前タワービルディング",
         },
         "location": [35.6706882, 139.6891846],
-        "company_id": "63d9bf7b1c47ae4a25777403",
+        "company_id": "63d9c4525d4c2596f1501c7d",
     },
     {
         "info": {
@@ -123,7 +123,7 @@ item = [
             "address": "〒107-0062 東京都港区南青山2-13-10",
         },
         "location": [35.6705225, 139.7036485],
-        "company_id": "63d9bf7b1c47ae4a25777403",
+        "company_id": "63d9c4525d4c2596f1501c7d",
     },
 ]
 
@@ -144,15 +144,15 @@ reservation = {
     },
     "period": {"start": "2023/02/09", "end": "2023/02/15"},
     "payment": {"total": 7000, "method": "Stripe", "status": "未決済"},
-    "lender": {"_id": " 63d9c4525d4c2596f1501c7a", "evaluation": ""},
-    "borrower": {"_id": "63d9c4525d4c2596f1501c72", "evaluation": ""},
+    "lender": {"_id": " 63d9c4525d4c2596f1501c7d", "evaluation": ""},
+    "borrower": {"_id": "63d9c4525d4c2596f1501c7d", "evaluation": ""},
     "status": "予約承認待ち",
 }
 
 # ステータス
 status = {
     "payment": ["未決済", "決済完了"],
-    "reservation": ["募集中", "予約承認待ち", "予約確定", "利用中", "掲載停止", "返却完了", "評価完了"],
+    "reservation": ["募集中", "予約承認待ち", "予約確定", "貸出中", "掲載停止", "返却完了"],
 }
 
 
