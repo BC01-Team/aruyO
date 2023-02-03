@@ -142,11 +142,11 @@ reservation = {
         "price": "1000",
         "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
     },
-    "period": {"start": "2023/02/09", "end": "2023/02/15"},
-    "payment": {"total": 7000, "method": "Stripe", "status": "未決済"},
-    "lender": {"_id": " 63d9c4525d4c2596f1501c7d", "evaluation": ""},
-    "borrower": {"_id": "63d9c4525d4c2596f1501c7d", "evaluation": ""},
-    "status": "予約承認待ち",
+    "period": {"start": "2023/2/1", "end": "2023/2/5"},
+    "payment": {"total": "5000", "method": "口座振込", "status": "決済完了"},
+    "lender": {"_id": "63d9c4525d4c2596f1501c79", "evaluation": "3"},
+    "borrower": {"_id": "63d9c4525d4c2596f1501c7d", "evaluation": "3"},
+    "status": "予約確定"
 }
 
 # ステータス
@@ -164,8 +164,8 @@ collection_statuses = db.statuses
 
 
 # ドキュメント(値)を保存
-collection_companies.insert_many(company)
-collection_items.insert_many(item)
+# collection_companies.insert_many(company)
+# collection_items.insert_many(item)
 collection_reservations.insert_many([reservation])
 collection_statuses.insert_many([status])
 
