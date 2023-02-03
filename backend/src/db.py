@@ -17,4 +17,5 @@ print(DATABASE_URL)
 client = MongoClient(DATABASE_URL)
 
 #接続test用の名前。変更可
-db = client.aruyo
+# db = client.aruyo
+db = client.first_Test
