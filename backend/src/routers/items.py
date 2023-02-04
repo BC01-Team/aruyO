@@ -1,9 +1,7 @@
-from fastapi import APIRouter, HTTPException, Cookie
+from fastapi import APIRouter, HTTPException
 from src.utils.logger.logger import setup_logger
-from typing import Optional
 
 import src.cruds.items as items_crud
-import src.utils.auth.auth as auth
 
 logger = setup_logger(__name__)
 router = APIRouter(
@@ -20,6 +18,7 @@ def get_all_items() -> list:
         raise HTTPException(status_code=404, detail="物品がありませんでした。")
     logger.debug(res)
     return res
+
 
 # API_No.7-2 物品詳細取得　未ログイン時も使用するため認証はなし
 @router.get("/{id}")
