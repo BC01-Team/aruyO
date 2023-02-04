@@ -11,6 +11,7 @@ import { userState } from "@/lib/atom";
 import { classNames } from "@/lib/class-names";
 import { getNumberOfDays } from "@/utils/getNumberOfDays";
 import { getStringFromDate } from "@/utils/getStringFromData";
+import { getTotalAmount } from "@/utils/getTotalAmount";
 import { Tab } from '@headlessui/react'
 import Button from "@/components/elements/Button";
 import PageTitle from "@/components/elements/PageTitle";
@@ -45,20 +46,6 @@ const ItemDetail = () => {
     setHydrated(true);
   }, [itemId]);
 
-  const getTotalAmount = (basePrice: number, days: number) => {
-    return basePrice * days;
-  };
-
-  // const getStringFromDate = (date: Date) => {
-  //   let format_str = 'YYYY/MM/DD';
-
-  //   format_str = format_str.replace(/YYYY/g, date.getFullYear().toString());
-  //   format_str = format_str.replace(/MM/g, ("0" + (date.getMonth() + 1)).slice(-2)); //月だけ+1すること
-  //   format_str = format_str.replace(/DD/g, ("0" + date.getDate()).slice(-2));
-
-  //   return format_str;
-  // };
-
   const onSubmit = async (_data: FieldValues) => {
     const itemsCopy = item?.info;
     const startDateStr = getStringFromDate(startDate);
@@ -82,20 +69,23 @@ const ItemDetail = () => {
       status: orderStatus
     };
 
-    const stripeCheckoutData = {
-      account: connectedId,
-      item_name: itemsCopy?.name,
-      item_description: `受取日: ${startDateStr} 〜 返却日: ${endDateStr}  計: ${days}日`,
-      item_image: itemsCopy?.pictures[0],
-      base_price: basePrice,
-      quantity: days,
-    };
-
     await axiosInstance
       .post("/reserves", orderData, { withCredentials: true })
       .then((res) => {
         console.log(res);
-        // return payment(stripeCheckoutData);
+
+        const stripeCheckoutData = {
+          account: connectedId,
+          item_name: itemsCopy?.name,
+          item_description: `受取日: ${startDateStr} 〜 返却日: ${endDateStr}  計: ${days}日`,
+          item_image: itemsCopy?.pictures[0],
+          base_price: basePrice,
+          quantity: days,
+          metadata: {
+            reservation_id: res.data._id
+          }
+        };
+
         return createStripeCheckoutSession(stripeCheckoutData);
       })
       .catch((error) => {
@@ -114,31 +104,6 @@ const ItemDetail = () => {
         console.log(error);
       });
   };
-
-  // フロントからStripe用APIが叩けるか動作確認
-  // const onSubmit = async (_data: FieldValues) => {
-  //   const connectedId = "acct_1MWZMz2eYfpnkUc7";
-  //   const items_copy = item?.info;
-  //   const data = {
-  //     account: connectedId,
-  //     item_name: items_copy?.name,
-  //     item_description: `受取日: ${startDate} 〜 返却日: ${endDate}  計: ${( endDate - startDate ) / 86400000 + 1}日`,
-  //     item_image: items_copy?.pictures[0],
-  //     base_price: Number(items_copy?.price),
-  //     quantity: ( endDate - startDate ) / 86400000 + 1,
-  //     metadata: items_copy
-  //   };
-
-  //   await axiosInstance
-  //     .post("create-checkout-session", data, { withCredentials: true })
-  //     .then((res) => {
-  //       console.log(res);
-  //       router.push(res.data.checkout_session_url);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
 
   if (!hydrated) return null;
   if (!item) return <Loading />; // itemがセットされるまでローディングを表示
