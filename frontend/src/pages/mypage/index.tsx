@@ -9,11 +9,11 @@ import { useRecoilValue } from "recoil";
 import { userState } from "@/lib/atom";
 import { axiosInstance } from "@/lib/axiosInstance";
 
-type User = {
+type UserProps = {
   user: User;
 };
 
-const Mypage = ({}: User) => {
+const Mypage = ({}: UserProps) => {
   const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState(null);

@@ -12,7 +12,7 @@ import Loading from "@/components/elements/Loading";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
 
 type OrdersProps = {
-  orders: Order[]
+  orders: Order[];
 };
 
 const MypageOrdersLender = ({}: OrdersProps) => {
@@ -22,19 +22,20 @@ const MypageOrdersLender = ({}: OrdersProps) => {
 
   useEffect(() => {
     setLoading(true);
-    if (user) {
-      const lenderId = user.id;
-      const fetchDate = async () => {
-        const res = await (
-          await axiosInstance.get(`/users/${lenderId}/lent`, {
-            withCredentials: true,
-          })
-        ).data;
-        setLoading(false);
-        setOrders(res);
-      };
-      fetchDate();
+    if (!user) {
+      return;
     }
+    const lenderId = user.id;
+    const fetchDate = async () => {
+      const res = await (
+        await axiosInstance.get(`/users/${lenderId}/lent`, {
+          withCredentials: true,
+        })
+      ).data;
+      setLoading(false);
+      setOrders(res);
+    };
+    fetchDate();
   }, []);
 
   if (loading) return <Loading />;
@@ -48,7 +49,7 @@ const MypageOrdersLender = ({}: OrdersProps) => {
             <Sidebar />
             <MypageLayout>
               <div className="font-bold text-2xl text-center mb-6">
-                貸すもの
+                貸すもの【{orders.length}件】
               </div>
               <ContentsLayout>
                 <div className="my-8">
