@@ -48,15 +48,15 @@ const ItemDetail = () => {
     return price * days;
   };
 
-  const getStringFromDate = (date: Date) => {
-    let format_str = 'YYYY/MM/DD';
+  // const getStringFromDate = (date: Date) => {
+  //   let format_str = 'YYYY/MM/DD';
 
-    format_str = format_str.replace(/YYYY/g, date.getFullYear().toString());
-    format_str = format_str.replace(/MM/g, ("0" + (date.getMonth() + 1)).slice(-2)); //月だけ+1すること
-    format_str = format_str.replace(/DD/g, ("0" + date.getDate()).slice(-2));
+  //   format_str = format_str.replace(/YYYY/g, date.getFullYear().toString());
+  //   format_str = format_str.replace(/MM/g, ("0" + (date.getMonth() + 1)).slice(-2)); //月だけ+1すること
+  //   format_str = format_str.replace(/DD/g, ("0" + date.getDate()).slice(-2));
 
-    return format_str;
-  };
+  //   return format_str;
+  // };
 
   // const onSubmit = async (_data: FieldValues) => {
   //   const items_copy = item?.info;
