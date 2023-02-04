@@ -3,16 +3,18 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { axiosInstance } from "@/lib/axiosInstance";
 import { FieldValues, useForm } from 'react-hook-form';
+import DatePicker, { registerLocale } from "react-datepicker";
+import ja from "date-fns/locale/ja";
 import { Item } from "@/types/item";
 import { useRecoilValue } from "recoil";
 import { userState } from "@/lib/atom";
 import { classNames } from "@/lib/class-names";
+import { getNumberOfDays } from "@/utils/getNumberOfDays";
+import { getStringFromDate } from "@/utils/getStringFromData";
 import { Tab } from '@headlessui/react'
 import Button from "@/components/elements/Button";
 import PageTitle from "@/components/elements/PageTitle";
 import Loading from "@/components/elements/Loading";
-import DatePicker, { registerLocale } from "react-datepicker";
-import ja from "date-fns/locale/ja";
 
 const ItemDetail = () => {
   const router = useRouter();
@@ -43,9 +45,8 @@ const ItemDetail = () => {
     setHydrated(true);
   }, [itemId]);
 
-  const getTotalAmount = (price: number) => {
-    const days = ( endDate - startDate ) / 86400000 + 1;
-    return price * days;
+  const getTotalAmount = (basePrice: number, days: number) => {
+    return basePrice * days;
   };
 
   // const getStringFromDate = (date: Date) => {
@@ -58,45 +59,51 @@ const ItemDetail = () => {
   //   return format_str;
   // };
 
-  // const onSubmit = async (_data: FieldValues) => {
-  //   const items_copy = item?.info;
-  //   const total = getTotalAmount(Number(item?.info?.price));
-  //   const lenderId = item?.company_id;
-  //   const borrowerId = user.id;
-
-  //   const orderData = {
-  //     items_copy,
-  //     period: {start: getStringFromDate(startDate), end: getStringFromDate(endDate)},
-  //     payment: {total: total, method: "Stripe", status: "未決済"},
-  //     lender: {_id: lenderId, evaluation: ""},
-  //     borrower: {_id: borrowerId, evaluation: ""},
-  //     status: "予約承認待ち"
-  //   };
-
-  //   await axiosInstance
-  //     .post("/reserves", orderData, { withCredentials: true })
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     })
-  // };
-
-  // フロントからStripe用APIが叩けるか動作確認
   const onSubmit = async (_data: FieldValues) => {
-    const connectedId = "acct_1MWZMz2eYfpnkUc7";
-    const items_copy = item?.info;
-    const data = {
-      account: connectedId,
-      item_name: items_copy?.name,
-      item_description: `受取日: ${startDate} 〜 返却日: ${endDate}  計: ${( endDate - startDate ) / 86400000 + 1}日`,
-      item_image: items_copy?.pictures[0],
-      base_price: Number(items_copy?.price),
-      quantity: ( endDate - startDate ) / 86400000 + 1,
-      metadata: items_copy
+    const itemsCopy = item?.info;
+    const startDateStr = getStringFromDate(startDate);
+    const endDateStr = getStringFromDate(endDate);
+    const basePrice = Number(itemsCopy?.price);
+    const days = getNumberOfDays(startDate, endDate);
+    const total = getTotalAmount(basePrice, days);
+    const paymentMethod = "Stripe";
+    const paymentStatus = "未決済";
+    const lenderId = item?.company_id;
+    const borrowerId = user.id;
+    const orderStatus = "予約確定";
+    const connectedId = "acct_1MWZMz2eYfpnkUc7"; // TODO: DBにフィールドを作成、ダッシュボードで発行したIDをテストデータに追加
+
+    const orderData = {
+      items_copy: itemsCopy,
+      period: {start: startDateStr, end: endDateStr},
+      payment: {total: total, method: paymentMethod, status: paymentStatus},
+      lender: {_id: lenderId, evaluation: ""},
+      borrower: {_id: borrowerId, evaluation: ""},
+      status: orderStatus
     };
 
+    const stripeCheckoutData = {
+      account: connectedId,
+      item_name: itemsCopy?.name,
+      item_description: `受取日: ${startDateStr} 〜 返却日: ${endDateStr}  計: ${days}日`,
+      item_image: itemsCopy?.pictures[0],
+      base_price: basePrice,
+      quantity: days,
+    };
+
+    await axiosInstance
+      .post("/reserves", orderData, { withCredentials: true })
+      .then((res) => {
+        console.log(res);
+        // return payment(stripeCheckoutData);
+        return createStripeCheckoutSession(stripeCheckoutData);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  };
+
+  const createStripeCheckoutSession = async (data: any) => {
     await axiosInstance
       .post("create-checkout-session", data, { withCredentials: true })
       .then((res) => {
@@ -107,6 +114,31 @@ const ItemDetail = () => {
         console.log(error);
       });
   };
+
+  // フロントからStripe用APIが叩けるか動作確認
+  // const onSubmit = async (_data: FieldValues) => {
+  //   const connectedId = "acct_1MWZMz2eYfpnkUc7";
+  //   const items_copy = item?.info;
+  //   const data = {
+  //     account: connectedId,
+  //     item_name: items_copy?.name,
+  //     item_description: `受取日: ${startDate} 〜 返却日: ${endDate}  計: ${( endDate - startDate ) / 86400000 + 1}日`,
+  //     item_image: items_copy?.pictures[0],
+  //     base_price: Number(items_copy?.price),
+  //     quantity: ( endDate - startDate ) / 86400000 + 1,
+  //     metadata: items_copy
+  //   };
+
+  //   await axiosInstance
+  //     .post("create-checkout-session", data, { withCredentials: true })
+  //     .then((res) => {
+  //       console.log(res);
+  //       router.push(res.data.checkout_session_url);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   if (!hydrated) return null;
   if (!item) return <Loading />; // itemがセットされるまでローディングを表示
