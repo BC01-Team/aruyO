@@ -54,7 +54,7 @@ const MyPageItems = ({}: ItemProps) => {
             <Sidebar />
             <MypageLayout>
               <div className="font-bold text-2xl text-center mb-6">
-                登録物品一覧【{items.length}件】
+                登録物品一覧 {items.length} 件
               </div>
               <ContentsLayout>
                 <div className="overflow-hidden">

@@ -3,7 +3,6 @@ import { axiosInstance } from "@/lib/axiosInstance";
 import { Order } from "@/types/order";
 import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
-import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import Button from "@/components/elements/Button";
 import { useEffect, useState } from "react";
@@ -12,36 +11,36 @@ import { userState } from "../../../../lib/atom";
 import Loading from "@/components/elements/Loading";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
 
-
 type OrdersProps = {
-  orders: Order[]
+  orders: Order[];
 };
 
-const MypageOrderBorrower = () => {
+const MyPageOrdersBorrower = ({}: OrdersProps) => {
   const [orders, setOrders] = useState(null);
   const [loading, setLoading] = useState(false);
   const user = useRecoilValue(userState);
 
   useEffect(() => {
     setLoading(true);
-    if (user) {
-      const borrowerId = user.id;
-      const fetchDate = async () => {
-        const res = await (
-          await axiosInstance.get(`/users/${borrowerId}/borrow`, {
-            withCredentials: true,
-          })
-        ).data;
-
-        setLoading(false);
-        setOrders(res);
-      };
-      fetchDate();
-      console.log(orders);
+    if (!user) {
+      return;
     }
+    const borrowerId = user.id;
+    const fetchDate = async () => {
+      const res = await (
+        await axiosInstance.get(`/users/${borrowerId}/borrow`, {
+          withCredentials: true,
+        })
+      ).data;
+
+      setLoading(false);
+      setOrders(res);
+      console.log(orders);
+    };
+    fetchDate();
   }, []);
 
-  if (loading) return <Loading />; 
+  if (loading) return <Loading />;
   console.log(orders);
   return (
     <ProtectRoute>
@@ -51,7 +50,7 @@ const MypageOrderBorrower = () => {
             <Sidebar />
             <MypageLayout>
               <div className="font-bold text-2xl text-center mb-6">
-                借りるもの
+                借りるもの {orders.length} 件
               </div>
               <ContentsLayout>
                 <div className="my-8">
@@ -137,5 +136,4 @@ const MypageOrderBorrower = () => {
   );
 };
 
-
-export default MypageOrderBorrower;
+export default MyPageOrdersBorrower;

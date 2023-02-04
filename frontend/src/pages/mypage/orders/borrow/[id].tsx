@@ -20,7 +20,7 @@ type OrderProps = {
   result: Order;
 };
 
-const MypageOrderDetailBorrower = ({ result }: OrderProps) => {
+const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
   const router = useRouter();
   const [order, setOrder] = useState<any>();
   const [reserveStatus, setReserveStatus] = useState<string>();
@@ -222,5 +222,5 @@ const MypageOrderDetailBorrower = ({ result }: OrderProps) => {
   );
 };
 
-export default MypageOrderDetailBorrower;
+export default MyPageOrderDetailBorrower;
 

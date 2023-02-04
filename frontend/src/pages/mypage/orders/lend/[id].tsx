@@ -15,7 +15,7 @@ import { classNames } from "@/lib/class-names";
 import Loading from "@/components/elements/Loading";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
 
-const MypageOrderDetailLender = () => {
+const MyPageOrderDetailLender = () => {
   const router = useRouter();
   const [order, setOrder] = useState<any>();
   const user = useRecoilValue(userState);
@@ -213,6 +213,6 @@ const MypageOrderDetailLender = () => {
   );
 };
 
-export default MypageOrderDetailLender;
+export default MyPageOrderDetailLender;
 
 

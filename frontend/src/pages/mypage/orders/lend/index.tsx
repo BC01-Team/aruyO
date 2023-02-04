@@ -15,7 +15,7 @@ type OrdersProps = {
   orders: Order[];
 };
 
-const MypageOrdersLender = ({}: OrdersProps) => {
+const MyPageOrdersLender = ({}: OrdersProps) => {
   const [orders, setOrders] = useState(null);
   const [loading, setLoading] = useState(false);
   const user = useRecoilValue(userState);
@@ -49,7 +49,7 @@ const MypageOrdersLender = ({}: OrdersProps) => {
             <Sidebar />
             <MypageLayout>
               <div className="font-bold text-2xl text-center mb-6">
-                貸すもの【{orders.length}件】
+                貸すもの  {orders.length} 件
               </div>
               <ContentsLayout>
                 <div className="my-8">
@@ -130,4 +130,4 @@ const MypageOrdersLender = ({}: OrdersProps) => {
   );
 };
 
-export default MypageOrdersLender;
+export default MyPageOrdersLender;
