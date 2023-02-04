@@ -6,13 +6,14 @@ import MypageLayout from "@/components/layouts/mypage/MypageLayout";
 import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
+import Loading from "@/components/elements/Loading";
 import { Item } from "@/types/item";
 import { useRecoilValue } from "recoil";
 import { userState } from "@/lib/atom";
 import { axiosInstance } from "@/lib/axiosInstance";
 
 type ItemProps = {
-  item: Item;
+  item: Item
 };
 
 // TODO 型の使い方確認
@@ -49,6 +50,7 @@ const MyPageItemDetail = ({}: ItemProps) => {
   }, [itemId]);
 
   if (!hydrated) return null;
+  if (loading) return <Loading />;
 
   return (
     <ProtectRoute>
@@ -124,7 +126,6 @@ const MyPageItemDetail = ({}: ItemProps) => {
             </MypageLayout>
           </div>
         )}
-        {loading && <div>ロード中</div>}
       </>
     </ProtectRoute>
   );
