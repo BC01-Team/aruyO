@@ -3,6 +3,7 @@ import { axiosInstance } from "@/lib/axiosInstance";
 import { Order } from "@/types/order";
 import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
+import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import Button from "@/components/elements/Button";
 import { useEffect, useState } from "react";
@@ -53,9 +54,7 @@ const MyPageOrdersBorrower = ({}: OrdersProps) => {
           <div className="flex">
             <Sidebar />
             <MypageLayout>
-              <div className="font-bold text-2xl text-center mb-6">
-                借りるもの {orders.length} 件
-              </div>
+              <PageTitle>借りるもの {orders.length} 件</PageTitle>
               <ContentsLayout>
                 <div className="my-8">
                   <Link href="/mypage/orders/lend">

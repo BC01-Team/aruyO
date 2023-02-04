@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { axiosInstance } from "@/lib/axiosInstance";
-import { Order } from "@/types/order";
+import { classNames } from "@/lib/class-names";
+import Confirm from "@/components/layouts/mypage/orders/Confirm";
+import ProtectRoute from "@/components/layouts/ProtectRoute";
 import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
-import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
+import PageTitle from "@/components/layouts/mypage/PageTitle";
+import QrReader from "@/components/layouts/mypage/orders/QrReader";
+import Loading from "@/components/elements/Loading";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../../lib/atom";
-import QrReader from "@/components/layouts/mypage/orders/QrReader";
-import Confirm from "@/components/layouts/mypage/orders/Confirm";
 import { Tab } from "@headlessui/react";
-import { classNames } from "@/lib/class-names";
-import Loading from "@/components/elements/Loading";
-import ProtectRoute from "@/components/layouts/ProtectRoute";
+import { Order } from "@/types/order";
 
 type OrderProps = {
   result: Order;
@@ -24,7 +24,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
   const [loading, setLoading] = useState(false);
   const [order, setOrder] = useState<any>();
   const [result, setResult] = useState<string>("");
-  const [status, setStatus] = useState<string>("");
+  const [status, setStatus] = useState<string>(""); //TODO 不要？
 
   const user = useRecoilValue(userState);
 
@@ -80,9 +80,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
                   <Sidebar />
                   <MypageLayout>
                     <ContentsLayout>
-                      <div className="font-bold text-2xl text-center mb-7">
-                        <PageTitle>予約詳細</PageTitle>
-                      </div>
+                      <PageTitle>貸出詳細</PageTitle>
                       <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
                         {/* 画像ギャラリー */}
                         <Tab.Group as="div" className="flex flex-col-reverse">
@@ -135,7 +133,9 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
                             )}
                           </Tab.Panels>
                         </Tab.Group>
-                        <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+
+                        <div className="">
+                          {/* 物品詳細 */}
                           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
                             <div className="text-sm font-bold text-gray-900 mb-2">
                               予約番号
@@ -194,19 +194,20 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
                                 {order[0].status}
                               </span>
                             </div>
+                          </div>
 
-                            <div className="mt-12 max-w-xs">
-                              {order[0].status !== "予約確定" &&
-                              order[0].status !== "貸出中" ? (
-                                <></>
-                              ) : (
-                                <QrReader
-                                  result={result}
-                                  setResult={setResult}
-                                  status={order[0].status}
-                                />
-                              )}
-                            </div>
+                          {/* チェックイン/チェックアウトのボタンでカメラ起動 */}
+                          <div className="mt-12 max-w-xs">
+                            {order[0].status !== "予約確定" &&
+                            order[0].status !== "貸出中" ? (
+                              <></>
+                            ) : (
+                              <QrReader
+                                result={result}
+                                setResult={setResult}
+                                status={order[0].status}
+                              />
+                            )}
                           </div>
                         </div>
                       </div>
@@ -215,7 +216,6 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
                 </div>
               </>
             )}
-            {/* {loading && <div>ロード中</div>} */}
           </>
         )}
       </>

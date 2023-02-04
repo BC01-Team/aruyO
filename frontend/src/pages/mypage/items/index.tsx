@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
+import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
 import Loading from "@/components/elements/Loading";
@@ -53,9 +54,7 @@ const MyPageItems = ({}: ItemProps) => {
           <div className="flex">
             <Sidebar />
             <MypageLayout>
-              <div className="font-bold text-2xl text-center mb-6">
-                登録物品 {items.length} 件
-              </div>
+              <PageTitle>登録物品 {items.length} 件</PageTitle>
               <ContentsLayout>
                 <div className="overflow-hidden">
                   <ul role="list" className="">
@@ -86,7 +85,11 @@ const MyPageItems = ({}: ItemProps) => {
                                       </p>
                                       <p className="mt-2 flex items-center text-sm text-gray-900">
                                         <span className="truncate">
-                                          金額{Number(item.info?.price).toLocaleString()}円
+                                          金額
+                                          {Number(
+                                            item.info?.price
+                                          ).toLocaleString()}
+                                          円
                                         </span>
                                       </p>
                                     </div>
