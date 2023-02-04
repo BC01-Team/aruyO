@@ -1,4 +1,3 @@
-import datetime
 import enum
 from pydantic import BaseModel, Field  # バリデーションチェック
 from src.utils.logger.logger import setup_logger
@@ -12,7 +11,7 @@ from src.utils.logger.logger import setup_logger
 
 
 class Items_Copy(BaseModel):
-    _id: str = Field(..., max_length=24)
+    # _id: str = Field(..., max_length=24)
     name: str = Field(..., max_length=200)
     pictures: list[str]
     detail: str = Field(max_length=500)
