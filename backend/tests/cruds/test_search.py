@@ -28,8 +28,13 @@ def test_get_search_word():
 
 
 # 距離+キーワード検索（ログイン時の検索ロジック）
-# def test_get_serch_both():
-#     assert get_serch_both() ===
+def test_get_serch_both():
+    # ユーザー位置を起点に約11km圏内のみ結果として返すため、起点を都内にすると結果0件になる
+    # "key":""  キーワード検索のみの場合結果11件、都内起点では0件
+    assert get_serch_both(data1) == no_result
+    # "key":"冷蔵"  キーワード検索のみの場合結果2件、都内起点では0件
+    assert get_serch_both(data2) == no_result
+
 
 
 
