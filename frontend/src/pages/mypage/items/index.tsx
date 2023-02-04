@@ -73,18 +73,18 @@ const MyPageItems = ({}: ItemProps) => {
                                   <div className="flex-shrink-0">
                                     <img
                                       className="h-20 w-20"
-                                      src={item.info.pictures[0]}
+                                      src={item.info?.pictures[0]}
                                       alt=""
                                     />
                                   </div>
                                   <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                                     <div>
                                       <p className="truncate text-sm font-medium text-amber-600">
-                                        {item.info.name}
+                                        {item.info?.name}
                                       </p>
                                       <p className="mt-2 flex items-center text-sm text-gray-500">
                                         <span className="truncate">
-                                          {item.info.price}円
+                                          {item.info?.price}円
                                         </span>
                                       </p>
                                     </div>
@@ -94,7 +94,7 @@ const MyPageItems = ({}: ItemProps) => {
                                           表示させる項目は要検討
                                         </p>
                                         <p className="mt-2 flex items-center text-sm text-gray-500">
-                                          {item.info.address}
+                                          {item.info?.address}
                                         </p>
                                       </div>
                                     </div>

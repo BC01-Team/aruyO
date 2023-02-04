@@ -7,20 +7,20 @@ import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
 import { Item } from "@/types/item";
-//componentで使用する際下記記載
 import { useRecoilValue } from "recoil";
 import { userState } from "@/lib/atom";
 import { axiosInstance } from "@/lib/axiosInstance";
 
 type ItemProps = {
-  result: Item;
+  item: Item;
 };
 
-const MyPageItemDetail = ({ result }: ItemProps) => {
+// TODO 型の使い方確認
+const MyPageItemDetail = ({}: ItemProps) => {
   const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [item, setItem] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
+
   // ログイン認証からuserId取得
   const user = useRecoilValue(userState);
   // urlからitemIdを取得
@@ -30,33 +30,22 @@ const MyPageItemDetail = ({ result }: ItemProps) => {
   useEffect(() => {
     setHydrated(true);
     setLoading(true);
-    if (user) {
-      const userId = user.id;
-      const fetchDate = async () => {
-        // 物品詳細取得
-        await axiosInstance
-          .get(`/users/${userId}/items/${itemId}`, {
-            withCredentials: true,
-          })
-          .then((res) => {
-            console.log(res.data);
-            setItem(res.data);
-          })
-          .catch((error) => {
-            console.log(error);
-            if (
-              error.response.status === 400 ||
-              error.response.status === 404
-            ) {
-              console.log(error.response.data.detail);
-              setErrorMessage(error.response.data.detail);
-              // errorMessage表示コードは未記入
-            }
-          });
-        setLoading(false);
-      };
-      fetchDate();
+    if (!user) {
+      return;
     }
+    const userId = user.id;
+    const fetchDate = async () => {
+      // 物品詳細取得
+      const res = await (
+        await axiosInstance.get(`/users/${userId}/items/${itemId}`, {
+          withCredentials: true,
+        })
+      ).data;
+
+      setItem(res);
+      setLoading(false);
+    };
+    fetchDate();
   }, [itemId]);
 
   if (!hydrated) return null;
@@ -68,7 +57,7 @@ const MyPageItemDetail = ({ result }: ItemProps) => {
           <div className="flex">
             <Sidebar />
             <MypageLayout>
-              <PageTitle>ユーザー物品詳細</PageTitle>
+              <PageTitle>登録物品詳細</PageTitle>
               <ContentsLayout>
                 <div className="overflow-hidden bg-white shadow sm:rounded-md">
                   <ul role="list" className="divide-y divide-gray-200">
@@ -83,42 +72,44 @@ const MyPageItemDetail = ({ result }: ItemProps) => {
                         <div className="flex items-center px-4 py-4 sm:px-6">
                           <div className="flex min-w-0 flex-1 items-center">
                             <div className="flex-shrink-0">
-                              {item.info.pictures.map((picture, index) => {
-                                return (
-                                  <li key={index}>
-                                    <div className="flex items-center px-4 py-4 sm:px-6">
-                                      <div className="flex min-w-0 flex-1 items-center">
-                                        <div className="flex-shrink-0">
-                                          <img
-                                            className="h-20 w-20"
-                                            src={picture}
-                                            alt=""
-                                          />
+                              {item.info?.pictures?.map(
+                                (picture, index: number) => {
+                                  return (
+                                    <li key={index}>
+                                      <div className="flex items-center px-4 py-4 sm:px-6">
+                                        <div className="flex min-w-0 flex-1 items-center">
+                                          <div className="flex-shrink-0">
+                                            <img
+                                              className="h-20 w-20"
+                                              src={picture}
+                                              alt=""
+                                            />
+                                          </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  </li>
-                                );
-                              })}
+                                    </li>
+                                  );
+                                }
+                              )}
                             </div>
                             <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                               <div>
                                 <p className="truncate text-sm font-medium text-amber-600">
-                                  {item.info.name}
+                                  {item.info?.name}
                                 </p>
                                 <p className="mt-2 flex items-center text-sm text-gray-500">
                                   <span className="truncate">
-                                    {item.info.price}円
+                                    {item.info?.price}円
                                   </span>
                                 </p>
                               </div>
                               <div className="hidden md:block">
                                 <div>
                                   <p className="text-sm text-gray-900">
-                                    表示させる項目は要検討
+                                    表示させる項目は要検討{/* TODO */}
                                   </p>
                                   <p className="mt-2 flex items-center text-sm text-gray-500">
-                                    {item.info.address}
+                                    {item.info?.address}
                                   </p>
                                 </div>
                               </div>
