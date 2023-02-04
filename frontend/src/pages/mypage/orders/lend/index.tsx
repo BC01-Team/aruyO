@@ -16,11 +16,13 @@ type OrdersProps = {
 };
 
 const MyPageOrdersLender = ({}: OrdersProps) => {
-  const [orders, setOrders] = useState(null);
+  const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [orders, setOrders] = useState(null);
   const user = useRecoilValue(userState);
 
   useEffect(() => {
+    setHydrated(true);
     setLoading(true);
     if (!user) {
       return;
@@ -38,9 +40,11 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
     fetchDate();
   }, []);
 
+  if (!hydrated) return null;
   if (loading) return <Loading />;
 
   console.log(orders);
+
   return (
     <ProtectRoute>
       <>
@@ -49,7 +53,7 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
             <Sidebar />
             <MypageLayout>
               <div className="font-bold text-2xl text-center mb-6">
-                貸すもの  {orders.length} 件
+                貸すもの {orders.length} 件
               </div>
               <ContentsLayout>
                 <div className="my-8">

@@ -17,7 +17,7 @@ type ItemProps = {
 
 // TODO 型の使い方確認
 const MyPageItems = ({}: ItemProps) => {
-  const [hydrated, setHydrated] = useState(false); // TODO 不要？
+  const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState(null);
   const user = useRecoilValue(userState);
@@ -42,7 +42,7 @@ const MyPageItems = ({}: ItemProps) => {
     fetchDate();
   }, []);
 
-  if (!hydrated) return null; // TODO 不要？
+  if (!hydrated) return null;
   if (loading) return <Loading />;
 
   // TODOレスポンシブCSS nav barが上に重なる

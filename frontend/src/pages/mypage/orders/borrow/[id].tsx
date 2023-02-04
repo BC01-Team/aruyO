@@ -21,14 +21,18 @@ type OrderProps = {
 };
 
 const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
-  const router = useRouter();
+  const [hydrated, setHydrated] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [order, setOrder] = useState<any>();
   const [reserveStatus, setReserveStatus] = useState<string>();
-  const user = useRecoilValue(userState);
-  const [loading, setLoading] = useState(false);
 
+  const user = useRecoilValue(userState);
+
+  const router = useRouter();
   const orderId = router.query.id;
+
   useEffect(() => {
+    setHydrated(true);
     setLoading(true);
     if (orderId) {
       const fetchDate = async () => {
@@ -56,7 +60,8 @@ const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
     }
   }, [orderId]);
 
-  if (loading) return <Loading />; 
+  if (!hydrated) return null;
+  if (loading) return <Loading />;
 
   return (
     <ProtectRoute>
@@ -223,4 +228,3 @@ const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
 };
 
 export default MyPageOrderDetailBorrower;
-

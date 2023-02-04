@@ -16,11 +16,13 @@ type OrdersProps = {
 };
 
 const MyPageOrdersBorrower = ({}: OrdersProps) => {
-  const [orders, setOrders] = useState(null);
+  const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [orders, setOrders] = useState(null);
   const user = useRecoilValue(userState);
 
   useEffect(() => {
+    setHydrated(true);
     setLoading(true);
     if (!user) {
       return;
@@ -40,8 +42,10 @@ const MyPageOrdersBorrower = ({}: OrdersProps) => {
     fetchDate();
   }, []);
 
+  if (!hydrated) return null;
   if (loading) return <Loading />;
   console.log(orders);
+
   return (
     <ProtectRoute>
       <>

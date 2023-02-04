@@ -6,7 +6,7 @@ import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
 import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userState } from "../../../../lib/atom";
 import QrReader from "@/components/layouts/mypage/orders/QrReader";
 import Confirm from "@/components/layouts/mypage/orders/Confirm";
@@ -15,16 +15,24 @@ import { classNames } from "@/lib/class-names";
 import Loading from "@/components/elements/Loading";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
 
-const MyPageOrderDetailLender = () => {
-  const router = useRouter();
-  const [order, setOrder] = useState<any>();
-  const user = useRecoilValue(userState);
+type OrderProps = {
+  result: Order;
+};
+
+const MyPageOrderDetailLender = ({}: OrderProps) => {
+  const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
-  const orderId = router.query.id;
+  const [order, setOrder] = useState<any>();
   const [result, setResult] = useState<string>("");
   const [status, setStatus] = useState<string>("");
 
+  const user = useRecoilValue(userState);
+
+  const router = useRouter();
+  const orderId = router.query.id;
+
   useEffect(() => {
+    setHydrated(true);
     setLoading(true);
     if (orderId) {
       const fetchDate = async () => {
@@ -50,7 +58,8 @@ const MyPageOrderDetailLender = () => {
     }
   }, [orderId]);
 
-  if (loading) return <Loading />; 
+  if (!hydrated) return null;
+  if (loading) return <Loading />;
 
   return (
     <ProtectRoute>
@@ -214,5 +223,3 @@ const MyPageOrderDetailLender = () => {
 };
 
 export default MyPageOrderDetailLender;
-
-
