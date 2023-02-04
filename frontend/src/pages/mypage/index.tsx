@@ -13,6 +13,7 @@ const Mypage = () => {
   const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   // ログイン認証からuserId取得
   const user = useRecoilValue(userState);
 
