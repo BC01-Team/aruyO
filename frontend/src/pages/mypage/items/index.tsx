@@ -54,7 +54,7 @@ const MyPageItems = ({}: ItemProps) => {
             <Sidebar />
             <MypageLayout>
               <div className="font-bold text-2xl text-center mb-6">
-                登録物品一覧 {items.length} 件
+                登録物品 {items.length} 件
               </div>
               <ContentsLayout>
                 <div className="overflow-hidden">
@@ -84,9 +84,9 @@ const MyPageItems = ({}: ItemProps) => {
                                       <p className="truncate text-sm font-medium text-amber-600">
                                         {item.info?.name}
                                       </p>
-                                      <p className="mt-2 flex items-center text-sm text-gray-500">
+                                      <p className="mt-2 flex items-center text-sm text-gray-900">
                                         <span className="truncate">
-                                          {item.info?.price}円
+                                          金額{Number(item.info?.price).toLocaleString()}円
                                         </span>
                                       </p>
                                     </div>
@@ -95,7 +95,7 @@ const MyPageItems = ({}: ItemProps) => {
                                         <p className="text-sm text-gray-900">
                                           表示させる項目は要検討
                                         </p>
-                                        <p className="mt-2 flex items-center text-sm text-gray-500">
+                                        <p className="mt-2 flex items-center text-sm text-gray-900">
                                           {item.info?.address}
                                         </p>
                                       </div>

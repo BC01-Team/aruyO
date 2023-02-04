@@ -99,7 +99,7 @@ const MyPageItemDetail = ({}: ItemProps) => {
                                 <p className="truncate text-sm font-medium text-amber-600">
                                   {item.info?.name}
                                 </p>
-                                <p className="mt-2 flex items-center text-sm text-gray-500">
+                                <p className="mt-2 flex items-center text-sm text-gray-900">
                                   <span className="truncate">
                                     {item.info?.price}円
                                   </span>
@@ -110,7 +110,7 @@ const MyPageItemDetail = ({}: ItemProps) => {
                                   <p className="text-sm text-gray-900">
                                     表示させる項目は要検討{/* TODO */}
                                   </p>
-                                  <p className="mt-2 flex items-center text-sm text-gray-500">
+                                  <p className="mt-2 flex items-center text-sm text-gray-900">
                                     {item.info?.address}
                                   </p>
                                 </div>

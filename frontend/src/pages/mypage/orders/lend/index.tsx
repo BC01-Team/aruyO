@@ -105,13 +105,13 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
                                           返却日: {order?.period?.end}
                                         </p>
                                       </div>
-                                      <p className="mt-2 flex items-center text-sm text-gray-500">
+                                      <p className="mt-2 flex items-center text-sm text-gray-900">
                                         {order?.payment?.status}
                                       </p>
                                     </div>
                                   </div>
                                   <p className="text-base text-gray-900">
-                                    <span className="border-black border-solid border-2 ">
+                                    <span className="text-sm text-gray-900 font-bold border border-black border-solid rounded px-4 py-2">
                                       {order?.status}
                                     </span>
                                   </p>

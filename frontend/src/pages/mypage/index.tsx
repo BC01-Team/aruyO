@@ -62,7 +62,7 @@ const Mypage = ({}: UserProps) => {
                                 <p className="truncate text-sm font-medium text-amber-600">
                                   {userInfo.info.name}
                                 </p>
-                                <p className="mt-2 flex user-center text-sm text-gray-500">
+                                <p className="mt-2 flex user-center text-sm text-gray-900">
                                   <span className="truncate">
                                     {userInfo.info.address}
                                   </span>
@@ -74,7 +74,7 @@ const Mypage = ({}: UserProps) => {
                                     表示させる項目は要検討
                                   </p>
                                   <a
-                                    className="mt-2 flex user-center text-sm text-gray-500"
+                                    className="mt-2 flex user-center text-sm text-gray-900"
                                     href={userInfo.info.hp_url}
                                   >
                                     {userInfo.info.hp_url}
@@ -110,7 +110,7 @@ const Mypage = ({}: UserProps) => {
                                   <p className="text-sm text-gray-900">
                                     表示させる項目は要検討
                                   </p>
-                                  <p className="mt-2 flex user-center text-sm text-gray-500">
+                                  <p className="mt-2 flex user-center text-sm text-gray-900">
                                     <span className="truncate">
                                       {userInfo.staff[0].email}
                                     </span>
