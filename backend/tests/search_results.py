@@ -300,10 +300,17 @@ data2 = {
         "location":[35.6706882,139.6891846]
         }
 }
-# POSTのdata形式
-# {
-#   "key":"キーワード" ,      
-#   "info": {
-#            "location":[]
-#           }
-# }
+
+data3 = {
+    "key":"" ,
+    "info": {
+        "location":[]
+        }
+}
+
+data4 = {
+    "key":"冷蔵" ,
+    "info": {
+        "location":[]
+        }
+}

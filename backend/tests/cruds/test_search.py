@@ -1,15 +1,14 @@
 from deepdiff import DeepDiff 
 from src.cruds.search import get_search_word
 from src.cruds.search import get_serch_both
-
-from .results import *
+from ..search_results import *
 
 # 確認したいこと
 # 1.ログインしていない場合はキーワード検索のみ行われる　routerのテスト
 # 2.ログインしているときには距離検索が入る　　routerのテスト
 # 3.空欄での検索は全物品が返る　　crudのテスト
-# 4.キーワードが一致しない時は０件で返る
-# 5.距離+キーワードの場合、キーワードの一致があっても遠方ならヒットしない
+# 4.キーワードが一致しない時は０件で返る  crudのテスト
+# 5.距離+キーワードの場合、キーワードの一致があっても遠方ならヒットしない  crudのテスト
 
 
 # キーワード検索APIのテスト（未ログイン時の検索ロジック）
