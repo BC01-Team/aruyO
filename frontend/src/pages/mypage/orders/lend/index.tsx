@@ -3,7 +3,6 @@ import { axiosInstance } from "@/lib/axiosInstance";
 import { Order } from "@/types/order";
 import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
-import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import Button from "@/components/elements/Button";
 import { useEffect, useState } from "react";
@@ -11,7 +10,6 @@ import { useRecoilValue } from "recoil";
 import { userState } from "../../../../lib/atom";
 import Loading from "@/components/elements/Loading";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
-
 
 type OrdersProps = {
   orders: Order[]
@@ -27,7 +25,7 @@ const MypageOrdersLender = ({}: OrdersProps) => {
     if (user) {
       const lenderId = user.id;
       const fetchDate = async () => {
-        const res = await(
+        const res = await (
           await axiosInstance.get(`/users/${lenderId}/lent`, {
             withCredentials: true,
           })
@@ -38,10 +36,10 @@ const MypageOrdersLender = ({}: OrdersProps) => {
       fetchDate();
     }
   }, []);
-  
-  if (loading) return <Loading />; 
 
-    console.log(orders);
+  if (loading) return <Loading />;
+
+  console.log(orders);
   return (
     <ProtectRoute>
       <>
@@ -130,6 +128,5 @@ const MypageOrdersLender = ({}: OrdersProps) => {
     </ProtectRoute>
   );
 };
-
 
 export default MypageOrdersLender;

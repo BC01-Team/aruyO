@@ -4,6 +4,7 @@ import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
+import Loading from "@/components/elements/Loading";
 import { useRecoilValue } from "recoil";
 import { userState } from "@/lib/atom";
 import { axiosInstance } from "@/lib/axiosInstance";
@@ -16,7 +17,7 @@ type ItemProps = {
 
 // TODO 型の使い方確認
 const MyPageItems = ({}: ItemProps) => {
-  const [hydrated, setHydrated] = useState(false);
+  const [hydrated, setHydrated] = useState(false); // TODO 不要？
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState(null);
   const user = useRecoilValue(userState);
@@ -41,7 +42,8 @@ const MyPageItems = ({}: ItemProps) => {
     fetchDate();
   }, []);
 
-  if (!hydrated) return null;
+  if (!hydrated) return null; // TODO 不要？
+  if (loading) return <Loading />;
 
   // TODOレスポンシブCSS nav barが上に重なる
   return (
@@ -111,7 +113,6 @@ const MyPageItems = ({}: ItemProps) => {
             </MypageLayout>
           </div>
         )}
-        {loading && <div>ロード中</div>}
       </>
     </ProtectRoute>
   );
