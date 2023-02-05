@@ -6,7 +6,7 @@ from src.routers import routers_search
 from src.routers import routers_reserves
 from src.routers import routers_auth
 from src.routers import routers_items
-
+import os
 from src.db import db
 
 # log設定
@@ -15,8 +15,8 @@ logger = setup_logger(__name__)
 
 app = FastAPI()
 
-
-origins = ["http://localhost:3000"]
+ORIGINS=os.environ.get("FRONTEND_URL")
+origins = [ORIGINS]
 
 # CORS
 app.add_middleware(
