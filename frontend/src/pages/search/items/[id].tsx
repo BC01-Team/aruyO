@@ -82,6 +82,7 @@ const ItemDetail = () => {
           base_price: basePrice,
           quantity: days,
           metadata: {
+            item_id: itemId,
             reservation_id: res.data._id
           }
         };
