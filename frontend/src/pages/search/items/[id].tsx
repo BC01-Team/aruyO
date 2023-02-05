@@ -62,10 +62,10 @@ const ItemDetail = () => {
 
     const orderData = {
       items_copy: itemsCopy,
-      period: {start: startDateStr, end: endDateStr},
-      payment: {total: total, method: paymentMethod, status: paymentStatus},
-      lender: {_id: lenderId, evaluation: ""},
-      borrower: {_id: borrowerId, evaluation: ""},
+      period: { start: startDateStr, end: endDateStr },
+      payment: { total: total, method: paymentMethod, status: paymentStatus },
+      lender: { _id: lenderId, evaluation: "" },
+      borrower: { _id: borrowerId, evaluation: "" },
       status: orderStatus
     };
 
