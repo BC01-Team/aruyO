@@ -2,18 +2,17 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
-import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
-import { Items } from "@/types/item";
 import { useRecoilValue } from "recoil";
 import { userState } from "@/lib/atom";
 import { axiosInstance } from "@/lib/axiosInstance";
 
-const MypageItems = () => {
+const MyPageItems = () => {
   const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   // ログイン認証からuserId取得
   const user = useRecoilValue(userState);
 
@@ -23,13 +22,25 @@ const MypageItems = () => {
     if (user) {
       const userId = user.id;
       const fetchDate = async () => {
-        const res = await (
-          await axiosInstance.get(`/users/${userId}/items`, {
+        await axiosInstance
+          .get(`/users/${userId}/items`, {
             withCredentials: true,
           })
-        ).data;
-
-        setItems(res);
+          .then((res) => {
+            console.log(res.data);
+            setItems(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+            if (
+              error.response.status === 400 ||
+              error.response.status === 404
+            ) {
+              console.log(error.response.data.detail);
+              setErrorMessage(error.response.data.detail);
+              // errorMessage表示コードは未記入
+            }
+          });
         setLoading(false);
       };
       fetchDate();
@@ -42,10 +53,10 @@ const MypageItems = () => {
     <ProtectRoute>
       <>
         {!loading && items && (
-          <>
+          <div className="flex">
             <Sidebar />
             <MypageLayout>
-              <div className="font-bold text-2xl text-center mt-10 mb-6">登録物品一覧</div>
+              <div className="font-bold text-2xl text-center mb-6">登録物品一覧</div>
               <ContentsLayout>
                 <div className="overflow-hidden">
                   <ul role="list" className="">
@@ -100,7 +111,7 @@ const MypageItems = () => {
                 </div>
               </ContentsLayout>
             </MypageLayout>
-          </>
+          </div>
         )}
         {loading && <div>ロード中</div>}
       </>
@@ -108,4 +119,4 @@ const MypageItems = () => {
   );
 };
 
-export default MypageItems;
+export default MyPageItems;

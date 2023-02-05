@@ -1,11 +1,11 @@
 from fastapi import FastAPI, Body
 from starlette.middleware.cors import CORSMiddleware
 
-from src.routers import routers_user_info
-from src.routers import routers_search
-from src.routers import routers_reserves
-from src.routers import routers_auth
-from src.routers import routers_items
+from src.routers import user_info
+from src.routers import search
+from src.routers import reserves
+from src.routers import auth
+from src.routers import items
 from src.routers import stripe
 
 from src.db import db
@@ -17,23 +17,23 @@ logger = setup_logger(__name__)
 app = FastAPI()
 
 
-# origins = [ ] 一旦空
+origins = ["http://localhost:3000"]
 
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"]
 )
 
 # ルーティング設定
-app.include_router(routers_user_info.router)
-app.include_router(routers_search.router)
-app.include_router(routers_reserves.router)
-app.include_router(routers_auth.router)
-app.include_router(routers_items.router)
+app.include_router(user_info.router)
+app.include_router(search.router)
+app.include_router(reserves.router)
+app.include_router(auth.router)
+app.include_router(items.router)
 app.include_router(stripe.router)
 
 

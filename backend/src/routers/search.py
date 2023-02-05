@@ -1,12 +1,11 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
 from src.utils.logger.logger import setup_logger
-import src.cruds.cruds_search as search_crud
 from typing import Union
 
+import src.cruds.search as search_crud
+
 logger = setup_logger(__name__)
-
-
 router = APIRouter(
     prefix="/search",  # エンドポイントの頭のURL
     tags=["search"],  # FastAPI Swagger /docsの分類
