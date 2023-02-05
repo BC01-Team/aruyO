@@ -8,14 +8,16 @@ from src.routers import auth
 from src.routers import items
 
 from src.db import db
+import os
 
 # log設定
 from src.utils.logger.logger import setup_logger
+
 logger = setup_logger(__name__)
 
 app = FastAPI()
 
-ORIGINS=os.environ.get("FRONTEND_URL")
+ORIGINS = os.environ.get("FRONTEND_URL")
 origins = [ORIGINS]
 
 # CORS
@@ -24,7 +26,7 @@ app.add_middleware(
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
 
 # ルーティング設定
@@ -41,6 +43,7 @@ def read_root():
     logger.debug("pass")
     return {"test": "get test ok"}
 
+
 # mongo_dbとの接続テスト用　削除可　postしたdataは下記
 # {
 #   "payload":{
@@ -51,6 +54,6 @@ def read_root():
 # }
 @app.post("/")
 def create_post(body=Body(...)):
-    post = body['payload']
+    post = body["payload"]
     db.collection.insert_one(post)
-    return {'post': "ok"}
+    return {"post": "ok"}
