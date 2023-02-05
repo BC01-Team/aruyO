@@ -16,10 +16,11 @@ type ItemProps = {
   result: Item;
 };
 
-const MypageItemDetail = ({ result }: ItemProps) => {
+const MyPageItemDetail = ({ result }: ItemProps) => {
   const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [item, setItem] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   // ログイン認証からuserId取得
   const user = useRecoilValue(userState);
   // urlからitemIdを取得
@@ -33,16 +34,27 @@ const MypageItemDetail = ({ result }: ItemProps) => {
       const userId = user.id;
       const fetchDate = async () => {
         // 物品詳細取得
-        const res = await (
-          await axiosInstance.get(`/users/${userId}/items/${itemId}`, {
+        await axiosInstance
+          .get(`/users/${userId}/items/${itemId}`, {
             withCredentials: true,
           })
-        ).data;
-
-        setItem(res);
+          .then((res) => {
+            console.log(res.data);
+            setItem(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+            if (
+              error.response.status === 400 ||
+              error.response.status === 404
+            ) {
+              console.log(error.response.data.detail);
+              setErrorMessage(error.response.data.detail);
+              // errorMessage表示コードは未記入
+            }
+          });
         setLoading(false);
       };
-
       fetchDate();
     }
   }, [itemId]);
@@ -53,7 +65,7 @@ const MypageItemDetail = ({ result }: ItemProps) => {
     <ProtectRoute>
       <>
         {!loading && item && (
-          <>
+          <div className="flex">
             <Sidebar />
             <MypageLayout>
               <PageTitle>ユーザー物品詳細</PageTitle>
@@ -119,7 +131,7 @@ const MypageItemDetail = ({ result }: ItemProps) => {
                 </div>
               </ContentsLayout>
             </MypageLayout>
-          </>
+          </div>
         )}
         {loading && <div>ロード中</div>}
       </>
@@ -127,4 +139,4 @@ const MypageItemDetail = ({ result }: ItemProps) => {
   );
 };
 
-export default MypageItemDetail;
+export default MyPageItemDetail;

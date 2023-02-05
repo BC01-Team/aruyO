@@ -3,7 +3,8 @@ from src.utils.logger.logger import setup_logger
 from fastapi.encoders import jsonable_encoder
 from typing import Optional
 
-import src.cruds.cruds_reserves as reserve_crud
+import src.schemas.reserve as reserve_schema
+import src.cruds.reserves as reserve_crud
 import src.utils.auth.auth as auth
 
 logger = setup_logger(__name__)
@@ -14,8 +15,11 @@ router = APIRouter(
 
 
 # API_No.10 予約登録
-@router.post("/")
-def create_reserve(data: dict, session_id: Optional[str] = Cookie(None)):
+@router.post("/", response_model=reserve_schema.ReserveCreateResponse)
+def create_reserve(
+    data: reserve_schema.ReserveCreate, session_id: Optional[str] = Cookie(None)
+):
+    # def create_reserve(data: dict, session_id: Optional[str] = Cookie(None)):
     logger.debug("auth前")
     if auth.is_login(session_id):
         reserve = jsonable_encoder(data)
@@ -40,7 +44,9 @@ def get_reserve(id: str, session_id: Optional[str] = Cookie(None)):
 
 # API_No.12 予約情報変更
 @router.put("/{id}")
-def update_reserve(id: str, data: dict):  # dataはrequestbodyにreserveコレクションから_idを抜いたものをいれた。余計な部分が多いのでステータスだけにしたい。
+def update_reserve(
+    id: str, data: dict
+):  # dataはrequestbodyにreserveコレクションから_idを抜いたものをいれた。余計な部分が多いのでステータスだけにしたい。
     if auth.is_login(session_id):
         reserve = jsonable_encoder(data)
         logger.debug(reserve)
@@ -60,4 +66,3 @@ def update_reserve(id: str, data: dict):
     if res:
         return res
     raise HTTPException(status_code=404, detail="予約がありません")
-

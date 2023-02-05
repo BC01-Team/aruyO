@@ -24,12 +24,12 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed inset-y-0 flex w-64 flex-col absolute">
+    <div className="z-30  inset-y-0 flex w-64 flex-col ">
     {/* PC版固定サイドバー、SP版別途用意する必要あり */}
     {/* <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col"> */} 
-      <div className="flex min-h-0 flex-1 flex-col border-r border-gray-200 bg-white">
-        <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
-          <nav className="mt-32 flex-1 space-y-1 bg-white px-2">
+      <div className="flex min-h-0 flex-col border-r border-gray-200 bg-white">
+        <div className="flex flex-col overflow-y-auto pb-4">
+          <nav className="space-y-1 bg-white px-2">
             {navigation.map((item) => (
               <div className="py-1" key={item.name}>
                 <Link href={item.href}>
