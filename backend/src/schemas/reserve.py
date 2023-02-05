@@ -2,6 +2,7 @@ import enum
 from pydantic import BaseModel, Field  # バリデーションチェック
 from src.utils.logger.logger import setup_logger
 from typing import Optional
+
 # BaseModelはFastAPIのスキーマモデルであることを表す
 # pydantic 名前:type宣言=値設定。Fieldの第一引数はデフォルト値, 省略（...）時は必須項目になる
 
