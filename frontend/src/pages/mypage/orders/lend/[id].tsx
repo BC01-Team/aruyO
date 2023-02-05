@@ -197,7 +197,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
                           </div>
 
                           {/* チェックイン/チェックアウトのボタンでカメラ起動 */}
-                          <div className="mt-12 max-w-xs">
+                          <div className="mt-12">
                             {order[0].status !== "予約確定" &&
                             order[0].status !== "貸出中" ? (
                               <></>

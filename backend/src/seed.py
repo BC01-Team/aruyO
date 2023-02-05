@@ -131,7 +131,6 @@ item = [
 reservation = {
     "items_copy": {
         "_id": "63d607e9f7e435916eb7ae51",
-        "_id": "63d607e9f7e435916eb7ae51",
         "name": "ホワイトボード",
         "pictures": [
             "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-front.jpg",

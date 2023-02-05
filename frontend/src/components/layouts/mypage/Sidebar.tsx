@@ -25,17 +25,19 @@ const Sidebar = () => {
 
   return (
     <div className="z-30  inset-y-0 flex w-64 flex-col ">
-    {/* PC版固定サイドバー、SP版別途用意する必要あり */}
-    {/* <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col"> */} 
+      {/* PC版固定サイドバー、SP版別途用意する必要あり */}
+      {/* <div className="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col"> */}
       <div className="flex min-h-0 flex-col border-r border-gray-200 bg-white">
         <div className="flex flex-col overflow-y-auto pb-4">
           <nav className="space-y-1 bg-white px-2">
             {navigation.map((item) => (
               <div className="py-1" key={item.name}>
                 <Link href={item.href}>
-                  <button className={classNames(
-                    item.current ?
-                      "bg-gray-100 text-gray-900" : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                  <button
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-100 text-gray-900"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
                       "group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full"
                     )}
                     onClick={(e) => handleOnClick(item.name)}
