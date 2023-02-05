@@ -16,8 +16,6 @@ import { Tab } from '@headlessui/react'
 import Button from "@/components/elements/Button";
 import PageTitle from "@/components/elements/PageTitle";
 import Loading from "@/components/elements/Loading";
-import DatePicker, { registerLocale } from "react-datepicker";
-import ja from "date-fns/locale/ja";
 
 const ItemDetail = () => {
   const router = useRouter();
