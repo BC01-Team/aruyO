@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { GoogleMap, InfoWindow, MarkerF } from "@react-google-maps/api";
+import { GoogleMap, InfoWindowF, MarkerF } from "@react-google-maps/api";
 import { useLoadScript } from "@react-google-maps/api";
 import Logger from "@/lib/logger";
 
@@ -38,15 +38,15 @@ function Map(props) {
   const results = props.results;
   // console.log(results);
   const markers = [];
-  results?.map((reult) => {
+  results?.map((result) => {
     // console.log("reult._id", reult._id);
     // console.log("reult.info.name", reult.info.name);
     // console.log("lat", reult.location.coordinates[0]);
     // console.log("lng", reult.location.coordinates[1]);
-    const location = reult.location.coordinates;
+    const location = result.location.coordinates;
     markers.push({
-      id: reult._id,
-      name: reult.info.name,
+      id: result._id,
+      name: result.info.name,
       position: {
         lat: location[1],
         lng: location[0],
@@ -99,9 +99,9 @@ function Map(props) {
             onClick={() => handleActiveMarker(id)}
           >
             {activeMarker === id ? (
-              <InfoWindow onCloseClick={() => setActiveMarker()}>
+              <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
                 <div>{name}</div>
-              </InfoWindow>
+              </InfoWindowF>
             ) : (
               <></>
             )}
