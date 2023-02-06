@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 type Props = { children: ReactNode };
 
-const List = ({ children }: Props) => {
+const ListColumn4 = ({ children }: Props) => {
   return (
     <div className="flex flex-1 md:grid md:grid-cols-4 md:gap-4 rounded border-none my-4 px-4 py-4 sm:px-6 max-w-6xl bg-slate-100 text-sm text-gray-900">
       {/* カラム1 */}
@@ -29,4 +29,4 @@ const List = ({ children }: Props) => {
   );
 };
 
-export default List;
+export default ListColumn4;
