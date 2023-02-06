@@ -60,74 +60,69 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
                     <Button>借りるものをみる</Button>
                   </Link>
                 </div>
-                <div className="overflow-hidden">
-                  <ul role="list" className="">
-                    {orders.map((order, index: number) => {
-                      return (
-                        <li key={index}>
-                          <Link
-                            as={`/mypage/orders/lend/${order._id}`}
-                            href={{
-                              pathname: `/mypage/orders/lend/[id]`,
-                              query: order._id,
-                            }}
+                <div className="overflow-x-auto">
+                  {orders.map((order, index: number) => {
+                    return (
+                      <>
+                        <Link
+                          as={`/mypage/orders/lend/${order._id}`}
+                          href={{
+                            pathname: `/mypage/orders/lend/[id]`,
+                            query: order._id,
+                          }}
+                        >
+                          <div
+                            key={index}
+                            className="flex flex-1 md:grid md:grid-cols-4 md:gap-4 rounded border-none my-4 px-4 py-4 sm:px-6 max-w-6xl bg-slate-100 text-sm text-gray-900"
                           >
-                            <div className="flex flex-col md:flex-row items-center px-4 py-2 sm:px-6">
-                              <div className="flex flex-1 item-center rounded border-none p-4 bg-slate-100 max-w-6xl min-w-full h-28">
-                                <div className="flex-shrink-0">
-                                  <img
-                                    className="h-20 w-20"
-                                    src={order?.items_copy.pictures[0]}
-                                    alt=""
-                                  />
-                                </div>
-                                <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-3 md:gap-4">
-                                  <div>
-                                    <p className="truncate text-sm font-medium text-amber-600">
-                                      {order?.items_copy?.name}
-                                    </p>
-                                    <p className="mt-2 truncate text-sm text-gray-900 mr-2">
-                                      金額
-                                      {Number(
-                                        order?.payment?.total
-                                      ).toLocaleString()}
-                                      円
-                                    </p>
-                                  </div>
-                                  <div className="hidden md:block">
-                                    <div>
-                                      <div className="flex">
-                                        <p className="text-sm text-gray-900 mr-2">
-                                          受取日: {order?.period?.start}
-                                        </p>
-                                        <p className="text-sm text-gray-900">
-                                          返却日: {order?.period?.end}
-                                        </p>
-                                      </div>
-                                      <p className="mt-2 flex items-center text-sm text-gray-900">
-                                        {order?.payment?.status}
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <p className="text-base text-gray-900">
-                                    <span className="text-sm text-gray-900 font-bold border border-black border-solid rounded px-4 py-2">
-                                      {order?.status}
-                                    </span>
-                                  </p>
-                                </div>
+                            {/* カラム1 画像 */}
+                            <div className="flex-shrink-0 h-20 w-20">
+                              <img src={order?.items_copy.pictures[0]} alt="" />
+                            </div>
+
+                            {/* カラム2 物品名 */}
+                            <div>
+                              <div className="font-bold mb-2">物品名</div>
+                              <div className="mb-2">
+                                {order?.items_copy?.name}
                               </div>
                             </div>
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
+
+                            {/* カラム3 貸出期間、金額 */}
+                            <div>
+                              <div className="font-bold mb-2">貸出期間</div>
+                              <div className="mb-2">
+                                <div>
+                                  {order?.period?.start} ～ {order?.period?.end}
+                                </div>
+                              </div>
+                              <div className="font-bold mb-2">金額</div>
+                              <div className="mb-2">
+                                {Number(order?.payment?.total).toLocaleString()}
+                                円
+                              </div>
+                            </div>
+
+                            {/* カラム4 ステータス */}
+                            <div className="items-center  text-sm font-bold">
+                              <span className="border border-black border-solid rounded px-4 py-2 my-2">
+                                {order?.status}
+                              </span>
+                              <br/>
+                              <span className="border border-black border-solid rounded px-4 py-2 my-2">
+                                {order?.payment?.status}
+                              </span>
+                            </div>
+                          </div>
+                        </Link>
+                      </>
+                    );
+                  })}
                 </div>
               </ContentsLayout>
             </MypageLayout>
           </div>
         )}
-        {/* {loading && <div>ロード中</div>} */}
       </>
     </ProtectRoute>
   );

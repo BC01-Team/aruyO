@@ -53,7 +53,7 @@ const Mypage = ({}: UserProps) => {
             <MypageLayout>
               <ContentsLayout>
                 <PageTitle>ユーザー情報</PageTitle>
-                <div className="overflow-hidden">
+                <div className="overflow-x-auto">
                   <div className="flex items-center rounded border-none mt-4 mb-8 px-4 py-4 sm:px-6 max-w-6xl min-w-full bg-slate-100 text-sm text-gray-900">
                     <div className="flex-1 md:grid md:grid-cols-3 md:gap-4">
                       {/* 企業情報 */}
