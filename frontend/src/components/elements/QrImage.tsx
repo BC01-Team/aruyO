@@ -16,7 +16,7 @@ const QrImage = ({ qrText }: Props) => {
         width: 200,
         color: {
           dark: "#000000",
-          light: "#FFBF60FF",
+          light: "#FFBF60F", // TODO 色検討
         },
       }}
     />

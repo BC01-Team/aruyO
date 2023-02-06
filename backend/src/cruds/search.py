@@ -39,6 +39,7 @@ def get_search_word(key: str):
         search_key_result.append(db_collection_serializer(document))
     return search_key_result
 
+
 # キーワード検索+距離検索
 def get_serch_both(data) -> list:
     location = data["info"]["location"]["coordinates"]
@@ -48,13 +49,13 @@ def get_serch_both(data) -> list:
     # mongoDB findでドキュメント取得、$regexで部分一致したドキュメントをlistに追加
     list = collection_items.find(
         {
-            "$and":[
+            "$and": [
                 {
                     "$or": [
                         {"info.name": {"$regex": key}},
                         {"info.detail": {"$regex": key}},
                         {"info.requirements": {"$regex": key}},
-                    ]  
+                    ]
                 },
                 {
                     "location": SON([("$nearSphere", location), ("$maxDistance", 0.1)])

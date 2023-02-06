@@ -11,7 +11,9 @@ const LogoutButton = () => {
   };
 
   return (
-    <Button onClick={onSubmitButton}>ログアウト</Button>
+    <Button style="primary" onClick={onSubmitButton}>
+      ログアウト
+    </Button>
   );
 };
 

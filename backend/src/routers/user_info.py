@@ -20,8 +20,6 @@ def get_user(id: str, session_id: Optional[str] = Cookie(None)) -> dict:
     if auth.is_login(session_id):
         logger.debug("get_user認証後")
         res = users_crud.get_user(id=id)
-        if res is None:
-            raise HTTPException(status_code=404, detail="指定のアカウントが見つかりません。")
         logger.debug(res)
         return res
     raise HTTPException(status_code=400, detail="ログイン情報がありません")
@@ -38,10 +36,8 @@ def create_item(
         logger.debug("create_item認証後")
         item = jsonable_encoder(data)
         res = users_crud.create_item(item)
-        if res:
-            logger.debug(res)
-            return res
-        raise HTTPException(status_code=404, detail="物品登録ができませんでした。")
+        logger.debug(res)
+        return res
     raise HTTPException(status_code=400, detail="ログイン情報がありません")
 
 
@@ -52,8 +48,6 @@ def get_user_items(id: str, session_id: Optional[str] = Cookie(None)) -> list:
     if auth.is_login(session_id):
         logger.debug("get_user_items認証後")
         res = users_crud.get_user_items(id=id)
-        if not res:  # listが空[]の場合
-            raise HTTPException(status_code=404, detail="登録物品がありませんでした。")
         logger.debug(res)
         return res
     raise HTTPException(status_code=400, detail="ログイン情報がありません")
@@ -68,8 +62,6 @@ def get_user_item(
     if auth.is_login(session_id):
         logger.debug("get_user_item認証後")
         res = users_crud.get_user_item(item_id=item_id)
-        if res is None:
-            raise HTTPException(status_code=404, detail="指定の物品がありませんでした。")
         logger.debug(res)
         return res
     raise HTTPException(status_code=400, detail="ログイン情報がありません")

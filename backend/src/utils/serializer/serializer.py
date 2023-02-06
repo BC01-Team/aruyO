@@ -1,4 +1,3 @@
-
 # オブジェクトの_idがBSONなのでstrに変換する
 def db_collection_serializer(res) -> dict:
     if res:
