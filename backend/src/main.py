@@ -6,6 +6,7 @@ from src.routers import search
 from src.routers import reserves
 from src.routers import auth
 from src.routers import items
+from src.routers import stripe
 
 from src.db import db
 
@@ -33,6 +34,7 @@ app.include_router(search.router)
 app.include_router(reserves.router)
 app.include_router(auth.router)
 app.include_router(items.router)
+app.include_router(stripe.router)
 
 
 # 接続テスト用　削除可
