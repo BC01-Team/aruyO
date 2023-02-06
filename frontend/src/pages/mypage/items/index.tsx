@@ -30,7 +30,7 @@ const MyPageItems = ({}: ItemProps) => {
       return;
     }
     const userId = user.id;
-    const fetchDate = async () => {
+    const fetchData = async () => {
       const res = await (
         await axiosInstance.get(`/users/${userId}/items`, {
           withCredentials: true,
@@ -40,7 +40,7 @@ const MyPageItems = ({}: ItemProps) => {
       setItems(res);
       setLoading(false);
     };
-    fetchDate();
+    fetchData();
   }, []);
 
   if (!hydrated) return null;

@@ -29,7 +29,7 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
       return;
     }
     const lenderId = user.id;
-    const fetchDate = async () => {
+    const fetchData = async () => {
       const res = await (
         await axiosInstance.get(`/users/${lenderId}/lent`, {
           withCredentials: true,
@@ -38,7 +38,7 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
       setLoading(false);
       setOrders(res);
     };
-    fetchDate();
+    fetchData();
   }, []);
 
   if (!hydrated) return null;

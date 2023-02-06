@@ -35,7 +35,7 @@ const MyPageItemDetail = ({}: ItemProps) => {
       return;
     }
     const userId = user.id;
-    const fetchDate = async () => {
+    const fetchData = async () => {
       // 物品詳細取得
       const res = await (
         await axiosInstance.get(`/users/${userId}/items/${itemId}`, {
@@ -46,7 +46,7 @@ const MyPageItemDetail = ({}: ItemProps) => {
       setItem(res);
       setLoading(false);
     };
-    fetchDate();
+    fetchData();
   }, [itemId]);
 
   if (!hydrated) return null;

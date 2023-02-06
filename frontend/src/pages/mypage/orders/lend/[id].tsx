@@ -35,7 +35,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
     setHydrated(true);
     setLoading(true);
     if (orderId) {
-      const fetchDate = async () => {
+      const fetchData = async () => {
         //予約詳細取得
         const reserveInfo = (
           await axiosInstance.get(`/reserves/${orderId}`, {
@@ -54,7 +54,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
         setLoading(false);
         // setStatus(order[0].status);
       };
-      fetchDate();
+      fetchData();
     }
   }, [orderId]);
 
