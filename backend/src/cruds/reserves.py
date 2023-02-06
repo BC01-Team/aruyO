@@ -11,8 +11,7 @@ logger = setup_logger(__name__)
 collection_reservations = db.reservations
 
 # API_No.10 予約登録
-# def create_reserve(data: dict) -> Union[dict, bool]:
-def create_reserve(data: reserve_schema.ReserveCreateResponse) -> Union[dict, bool]:
+def create_reserve(data: reserve_schema.ReserveCreate) -> Union[dict, bool]:
     reserve = collection_reservations.insert_one(data)
     new_reserve = collection_reservations.find_one({"_id": reserve.inserted_id})
     if new_reserve:
