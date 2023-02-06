@@ -37,16 +37,16 @@ function Map(props) {
   const results = props.results;
   console.log(results);
   const markers = [];
-  results?.map((reult) => {
-    console.log("reult._id", reult._id);
-    console.log("reult.info.name", reult.info.name);
-    console.log("lat", reult.location[0]);
-    console.log("lng", reult.location[1]);
+  results?.map((result) => {
+    console.log("result._id", result._id);
+    console.log("result.info.name", result.info.name);
+    console.log("lat", result.location[0]);
+    console.log("lng", result.location[1]);
 
     markers.push({
-      id: reult._id,
-      name: reult.info.name,
-      position: { lat: reult.location[0], lng: reult.location[1] },
+      id: result._id,
+      name: result.info.name,
+      position: { lat: result.location[0], lng: result.location[1] },
     });
   });
   console.log("markers", markers);
