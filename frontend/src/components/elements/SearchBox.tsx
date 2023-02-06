@@ -35,7 +35,7 @@ const SearchBox = () => {
     }
 
     axiosInstance
-      .post("/search", dataSet)
+      .post("/search/", dataSet)
       .then((res) => {
         console.log(res.data);
         setResult(res.data);

@@ -6,17 +6,20 @@ from src.routers import search
 from src.routers import reserves
 from src.routers import auth
 from src.routers import items
+from src.routers import stripe
 
 from src.db import db
+import os
 
 # log設定
 from src.utils.logger.logger import setup_logger
+
 logger = setup_logger(__name__)
 
 app = FastAPI()
 
-
-origins = ["http://localhost:3000"]
+ORIGINS = os.environ.get("FRONTEND_URL")
+origins = [ORIGINS]
 
 # CORS
 app.add_middleware(
@@ -24,7 +27,7 @@ app.add_middleware(
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
 
 # ルーティング設定
@@ -33,6 +36,7 @@ app.include_router(search.router)
 app.include_router(reserves.router)
 app.include_router(auth.router)
 app.include_router(items.router)
+app.include_router(stripe.router)
 
 
 # 接続テスト用　削除可
@@ -40,6 +44,7 @@ app.include_router(items.router)
 def read_root():
     logger.debug("pass")
     return {"test": "get test ok"}
+
 
 # mongo_dbとの接続テスト用　削除可　postしたdataは下記
 # {
@@ -51,6 +56,6 @@ def read_root():
 # }
 @app.post("/")
 def create_post(body=Body(...)):
-    post = body['payload']
+    post = body["payload"]
     db.collection.insert_one(post)
-    return {'post': "ok"}
+    return {"post": "ok"}

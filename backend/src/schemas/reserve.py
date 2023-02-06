@@ -1,6 +1,7 @@
 import enum
 from pydantic import BaseModel, Field  # バリデーションチェック
 from src.utils.logger.logger import setup_logger
+from typing import Optional
 
 # BaseModelはFastAPIのスキーマモデルであることを表す
 # pydantic 名前:type宣言=値設定。Fieldの第一引数はデフォルト値, 省略（...）時は必須項目になる
@@ -11,11 +12,11 @@ from src.utils.logger.logger import setup_logger
 
 
 class Items_Copy(BaseModel):
-    # _id: str = Field(..., max_length=24)
+    _id: str = Field(..., max_length=24)
     name: str = Field(..., max_length=200)
     pictures: list[str]
     detail: str = Field(max_length=500)
-    requirements: str = Field(max_length=200)
+    requirements: Optional[str] = Field(None, max_length=200)
     take_out: str
     # take_out: bool
     price: str
@@ -69,7 +70,7 @@ class ReserveCreate(BaseModel):
     payment: Payment
     lender: Lender
     borrower: Borrower
-    status: ReserveStatus = Field(ReserveStatus.status1)
+    status: ReserveStatus = Field(ReserveStatus.status2)  # TODO: 貸主企業側での承認機能が実装できたら、status1に変更
 
 
 class Config:  # Configは Pydantic 用
@@ -100,7 +101,7 @@ class ReserveCreateResponse(ReserveCreate):
                 "payment": {"total": 7000, "method": "Stripe", "status": "未決済"},
                 "lender": {"_id": " 63d9c4525d4c2596f1501c7a", "evaluation": ""},
                 "borrower": {"_id": "63d9c4525d4c2596f1501c72", "evaluation": ""},
-                "status": "予約承認待ち",
+                "status": "予約確定",  # TODO: 貸主企業側での承認機能が実装できたら、予約承認待ちに変更
             }
         }
 
