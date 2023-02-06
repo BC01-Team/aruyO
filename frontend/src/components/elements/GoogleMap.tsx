@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GoogleMap, InfoWindow, MarkerF } from "@react-google-maps/api";
 import { useLoadScript } from "@react-google-maps/api";
+import Logger from "@/lib/logger";
 
 const initialBounds = [
   {
@@ -40,13 +41,16 @@ function Map(props) {
   results?.map((reult) => {
     console.log("reult._id", reult._id);
     console.log("reult.info.name", reult.info.name);
-    console.log("lat", reult.location[0]);
-    console.log("lng", reult.location[1]);
-
+    console.log("lat", reult.location.coordinates[0]);
+    console.log("lng", reult.location.coordinates[1]);
+    const location = reult.location.coordinates;
     markers.push({
       id: reult._id,
       name: reult.info.name,
-      position: { lat: reult.location[0], lng: reult.location[1] },
+      position: {
+        lat: location[0],
+        lng: location[1],
+      },
     });
   });
   console.log("markers", markers);
@@ -72,14 +76,13 @@ function Map(props) {
     if (map) {
       const bounds = new google.maps.LatLngBounds();
       if (markers.length > 0) {
-        markers.forEach(({ position }) => bounds.extend(position)); 
+        markers.forEach(({ position }) => bounds.extend(position));
       } else {
-        initialBounds.forEach(({ position }) => bounds.extend(position)); 
+        initialBounds.forEach(({ position }) => bounds.extend(position));
       }
       map.fitBounds(bounds);
     }
   }, [markers]);
-
 
   // mapの読み込みが完了(isLoaded = true)の場合mapを描画する
   if (isLoaded) {

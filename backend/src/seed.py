@@ -4,29 +4,14 @@ from db import db
 company = [
     {
         "info": {
-            "name": "グリー株式会社",
-            "Japan_Corporate_Number": "8010401055923",
-            "address": "〒106-0032 東京都港区六本木6-11-1 六本木ヒルズゲートタワー",
-            "hp_url": "https://corp.gree.net/jp/ja/corporate/summary/",
-            "location": [35.658756, 139.731986],
-            "phone": "0123456789",
-            "email": "info@gree.com",
-            "account": "stripe",
-        },
-        "items_id": ["63cd1b0420cfbda6799aaaaa"],
-        "borrower_history": ["63cd1b0420cfbda6799wwwww"],
-        "reservations_history": [],
-    },
-    {
-        "info": {
             "name": "株式会社メルカリ",
             "Japan_Corporate_Number": "6010701027558",
             "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
             "hp_url": "https://www.google.com/",
-            "location": [35.660205, 139.729202],
+            "location": {"type":"Point","coordinates":[-139.729202,35.660]},
             "phone": "0123456789",
             "email": "info@mercari.com",
-            "account": "stripe",
+            "account": "stripe"
         },
         "staff": [
             {
@@ -34,12 +19,12 @@ company = [
                 "name": "門後David",
                 "email": "david@mercari.com",
                 "password": "$2b$12$/13tMLgoH.Qn3rYOAbXK6.nfTwN/PXNDKp.2HsUqVkRkZJuW3m/iS",
-                "role": {"admin": "1", "item": "1", "reservation": "1"},
+                "role": {"admin": "1", "item": "1", "reservation": "1"}
             }
         ],
         "items_id": ["63cd1b0420cfbda6799aaaaa"],
         "borrower_history": ["63cd1b0420cfbda6799wwwww"],
-        "reservations_history": [],
+        "reservations_history": []
     },
     {
         "info": {
@@ -47,14 +32,14 @@ company = [
             "Japan_Corporate_Number": "9010401088996",
             "address": "〒107-0062 東京都港区南青山2-13-10",
             "hp_url": "www.cassina-ixc.jp",
-            "location": [35.6705225, 139.7036485],
+            "location":{"type":"Point","coordinates": [-139.7036485,35.6705]},
             "phone": "0123456789",
             "email": "info@cassina.com",
-            "account": "stripe",
+            "account": "stripe"
         },
         "items_id": ["63cd1b0420cfbda6799aaaaa"],
         "borrower_history": [],
-        "reservations_history": [],
+        "reservations_history": []
     },
     {
         "info": {
@@ -62,15 +47,15 @@ company = [
             "Japan_Corporate_Number": "6010401029425",
             "address": "〒150-0001 東京都渋谷区神宮前1-5-8 神宮前タワービルディング",
             "hp_url": "https://www.beams.co.jp",
-            "location": [35.6706882, 139.6891846],
+            "location": {"type":"Point","coordinates":[-139.6891846,35.6705]},
             "phone": "0123456789",
             "email": "info@beams.com",
-            "account": "stripe",
+            "account": "stripe"
         },
         "items_id": [],
         "borrower_history": [],
-        "reservations_history": [],
-    },
+        "reservations_history": []
+    }
 ]
 
 # 出品物
@@ -80,16 +65,16 @@ item = [
             "name": "ホワイトボード",
             "pictures": [
                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-front.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-back.jpg",
+                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-back.jpg"
             ],
             "detail": "使用後は書いたものを消してください",
             "requirements": "平日日中のみ",
             "take_out": "true",
-            "price": 1000,
-            "address": "〒106-6108 東京都港区六本木６丁目１０番１号",
+            "price": "1000",
+            "address": "〒106-6108 東京都港区六本木６丁目１０番１号"
         },
-        "location": [35.660205, 139.729202],
-        "company_id": "63d9c4525d4c2596f1501c7d",
+        "location": {"type":"Point","coordinates":[-139.729202,35.660205]},
+        "company_id": "63cd1b0420cfbda6799d59b1"
     },
     {
         "info": {
@@ -100,11 +85,11 @@ item = [
             "detail": "A2まで裁断可能。",
             "requirements": "平日日中のみ",
             "take_out": "true",
-            "price": 1000,
-            "address": "〒150-0001 東京都渋谷区神宮前1-5-8 神宮前タワービルディング",
+            "price": "1000",
+            "address": "〒150-0001 東京都渋谷区神宮前1-5-8 神宮前タワービルディング"
         },
-        "location": [35.6706882, 139.6891846],
-        "company_id": "63d9c4525d4c2596f1501c7d",
+        "location": {"type":"Point","coordinates":[-139.6891846,35.6705]},
+        "company_id": "63d124217a5c4bfaed6fe402"
     },
     {
         "info": {
@@ -115,23 +100,22 @@ item = [
                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/%E7%99%BA%E9%9B%BB%E6%A9%9F.jpeg",
                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/3Dprinter_front.png",
                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/3Dprinter_side.png",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/3Dprinter_specification.png",
+                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/3Dprinter_specification.png"
             ],
             "detail": "口径:200φ、電源:単相100ｖ、風量:17ｍ3/min(50Hz)、重量:9kg、羽枚数:5枚",
             "take_out": "true",
-            "price": 2000,
-            "address": "〒107-0062 東京都港区南青山2-13-10",
+            "price": "2000",
+            "address": "〒107-0062 東京都港区南青山2-13-10"
         },
-        "location": [35.6705225, 139.7036485],
-        "company_id": "63d9c4525d4c2596f1501c7d",
+        "location": {"type":"Point","coordinates":[-139.7036485,35.670520]},
+        "company_id": "63d124217a5c4bfaed6fe401"
     },
 ]
 
 # 予約
 reservation = {
     "items_copy": {
-        "_id": "63d607e9f7e435916eb7ae51",
-        "_id": "63d607e9f7e435916eb7ae51",
+        "id": "63d607e9f7e435916eb7ae51",
         "name": "ホワイトボード",
         "pictures": [
             "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-front.jpg",
@@ -145,8 +129,8 @@ reservation = {
     },
     "period": {"start": "2023/2/1", "end": "2023/2/5"},
     "payment": {"total": "5000", "method": "口座振込", "status": "決済完了"},
-    "lender": {"_id": "63d9c4525d4c2596f1501c79", "evaluation": "3"},
-    "borrower": {"_id": "63d9c4525d4c2596f1501c7d", "evaluation": "3"},
+    "lender": {"id": "63d9c4525d4c2596f1501c79", "evaluation": "3"},
+    "borrower": {"id": "63d9c4525d4c2596f1501c7d", "evaluation": "3"},
     "status": "予約確定"
 }
 
@@ -165,8 +149,8 @@ collection_statuses = db.statuses
 
 
 # ドキュメント(値)を保存
-# collection_companies.insert_many(company)
-# collection_items.insert_many(item)
+collection_companies.insert_many(company)
+collection_items.insert_many(item)
 collection_reservations.insert_many([reservation])
 collection_statuses.insert_many([status])
 
