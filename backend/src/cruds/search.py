@@ -41,8 +41,8 @@ def get_search_word(key: str):
 
 
 # キーワード検索+距離検索
-def get_serch_both(data) -> list:
-    location = data["info"]["location"]["coordinates"]
+def get_search_both(data) -> list:
+    location = data["info"]["location"]
     logger.debug(location)
     key = data["key"]
     logger.debug(key)
@@ -57,8 +57,9 @@ def get_serch_both(data) -> list:
                         {"info.requirements": {"$regex": key}},
                     ]
                 },
+                # 距離検索を併用。検索範囲は10000ｍ。
                 {
-                    "location": SON([("$nearSphere", location), ("$maxDistance", 0.1)])
+                    "location": SON([("$nearSphere", location), ("$maxDistance", 10000)])
                 }
             ]
         }
