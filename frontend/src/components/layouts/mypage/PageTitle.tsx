@@ -5,7 +5,9 @@ type Props = { children: ReactNode };
 const PageTitle = ({ children }: Props) => {
   return (
     <div className="mx-auto max-w-7xl">
-      <h1 className="text-2xl font-semibold text-gray-900">{children}</h1>
+      <div className="text-gray-900 font-bold text-2xl text-center mb-8">
+        {children}
+      </div>
     </div>
   );
 };

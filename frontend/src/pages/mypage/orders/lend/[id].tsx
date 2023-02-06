@@ -1,30 +1,38 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { axiosInstance } from "@/lib/axiosInstance";
-import { Order } from "@/types/order";
+import { classNames } from "@/lib/class-names";
+import Confirm from "@/components/layouts/mypage/orders/Confirm";
+import ProtectRoute from "@/components/layouts/ProtectRoute";
 import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
-import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { userState } from "../../../../lib/atom";
+import PageTitle from "@/components/layouts/mypage/PageTitle";
 import QrReader from "@/components/layouts/mypage/orders/QrReader";
-import Confirm from "@/components/layouts/mypage/orders/Confirm";
-import { Tab } from "@headlessui/react";
-import { classNames } from "@/lib/class-names";
 import Loading from "@/components/elements/Loading";
-import ProtectRoute from "@/components/layouts/ProtectRoute";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../../../lib/atom";
+import { Tab } from "@headlessui/react";
+import { Order } from "@/types/order";
 
-const MypageOrderDetailLender = () => {
-  const router = useRouter();
-  const [order, setOrder] = useState<any>();
-  const user = useRecoilValue(userState);
+type OrderProps = {
+  result: Order;
+};
+
+const MyPageOrderDetailLender = ({}: OrderProps) => {
+  const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
-  const orderId = router.query.id;
+  const [order, setOrder] = useState<any>();
   const [result, setResult] = useState<string>("");
-  const [status, setStatus] = useState<string>("");
+  const [status, setStatus] = useState<string>(""); //TODO 不要？
+
+  const user = useRecoilValue(userState);
+
+  const router = useRouter();
+  const orderId = router.query.id;
 
   useEffect(() => {
+    setHydrated(true);
     setLoading(true);
     if (orderId) {
       const fetchDate = async () => {
@@ -50,7 +58,8 @@ const MypageOrderDetailLender = () => {
     }
   }, [orderId]);
 
-  if (loading) return <Loading />; 
+  if (!hydrated) return null;
+  if (loading) return <Loading />;
 
   return (
     <ProtectRoute>
@@ -67,28 +76,25 @@ const MypageOrderDetailLender = () => {
           <>
             {!loading && order && user && order[0].lender._id === user.id && (
               <>
-                <Sidebar />
-                <MypageLayout>
-                  <ContentsLayout>
-                    <div className="bg-white">
-                      <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-                        <PageTitle>取引詳細</PageTitle>
-                      </div>
+                <div className="flex">
+                  <Sidebar />
+                  <MypageLayout>
+                    <ContentsLayout>
+                      <PageTitle>貸出詳細</PageTitle>
                       <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
                         {/* 画像ギャラリー */}
-
                         <Tab.Group as="div" className="flex flex-col-reverse">
-                          <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
-                            <Tab.List className="grid grid-cols-4 gap-6">
+                          <div className="mx-auto mt-6 hidden w-full max-w-sm sm:block lg:max-w-none">
+                            <Tab.List className="grid grid-cols-5 gap-6">
                               {order[0].items_copy?.pictures.map(
                                 (picture, index) => (
                                   <Tab
                                     key={index}
-                                    className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
+                                    className="relative flex h-24 cursor-pointer items-center justify-center bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
                                   >
                                     {({ selected }) => (
                                       <>
-                                        <span className="absolute inset-0 overflow-hidden rounded-md">
+                                        <span className="absolute inset-0 overflow-hidden">
                                           <img
                                             src={picture}
                                             alt={
@@ -102,7 +108,7 @@ const MypageOrderDetailLender = () => {
                                             selected
                                               ? "ring-indigo-100"
                                               : "ring-transparent",
-                                            "pointer-events-none absolute inset-0 rounded-md ring-2 ring-offset-2"
+                                            "pointer-events-none absolute inset-0 ring-2 ring-offset-2"
                                           )}
                                           aria-hidden="true"
                                         />
@@ -120,92 +126,96 @@ const MypageOrderDetailLender = () => {
                                 <Tab.Panel key={index}>
                                   <img
                                     src={picture}
-                                    className="h-full w-full object-cover object-center sm:rounded-lg"
+                                    className="h-full w-full object-cover object-center"
                                   />
                                 </Tab.Panel>
                               )
                             )}
                           </Tab.Panels>
                         </Tab.Group>
-                        <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+
+                        <div className="">
+                          {/* 物品詳細 */}
                           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-                            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+                            <div className="text-sm font-bold text-gray-900 mb-2">
+                              予約番号
+                            </div>
+                            <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                              <div>{orderId}</div>
+                            </div>
+
+                            <div className="text-sm font-bold text-gray-900 my-2">
+                              物品名
+                            </div>
+                            <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
                               {order[0].items_copy?.name}
-                            </h1>
-
-                            <section
-                              aria-labelledby="details-heading"
-                              className="mt-12"
-                            >
-                              {/* 取引No. */}
-                              <h2 id="details-heading" className="text-xl my-2">
-                                取引No.
-                              </h2>
-                              <div className="border-t py-2">
-                                <div className="mb-4">
-                                  <h3>{orderId}</h3>
-                                </div>
-                              </div>
-
-                              <h2 id="details-heading" className="text-xl my-2">
-                                貸出企業
-                              </h2>
-                              <div className="border-t py-2">
-                                <div className="mb-4">
-                                  <h3>{order[1].info?.name}</h3>
-                                  <h3>連絡先　{order[1].info?.phone}</h3>
-                                  <p></p>
-                                </div>
-                              </div>
-
-                              <h2 id="details-heading" className="text-xl my-2">
-                                貸出期間
-                              </h2>
-                              <div className="border-t py-2">
-                                <div className="mb-4">
-                                  <h3>貸出日　{order[0].period?.start}</h3>
-                                  <h3>返却日　{order[0].period?.end}</h3>
-                                </div>
-                              </div>
-                              {/* 
-                              <h2 id="details-heading" className="text-xl my-2">
-                                決済
-                              </h2>
-                              <div className="border-t py-2">
-                                <div className="mb-4">
-                                  <h3>金額　{Number(order[0].payment?.total).toLocaleString()}円</h3>
-                                  <h3>ステータス　{order[0].payment?.status}</h3>
-                                </div>
-                              </div> */}
-                            </section>
-                            <div>
-                              <h4 className="text-3xl">
-                                <span className="border-black border-solid border-2 ">
-                                  {order[0].status}
-                                </span>
-                              </h4>
                             </div>
-                            <div className="mt-6">
-                              {order[0].status !== "予約確定" &&
-                              order[0].status !== "貸出中" ? (
-                                <></>
-                              ) : (
-                                <QrReader
-                                  result={result}
-                                  setResult={setResult}
-                                  status={order[0].status}
-                                />
-                              )}
+
+                            <div className="text-sm font-bold text-gray-900 my-2">
+                              貸出企業
                             </div>
+                            <div className="text-sm font-normal text-gray-900 mt-2 mb-1">
+                              {order[1].info?.name}
+                            </div>
+                            <div className="text-sm font-normal text-gray-900 mb-7">
+                              連絡先 {order[1].info?.phone}
+                            </div>
+
+                            <div className="text-sm font-bold text-gray-900 my-2">
+                              貸出期間
+                            </div>
+                            <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                              <div>
+                                {order[0].period?.start} ～{" "}
+                                {order[0].period?.end}
+                              </div>
+                            </div>
+
+                            <div className="text-sm font-bold text-gray-900 my-2">
+                              金額
+                            </div>
+                            <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                              <div>
+                                {Number(
+                                  order[0].payment?.total
+                                ).toLocaleString()}
+                                円
+                              </div>
+                            </div>
+
+                            <div className="text-sm font-bold text-gray-900 my-2">
+                              ステータス
+                            </div>
+                            <div className="my-6">
+                              <span className="text-sm text-gray-900 font-bold border border-black border-solid rounded px-4 py-2 mr-4">
+                                {order[0].payment?.status}
+                              </span>
+                              <span className="text-sm text-gray-900 font-bold border border-black border-solid rounded px-4 py-2">
+                                {order[0].status}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* チェックイン/チェックアウトのボタンでカメラ起動 */}
+                          <div className="mt-12">
+                            {order[0].status !== "予約確定" &&
+                            order[0].status !== "貸出中" ? (
+                              <></>
+                            ) : (
+                              <QrReader
+                                result={result}
+                                setResult={setResult}
+                                status={order[0].status}
+                              />
+                            )}
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </ContentsLayout>
-                </MypageLayout>
+                    </ContentsLayout>
+                  </MypageLayout>
+                </div>
               </>
             )}
-            {/* {loading && <div>ロード中</div>} */}
           </>
         )}
       </>
@@ -213,6 +223,4 @@ const MypageOrderDetailLender = () => {
   );
 };
 
-export default MypageOrderDetailLender;
-
-
+export default MyPageOrderDetailLender;

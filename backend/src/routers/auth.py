@@ -1,8 +1,7 @@
-# import redis
-import src.utils.redis.redis as r
 import uuid
 from fastapi import APIRouter, HTTPException, Response, status
 from src.utils.logger.logger import setup_logger
+import src.utils.redis.redis as r  # TODO 不要？
 from src.utils.redis.redis import r
 
 import src.cruds.auth as auth_crud

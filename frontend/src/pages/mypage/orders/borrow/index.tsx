@@ -12,37 +12,41 @@ import { userState } from "../../../../lib/atom";
 import Loading from "@/components/elements/Loading";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
 
-
 type OrdersProps = {
-  orders: Order[]
+  orders: Order[];
 };
 
-const MypageOrderBorrower = () => {
-  const [orders, setOrders] = useState(null);
+const MyPageOrdersBorrower = ({}: OrdersProps) => {
+  const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [orders, setOrders] = useState(null);
   const user = useRecoilValue(userState);
 
   useEffect(() => {
+    setHydrated(true);
     setLoading(true);
-    if (user) {
-      const borrowerId = user.id;
-      const fetchDate = async () => {
-        const res = await (
-          await axiosInstance.get(`/users/${borrowerId}/borrow`, {
-            withCredentials: true,
-          })
-        ).data;
-
-        setLoading(false);
-        setOrders(res);
-      };
-      fetchDate();
-      console.log(orders);
+    if (!user) {
+      return;
     }
+    const borrowerId = user.id;
+    const fetchDate = async () => {
+      const res = await (
+        await axiosInstance.get(`/users/${borrowerId}/borrow`, {
+          withCredentials: true,
+        })
+      ).data;
+
+      setLoading(false);
+      setOrders(res);
+      console.log(orders);
+    };
+    fetchDate();
   }, []);
 
-  if (loading) return <Loading />; 
+  if (!hydrated) return null;
+  if (loading) return <Loading />;
   console.log(orders);
+
   return (
     <ProtectRoute>
       <>
@@ -50,9 +54,7 @@ const MypageOrderBorrower = () => {
           <div className="flex">
             <Sidebar />
             <MypageLayout>
-              <div className="font-bold text-2xl text-center mb-6">
-                借りるもの
-              </div>
+              <PageTitle>借りるもの {orders.length} 件</PageTitle>
               <ContentsLayout>
                 <div className="my-8">
                   <Link href="/mypage/orders/lend">
@@ -92,7 +94,7 @@ const MypageOrderBorrower = () => {
                                       ).toLocaleString()}
                                       円
                                     </p>
-                                    {/* <p className="mt-2 flex items-center text-sm text-gray-500">
+                                    {/* <p className="mt-2 flex items-center text-sm text-gray-900">
                                     <span className="truncate">
                                       相手先: {order?.lender?._id}
                                     </span>
@@ -108,13 +110,13 @@ const MypageOrderBorrower = () => {
                                           返却日: {order?.period?.end}
                                         </p>
                                       </div>
-                                      <p className="mt-2 flex items-center text-sm text-gray-900 ">
+                                      <p className="mt-2 flex items-center text-sm text-gray-900">
                                         {order?.payment?.status}
                                       </p>
                                     </div>
                                   </div>
                                   <p className="text-base text-gray-900">
-                                    <span className="border-black border-solid border-2 ">
+                                    <span className="text-sm text-gray-900 font-bold border border-black border-solid rounded px-4 py-2">
                                       {order?.status}
                                     </span>
                                   </p>
@@ -137,5 +139,4 @@ const MypageOrderBorrower = () => {
   );
 };
 
-
-export default MypageOrderBorrower;
+export default MyPageOrdersBorrower;

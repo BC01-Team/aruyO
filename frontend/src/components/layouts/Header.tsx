@@ -31,14 +31,14 @@ const Header = () => {
               {/* ログイン時と未ログイン時でボタンの表示を切り替え */}
               {user ? (
                 <div className="flex justify-between">
-                  <Link href="/" className="mx-2 font-sans text-sm">
+                  <Link href="/" className="mx-2 text-sm font-bold text-gray-900">
                     借りる
                   </Link>
                   {/* ↓新規物品登録画面が作成できたらリンク先要変更 */}
-                  <Link href="/" className="mx-2 font-sans text-sm">
+                  <Link href="/" className="mx-2 text-sm font-bold text-gray-900">
                     貸す
                   </Link>
-                  <Link href="/mypage" className="mx-2 font-sans text-sm">
+                  <Link href="/mypage" className="mx-2 text-sm font-bold text-gray-900">
                     マイページ
                   </Link>
                 </div>

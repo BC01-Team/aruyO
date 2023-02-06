@@ -36,8 +36,6 @@ def create_reserve(data: dict, session_id: Optional[str] = Cookie(None)):
 def get_reserve(id: str, session_id: Optional[str] = Cookie(None)):
     if auth.is_login(session_id):
         reserve = reserve_crud.get_reserve(id=id)
-        if reserve is None:
-            raise HTTPException(status_code=404, detail="予約がありません")
         logger.debug("予約詳細確認")
         return reserve
     raise HTTPException(status_code=400, detail="ログイン情報がありません")
@@ -46,24 +44,22 @@ def get_reserve(id: str, session_id: Optional[str] = Cookie(None)):
 # API_No.12 予約情報変更
 @router.put("/{id}")
 def update_reserve(
-    id: str, data: dict
+    id: str, data: dict, session_id: Optional[str] = Cookie(None)
 ):  # dataはrequestbodyにreserveコレクションから_idを抜いたものをいれた。余計な部分が多いのでステータスだけにしたい。
     if auth.is_login(session_id):
         reserve = jsonable_encoder(data)
         logger.debug(reserve)
         res = reserve_crud.update_reserve(id, reserve)
-        if res:
-            return res
-        raise HTTPException(status_code=404, detail="予約がありません")
+        return res
     raise HTTPException(status_code=400, detail="ログイン情報がありません")
 
 
-# API_No. 予約ステータス変更　QR
+# API_No.15 予約ステータス変更　QR
 @router.put("/status/{id}")
-def update_reserve(id: str, data: dict):
+def update_reserve_status(id: str, data: dict):
     reserve = jsonable_encoder(data)
     logger.debug(reserve)
-    res = reserve_crud.update_reserve(id, reserve)
+    res = reserve_crud.update_reserve_status(id, reserve)
     if res:
         return res
     raise HTTPException(status_code=404, detail="予約がありません")
