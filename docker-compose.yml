@@ -22,17 +22,13 @@ services:
       - ./backend:/app
     environment:
       TZ: "Asia/Tokyo"
-      MONGO_DATABASE_NAME: ${MONGO_DATABASE_NAME}
-      MONGO_DATABASE_USER: ${MONGO_DATABASE_USER}
-      MONGO_DATABASE_PASSWORD: ${MONGO_DATABASE_PASSWORD}
-      MONGO_DATABASE_CONTAINER_NAME: ${MONGO_DATABASE_CONTAINER_NAME}
-      MONGO_DATABASE_PORT: $MONGO_DATABASE_PORT
+      MONGO_DATABASE_URL: ${MONGO_DATABASE_URL}
       REDIS_URL: ${REDIS_URL}
-
+      FRONTEND_URL: ${FRONTEND_URL}
     ports:
       - $BACKEND_PORT:8888
     depends_on:
-      - mongo
+      - mongo 
 
   mongo:
     container_name: mongo_db
@@ -46,7 +42,6 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
     ports:
       - $MONGO_PORT:27017
-      # - ./configdb:/data/configdb 必要？とりあえず未作成
 
   mongo-express:
     image: mongo-express
