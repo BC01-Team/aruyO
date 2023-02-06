@@ -59,7 +59,7 @@ const MyPageItems = ({}: ItemProps) => {
                 <div className="overflow-hidden">
                   <ul role="list" className="">
                     {items &&
-                      items.map((item, index) => {
+                      items.map((item, index: number) => {
                         return (
                           <li key={index}>
                             <Link
