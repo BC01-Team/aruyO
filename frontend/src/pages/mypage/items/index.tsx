@@ -75,7 +75,7 @@ const MyPageItems = ({}: ItemProps) => {
                                     <img
                                       className="h-20 w-20"
                                       src={item.info?.pictures[0]}
-                                      alt=""
+                                      alt={item.info?.name}
                                     />
                                   </div>
                                   <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">

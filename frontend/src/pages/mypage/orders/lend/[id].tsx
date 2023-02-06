@@ -97,9 +97,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
                                         <span className="absolute inset-0 overflow-hidden">
                                           <img
                                             src={picture}
-                                            alt={
-                                              order[0].items_copy?.info?.name
-                                            }
+                                            alt={order[0].items_copy?.info?.name}
                                             className="h-full w-full object-cover object-center"
                                           />
                                         </span>

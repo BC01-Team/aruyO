@@ -84,7 +84,7 @@ const MyPageItemDetail = ({}: ItemProps) => {
                                             <img
                                               className="h-20 w-20"
                                               src={picture}
-                                              alt=""
+                                              alt={item.info?.name}
                                             />
                                           </div>
                                         </div>
