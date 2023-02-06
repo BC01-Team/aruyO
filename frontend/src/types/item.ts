@@ -10,5 +10,10 @@ export type Item = {
     address: string;
   };
   location?: Array<number>;
-  company_id?: string;
+  // company_id?: string;
+  lender?: {
+    company_id: string;
+    company_name: string;
+    stripe_connected_id: string;
+  };
 };

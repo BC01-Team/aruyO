@@ -15,12 +15,11 @@ router = APIRouter(
 
 
 # API_No.10 予約登録
-# @router.post("/", response_model=reserve_schema.ReserveCreateResponse)
-# def create_reserve(
-#     data: reserve_schema.ReserveCreate, session_id: Optional[str] = Cookie(None)
-# ):
 @router.post("/")
-def create_reserve(data: dict, session_id: Optional[str] = Cookie(None)):
+# @router.post("/", response_model=reserve_schema.ReserveCreateResponse)
+def create_reserve(
+    data: reserve_schema.ReserveCreate, session_id: Optional[str] = Cookie(None)
+):
     logger.debug("auth前")
     if auth.is_login(session_id):
         reserve = jsonable_encoder(data)
@@ -59,7 +58,7 @@ def update_reserve(
 def update_reserve_status(id: str, data: dict):
     reserve = jsonable_encoder(data)
     logger.debug(reserve)
-    res = reserve_crud.update_reserve_status(id, reserve)
+    res = reserve_crud.update_reserve(id, reserve)
     if res:
         return res
     raise HTTPException(status_code=404, detail="予約がありません")
