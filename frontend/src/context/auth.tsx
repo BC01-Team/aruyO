@@ -55,7 +55,7 @@ export const AuthProvider = (props: AuthProps) => {
 })
       .then((res) => {
         setUser(res.data.user);
-        router.push(`/mypage/`);
+        router.back();
       })
       .catch((e) => {
         console.log(e);
