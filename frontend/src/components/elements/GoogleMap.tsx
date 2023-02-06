@@ -36,20 +36,20 @@ function Map(props) {
 
   // 検索結果がある場合、検索結果から必要項目を抜き出してmakersに配列として入れる
   const results = props.results;
-  console.log(results);
+  // console.log(results);
   const markers = [];
   results?.map((reult) => {
-    console.log("reult._id", reult._id);
-    console.log("reult.info.name", reult.info.name);
-    console.log("lat", reult.location.coordinates[0]);
-    console.log("lng", reult.location.coordinates[1]);
+    // console.log("reult._id", reult._id);
+    // console.log("reult.info.name", reult.info.name);
+    // console.log("lat", reult.location.coordinates[0]);
+    // console.log("lng", reult.location.coordinates[1]);
     const location = reult.location.coordinates;
     markers.push({
       id: reult._id,
       name: reult.info.name,
       position: {
-        lat: location[0],
-        lng: location[1],
+        lat: location[1],
+        lng: location[0],
       },
     });
   });
