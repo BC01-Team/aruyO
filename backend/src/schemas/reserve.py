@@ -44,13 +44,13 @@ class Payment(BaseModel):
 
 
 class Lender(BaseModel):
-    _id: str = Field(..., max_length=24)
+    id: str = Field(..., max_length=24)
     evaluation: str
     # evaluation: int = Field(0, ge=0, le=5)
 
 
 class Borrower(BaseModel):
-    _id: str = Field(..., max_length=24)
+    id: str = Field(..., max_length=24)
     evaluation: str
     # evaluation: int = Field(0, ge=0, le=5)
 

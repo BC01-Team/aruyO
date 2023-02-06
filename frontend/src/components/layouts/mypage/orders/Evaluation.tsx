@@ -15,7 +15,7 @@ const EvaluationButton = ({ type }: any) => {
       const borrowerId = (id as string).split("&")[1];
       const data = {
         borrower: {
-          _id: borrowerId,
+          id: borrowerId,
           evaluation: value,
         },
       };
@@ -27,7 +27,7 @@ const EvaluationButton = ({ type }: any) => {
             const lenderId = (id as string).split("&")[1];
             const data = {
               lender: {
-                _id: lenderId,
+                id: lenderId,
                 evaluation: value,
               },
             };

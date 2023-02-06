@@ -96,7 +96,7 @@ const MyPageOrdersBorrower = ({}: OrdersProps) => {
                                     </p>
                                     {/* <p className="mt-2 flex items-center text-sm text-gray-900">
                                     <span className="truncate">
-                                      相手先: {order?.lender?._id}
+                                      相手先: {order?.lender?.id}
                                     </span>
                                   </p> */}
                                   </div>

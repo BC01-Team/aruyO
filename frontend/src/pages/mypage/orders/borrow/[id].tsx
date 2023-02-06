@@ -44,7 +44,7 @@ const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
         ).data;
 
         //相手先企業情報取得
-        const lenderId = reserveInfo.lender._id;
+        const lenderId = reserveInfo.lender.id;
         const lenderInfo = await (
           await axiosInstance.get(`/users/${lenderId}`, {
             withCredentials: true,
@@ -66,7 +66,7 @@ const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
   return (
     <ProtectRoute>
       <>
-        {!loading && order && user && order[0].borrower._id === user.id && (
+        {!loading && order && user && order[0].borrower.id === user.id && (
           <div className="flex">
             <Sidebar />
             <MypageLayout>
@@ -209,7 +209,7 @@ const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
                                 pathname:
                                   "/mypage/orders/borrow/evaluation/[id]",
                                 query: {
-                                  id: `${orderId}&${order[0]?.lender._id}`,
+                                  id: `${orderId}&${order[0]?.lender.id}`,
                                 },
                               }}
                             >

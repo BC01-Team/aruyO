@@ -55,7 +55,7 @@ def get_user_item(item_id: str):
 def get_borrow_list(id: str) -> list:
     borrow_list = []
     logger.debug(id)
-    for borrow in collection_reservations.find({"borrower._id": id}, limit=20):
+    for borrow in collection_reservations.find({"borrower.id": id}, limit=20):
         logger.debug(borrow)
         borrow_list.append(db_collection_serializer(borrow))
     logger.debug(borrow_list)
@@ -65,6 +65,6 @@ def get_borrow_list(id: str) -> list:
 # API_No.8-2 予約一覧取得(貸す予約)
 def get_lent_list(id: str) -> list:
     lent_list = []
-    for lent in collection_reservations.find({"lender._id": id}, limit=20):
+    for lent in collection_reservations.find({"lender.id": id}, limit=20):
         lent_list.append(db_collection_serializer(lent))
     return lent_list

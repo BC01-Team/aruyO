@@ -13,6 +13,7 @@ pymongo = "^4.3.3"
 redis = "^4.4.2"
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 uuid = "^1.30"
+deepdiff = "^6.2.3"
 stripe = "^5.0.0"
 python-dotenv = "^0.21.1"
 

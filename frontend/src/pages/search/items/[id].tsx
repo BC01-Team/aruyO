@@ -55,25 +55,25 @@ const ItemDetail = () => {
     const total = getTotalAmount(basePrice, days);
     const paymentMethod = "Stripe";
     const paymentStatus = "未決済";
-    const lenderId = item?.company_id;
+    const lenderId = item?.lender?.company_id;
     const borrowerId = user.id;
     const orderStatus = "予約確定";
-    const connectedId = "acct_1MWZMz2eYfpnkUc7"; // TODO: DBにフィールドを作成、ダッシュボードで発行したIDをテストデータに追加
+    const connectedId = item?.lender?.stripe_connected_id;
 
     const orderData = {
       items_copy: itemsCopy,
       period: { start: startDateStr, end: endDateStr },
       payment: { total: total, method: paymentMethod, status: paymentStatus },
-      lender: { _id: lenderId, evaluation: "" },
-      borrower: { _id: borrowerId, evaluation: "" },
+      lender: { id: lenderId, evaluation: "" },
+      borrower: { id: borrowerId, evaluation: "" },
       status: orderStatus
     };
 
     await axiosInstance
-      .post("/reserves", orderData, { withCredentials: true })
+      .post("/reserves/", orderData, { withCredentials: true })
       .then((res) => {
         console.log(res);
-        
+
         const stripeCheckoutData = {
           account: connectedId,
           item_name: itemsCopy?.name,
@@ -190,7 +190,11 @@ const ItemDetail = () => {
               <div className="border-t py-2">
                 <div className="mb-4">
                   <h3>企業名</h3>
-                  <p>{item?.company_id}</p>
+                  <p>{item?.lender?.company_name}</p>
+                </div>
+                <div className="mb-4">
+                  <h3>貸出場所</h3>
+                  <p>{item?.info?.address}</p>
                 </div>
                 {/* <div className="mb-4">
                   <h3>条件</h3>

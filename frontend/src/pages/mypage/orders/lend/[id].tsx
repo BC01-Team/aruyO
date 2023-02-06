@@ -43,7 +43,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
           })
         ).data;
         //相手先企業情報取得
-        const borrowerId = reserveInfo.borrower._id;
+        const borrowerId = reserveInfo.borrower.id;
         const borrowerInfo = (
           await axiosInstance.get(`/users/${borrowerId}`, {
             withCredentials: true,
@@ -70,11 +70,11 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
             status={order[0].status}
             setStatus={setStatus}
             orderId={orderId}
-            borrowerId={order[0].borrower._id}
+            borrowerId={order[0].borrower.id}
           />
         ) : (
           <>
-            {!loading && order && user && order[0].lender._id === user.id && (
+            {!loading && order && user && order[0].lender.id === user.id && (
               <>
                 <div className="flex">
                   <Sidebar />
