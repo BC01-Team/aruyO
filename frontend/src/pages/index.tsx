@@ -30,7 +30,6 @@ export default function Home() {
   if (loading) return <Loading />;
 
   return (
-    <ProtectRoute>
       <>
         {!loading && items && (
           <>
@@ -101,6 +100,5 @@ export default function Home() {
           </>
         )}
       </>
-    </ProtectRoute>
   );
 }
