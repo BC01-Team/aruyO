@@ -1,6 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
 import { useRouter } from "next/router";
-import Button from "./Button";
 import { axiosInstance } from "@/lib/axiosInstance";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { userState, searchState } from "@/lib/atom";

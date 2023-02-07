@@ -45,7 +45,7 @@ company = [
             "phone": "0474241011",
             "email": "info@toyo.com",
             "account": {
-                "stripe_connected_id":"",
+                "stripe_connected_id":"acct_1MWZMz2eYfpnkUc7",
                 "bank_account":""
             }
         },
@@ -66,7 +66,7 @@ company = [
             "phone": "0474496528",
             "email": "info@funa.ac.jp",
             "account": {
-                "stripe_connected_id":"",
+                "stripe_connected_id":"acct_1MWZMz2eYfpnkUc7",
                 "bank_account":""
             }
         },
@@ -87,7 +87,7 @@ company = [
             "phone": "0474863951",
             "email": "info@funabashi.or.jp",
             "account": {
-                "stripe_connected_id":"",
+                "stripe_connected_id":"acct_1MWZMz2eYfpnkUc7",
                 "bank_account":""
             }
         },
@@ -108,7 +108,7 @@ company = [
             "phone": "0473760333",
             "email": "info@yakudatsu.com",
             "account": {
-                "stripe_connected_id":"",
+                "stripe_connected_id":"acct_1MWZMz2eYfpnkUc7",
                 "bank_account":""
             }
         },
@@ -129,7 +129,7 @@ company = [
             "phone": "0474386111",
             "email": "info@kubo.com",
             "account": {
-                "stripe_connected_id":"",
+                "stripe_connected_id":"acct_1MWZMz2eYfpnkUc7",
                 "bank_account":""
             }
         },
@@ -150,7 +150,7 @@ company = [
             "phone": "0479394856",
             "email": "info@ikeda.com",
             "account": {
-                "stripe_connected_id":"",
+                "stripe_connected_id":"acct_1MWZMz2eYfpnkUc7",
                 "bank_account":""
             }
         },
@@ -171,7 +171,7 @@ company = [
             "phone": "0474861595",
             "email": "info@n.yushi.com",
             "account": {
-                "stripe_connected_id":"",
+                "stripe_connected_id":"acct_1MWZMz2eYfpnkUc7",
                 "bank_account":""
             }
         },
@@ -192,7 +192,7 @@ company = [
             "phone": "0479186978",
             "email": "info@robot.com",
             "account": {
-                "stripe_connected_id":"",
+                "stripe_connected_id":"acct_1MWZMz2eYfpnkUc7",
                 "bank_account":""
             }
         },
@@ -213,7 +213,7 @@ company = [
             "phone": "0474237965",
             "email": "funabashi.shoutenkai@gmail.com",
             "account": {
-                "stripe_connected_id":"",
+                "stripe_connected_id":"acct_1MWZMz2eYfpnkUc7",
                 "bank_account":""
             }
         },
@@ -234,7 +234,7 @@ company = [
             "phone": "0356985485",
             "email": "info@kerry.com",
             "account": {
-                "stripe_connected_id":"",
+                "stripe_connected_id":"acct_1MWZMz2eYfpnkUc7",
                 "bank_account":""
             }
         },
@@ -255,7 +255,7 @@ company = [
             "phone": "0303255485",
             "email": "info@mercard.com",
             "account": {
-                "stripe_connected_id":"",
+                "stripe_connected_id":"acct_1MWZMz2eYfpnkUc7",
                 "bank_account":""
             }
         },
@@ -276,7 +276,7 @@ company = [
             "phone": "0356980035",
             "email": "info@kassy.com",
             "account": {
-                "stripe_connected_id":"",
+                "stripe_connected_id":"acct_1MWZMz2eYfpnkUc7",
                 "bank_account":""
             }
         },
@@ -297,7 +297,7 @@ company = [
             "phone": "0354900359",
             "email": "info@beans.com",
             "account": {
-                "stripe_connected_id":"",
+                "stripe_connected_id":"acct_1MWZMz2eYfpnkUc7",
                 "bank_account":""
             }
         },
@@ -345,7 +345,7 @@ item = [
         "lender": {
         "company_id": "",
         "company_name": "船橋市役所",
-        "stripe_connected_id": ""
+        "stripe_connected_id": "acct_1MWZMz2eYfpnkUc7"
         }
     },
     {
@@ -365,7 +365,7 @@ item = [
         "lender": {
         "company_id": "",
         "company_name": "ニッポン油脂株式会社 船橋工場",
-        "stripe_connected_id": ""
+        "stripe_connected_id": "acct_1MWZMz2eYfpnkUc7"
         }
     },
     {
@@ -386,7 +386,7 @@ item = [
         "lender": {
         "company_id": "",
         "company_name": "株式会社応用ロボット",
-        "stripe_connected_id": ""
+        "stripe_connected_id": "acct_1MWZMz2eYfpnkUc7"
         }
     },
     {
@@ -407,7 +407,7 @@ item = [
         "lender": {
         "company_id": "",
         "company_name": "IKEDA Tokyo-Bay",
-        "stripe_connected_id": ""
+        "stripe_connected_id": "acct_1MWZMz2eYfpnkUc7"
         }
     },
     {
@@ -427,7 +427,7 @@ item = [
         "lender": {
         "company_id": "",
         "company_name": "学校法人船橋大学 理工学部",
-        "stripe_connected_id": ""
+        "stripe_connected_id": "acct_1MWZMz2eYfpnkUc7"
         }
     },
     {
@@ -450,7 +450,7 @@ item = [
         "lender": {
         "company_id": "",
         "company_name": "船橋駅前商店会",
-        "stripe_connected_id": ""
+        "stripe_connected_id": "acct_1MWZMz2eYfpnkUc7"
         }
     },
     {
@@ -471,7 +471,7 @@ item = [
         "lender": {
         "company_id": "",
         "company_name": "船橋駅前商店会",
-        "stripe_connected_id": ""
+        "stripe_connected_id": "acct_1MWZMz2eYfpnkUc7"
         }
     },
     {
@@ -491,7 +491,7 @@ item = [
         "lender": {
         "company_id": "",
         "company_name": "合同会社役立",
-        "stripe_connected_id": ""
+        "stripe_connected_id": "acct_1MWZMz2eYfpnkUc7"
         }
     },
     {
@@ -511,7 +511,7 @@ item = [
         "lender": {
         "company_id": "",
         "company_name": "株式会社クボ 京葉工場",
-        "stripe_connected_id": ""
+        "stripe_connected_id": "acct_1MWZMz2eYfpnkUc7"
         }
     },
     {
@@ -532,7 +532,7 @@ item = [
         "lender": {
         "company_id": "",
         "company_name": "トーヨー自動車千葉株式会社",
-        "stripe_connected_id": ""
+        "stripe_connected_id": "acct_1MWZMz2eYfpnkUc7"
         }
     },
     {
@@ -553,7 +553,7 @@ item = [
         "lender": {
         "company_id": "",
         "company_name": "株式会社カッシーナ",
-        "stripe_connected_id": ""
+        "stripe_connected_id": "acct_1MWZMz2eYfpnkUc7"
         }
     },
     {
@@ -573,7 +573,7 @@ item = [
         "lender": {
         "company_id": "",
         "company_name": "ケリー株式会社",
-        "stripe_connected_id": ""
+        "stripe_connected_id": "acct_1MWZMz2eYfpnkUc7"
         }
     },
 ]
@@ -615,21 +615,21 @@ collection_statuses = db.statuses
 
 
 # ドキュメント(値)を保存
-# collection_companies.insert_many(company)
+collection_companies.insert_many(company)
 collection_items.insert_many(item)
-# collection_reservations.insert_many([reservation])
-# collection_statuses.insert_many([status])
+collection_reservations.insert_many([reservation])
+collection_statuses.insert_many([status])
 
 
 # ドキュメントをconsoleに表示
-# for data in collection_companies.find():
-#     print(data)
+for data in collection_companies.find():
+    print(data)
 
-# for data in collection_items.find():
-#     print(data)
+for data in collection_items.find():
+    print(data)
 
-# for data in collection_reservations.find():
-#     print(data)
+for data in collection_reservations.find():
+    print(data)
 
-# for data in collection_statuses.find():
-#     print(data)
+for data in collection_statuses.find():
+    print(data)

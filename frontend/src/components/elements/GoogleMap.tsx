@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { GoogleMap, InfoWindowF, MarkerF } from "@react-google-maps/api";
 import { useLoadScript } from "@react-google-maps/api";
-import Logger from "@/lib/logger";
 
+
+// 地図描画範囲の初期値を設定。今後、ログイン状態ではユーザー位置情報を中心とした描画範囲に設定したい。
 const initialBounds = [
   {
     id: 1,
@@ -47,6 +48,7 @@ function Map(props) {
     markers.push({
       id: result._id,
       name: result.info.name,
+      lender: result.lender.company_name,
       position: {
         lat: location[1],
         lng: location[0],
@@ -92,7 +94,7 @@ function Map(props) {
         onClick={() => setActiveMarker()} //
         mapContainerStyle={{ width: "100%", height: "100%" }}
       >
-        {markers.map(({ id, name, position }) => (
+        {markers.map(({ id, name, lender, position }) => (
           <MarkerF
             key={id}
             position={position}
@@ -100,7 +102,10 @@ function Map(props) {
           >
             {activeMarker === id ? (
               <InfoWindowF onCloseClick={() => setActiveMarker(null)}>
-                <div>{name}</div>
+                <>
+                  <p>{name}</p>
+                  <p>{lender}</p>
+                </>
               </InfoWindowF>
             ) : (
               <></>

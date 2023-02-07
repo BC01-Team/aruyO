@@ -75,7 +75,8 @@ const Mypage = ({}: UserProps) => {
                           </a>
                         </div>
                         <div className="font-bold mb-2">支払方法</div>
-                        <div className="">{userInfo.info?.account}</div>
+                        <div className="">クレジットカード</div>
+                        {/* <div className="">{userInfo.info?.account}</div> */}
                       </div>
                     </div>
                   </div>
