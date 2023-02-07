@@ -30,7 +30,7 @@ const MyPageItems = ({}: ItemProps) => {
       return;
     }
     const userId = user.id;
-    const fetchDate = async () => {
+    const fetchData = async () => {
       const res = await (
         await axiosInstance.get(`/users/${userId}/items`, {
           withCredentials: true,
@@ -40,7 +40,7 @@ const MyPageItems = ({}: ItemProps) => {
       setItems(res);
       setLoading(false);
     };
-    fetchDate();
+    fetchData();
   }, []);
 
   if (!hydrated) return null;
@@ -59,7 +59,7 @@ const MyPageItems = ({}: ItemProps) => {
                 <div className="overflow-hidden">
                   <ul role="list" className="">
                     {items &&
-                      items.map((item, index) => {
+                      items.map((item, index: number) => {
                         return (
                           <li key={index}>
                             <Link
@@ -75,7 +75,7 @@ const MyPageItems = ({}: ItemProps) => {
                                     <img
                                       className="h-20 w-20"
                                       src={item.info?.pictures[0]}
-                                      alt=""
+                                      alt={item.info?.name}
                                     />
                                   </div>
                                   <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">

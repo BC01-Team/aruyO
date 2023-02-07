@@ -35,7 +35,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
     setHydrated(true);
     setLoading(true);
     if (orderId) {
-      const fetchDate = async () => {
+      const fetchData = async () => {
         //予約詳細取得
         const reserveInfo = (
           await axiosInstance.get(`/reserves/${orderId}`, {
@@ -54,7 +54,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
         setLoading(false);
         // setStatus(order[0].status);
       };
-      fetchDate();
+      fetchData();
     }
   }, [orderId]);
 
@@ -87,7 +87,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
                           <div className="mx-auto mt-6 hidden w-full max-w-sm sm:block lg:max-w-none">
                             <Tab.List className="grid grid-cols-5 gap-6">
                               {order[0].items_copy?.pictures.map(
-                                (picture, index) => (
+                                (picture, index: number) => (
                                   <Tab
                                     key={index}
                                     className="relative flex h-24 cursor-pointer items-center justify-center bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
@@ -97,9 +97,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
                                         <span className="absolute inset-0 overflow-hidden">
                                           <img
                                             src={picture}
-                                            alt={
-                                              order[0].items_copy?.info?.name
-                                            }
+                                            alt={order[0].items_copy?.info?.name}
                                             className="h-full w-full object-cover object-center"
                                           />
                                         </span>
@@ -122,7 +120,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
 
                           <Tab.Panels className="aspect-w-1 aspect-h-1 w-full">
                             {order[0].items_copy?.pictures.map(
-                              (picture, index) => (
+                              (picture, index: number) => (
                                 <Tab.Panel key={index}>
                                   <img
                                     src={picture}

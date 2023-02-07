@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { axiosInstance } from "@/lib/axiosInstance";
-import { FieldValues, useForm } from 'react-hook-form';
+import { FieldValues, useForm } from "react-hook-form";
 import DatePicker, { registerLocale } from "react-datepicker";
 import ja from "date-fns/locale/ja";
 import { Item } from "@/types/item";
@@ -12,7 +12,7 @@ import { classNames } from "@/lib/class-names";
 import { getNumberOfDays } from "@/utils/getNumberOfDays";
 import { getStringFromDate } from "@/utils/getStringFromData";
 import { getTotalAmount } from "@/utils/getTotalAmount";
-import { Tab } from '@headlessui/react'
+import { Tab } from "@headlessui/react";
 import Button from "@/components/elements/Button";
 import PageTitle from "@/components/elements/PageTitle";
 import Loading from "@/components/elements/Loading";
@@ -25,9 +25,9 @@ const ItemDetail = () => {
   const [dateRange, setDateRange] = useState<any>([null, null]);
   const [startDate, endDate] = dateRange;
   const today = new Date();
-  registerLocale('ja', ja);
+  registerLocale("ja", ja);
 
-  const itemId = router.query.id || router.asPath.split('/')[3]; // URLからIDを取得
+  const itemId = router.query.id || router.asPath.split("/")[3]; // URLからIDを取得
   const {
     handleSubmit,
     // formState: { errors },
@@ -66,7 +66,7 @@ const ItemDetail = () => {
       payment: { total: total, method: paymentMethod, status: paymentStatus },
       lender: { id: lenderId, evaluation: "" },
       borrower: { id: borrowerId, evaluation: "" },
-      status: orderStatus
+      status: orderStatus,
     };
 
     await axiosInstance
@@ -83,15 +83,15 @@ const ItemDetail = () => {
           quantity: days,
           metadata: {
             item_id: itemId,
-            reservation_id: res.data._id
-          }
+            reservation_id: res.data._id,
+          },
         };
 
         return createStripeCheckoutSession(stripeCheckoutData);
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
   };
 
   const createStripeCheckoutSession = async (data: any) => {
@@ -119,7 +119,7 @@ const ItemDetail = () => {
             {/* 画像選択 */}
             <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
               <Tab.List className="grid grid-cols-4 gap-6">
-                {item?.info?.pictures?.map((picture, index) => (
+                {item?.info?.pictures?.map((picture, index: number) => (
                   <Tab
                     key={index}
                     className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
@@ -127,12 +127,16 @@ const ItemDetail = () => {
                     {({ selected }) => (
                       <>
                         <span className="absolute inset-0 overflow-hidden rounded-md">
-                          <img src={picture} alt={item?.info?.name} className="h-full w-full object-cover object-center" />
+                          <img
+                            src={picture}
+                            alt={item?.info?.name}
+                            className="h-full w-full object-cover object-center"
+                          />
                         </span>
                         <span
                           className={classNames(
-                            selected ? 'ring-indigo-100' : 'ring-transparent',
-                            'pointer-events-none absolute inset-0 rounded-md ring-2 ring-offset-2'
+                            selected ? "ring-indigo-100" : "ring-transparent",
+                            "pointer-events-none absolute inset-0 rounded-md ring-2 ring-offset-2"
                           )}
                           aria-hidden="true"
                         />
@@ -144,7 +148,7 @@ const ItemDetail = () => {
             </div>
 
             <Tab.Panels className="aspect-w-1 aspect-h-1 w-full">
-              {item?.info?.pictures?.map((picture, index) => (
+              {item?.info?.pictures?.map((picture, index: number) => (
                 <Tab.Panel key={index}>
                   <img
                     src={picture}
@@ -157,10 +161,14 @@ const ItemDetail = () => {
 
           {/* 物品情報 */}
           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">{item?.info?.name}</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+              {item?.info?.name}
+            </h1>
 
             <div className="mt-3">
-              <p className="text-3xl tracking-tight text-gray-900">{Number(item?.info?.price).toLocaleString()} 円</p>
+              <p className="text-3xl tracking-tight text-gray-900">
+                {Number(item?.info?.price).toLocaleString()} 円
+              </p>
             </div>
 
             <section aria-labelledby="details-heading" className="mt-12">
@@ -214,13 +222,14 @@ const ItemDetail = () => {
               <div className="border-t py-2">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="mb-2 w-full">
-                    <DatePicker className="w-full"
+                    <DatePicker
+                      className="w-full"
                       dateFormat="yyyy/MM/dd"
                       selectsRange={true}
                       startDate={startDate}
                       endDate={endDate}
                       minDate={today}
-                      locale='ja'
+                      locale="ja"
                       onChange={(update) => {
                         setDateRange(update);
                       }}
@@ -237,7 +246,6 @@ const ItemDetail = () => {
                 </form>
               </div>
             </section>
-
           </div>
         </div>
       </div>

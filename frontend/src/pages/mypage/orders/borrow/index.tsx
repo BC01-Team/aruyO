@@ -29,7 +29,7 @@ const MyPageOrdersBorrower = ({}: OrdersProps) => {
       return;
     }
     const borrowerId = user.id;
-    const fetchDate = async () => {
+    const fetchData = async () => {
       const res = await (
         await axiosInstance.get(`/users/${borrowerId}/borrow`, {
           withCredentials: true,
@@ -40,7 +40,7 @@ const MyPageOrdersBorrower = ({}: OrdersProps) => {
       setOrders(res);
       console.log(orders);
     };
-    fetchDate();
+    fetchData();
   }, []);
 
   if (!hydrated) return null;
@@ -79,7 +79,7 @@ const MyPageOrdersBorrower = ({}: OrdersProps) => {
                                   <img
                                     className="className=h-20 w-20"
                                     src={order?.items_copy.pictures[0]}
-                                    alt=""
+                                    alt={order?.items_copy?.name}
                                   />
                                 </div>
                                 <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-3 md:gap-4">
