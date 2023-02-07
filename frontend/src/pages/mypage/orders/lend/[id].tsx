@@ -10,9 +10,9 @@ import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import PageTitle from "@/components/layouts/mypage/PageTitle";
 import QrReader from "@/components/layouts/mypage/orders/QrReader";
 import Loading from "@/components/elements/Loading";
+import ImageGallery from "@/components/elements/details/ImageGallery";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../../lib/atom";
-import { Tab } from "@headlessui/react";
 import { Order } from "@/types/order";
 
 type OrderProps = {
@@ -35,7 +35,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
     setHydrated(true);
     setLoading(true);
     if (orderId) {
-      const fetchDate = async () => {
+      const fetchData = async () => {
         //予約詳細取得
         const reserveInfo = (
           await axiosInstance.get(`/reserves/${orderId}`, {
@@ -54,7 +54,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
         setLoading(false);
         // setStatus(order[0].status);
       };
-      fetchDate();
+      fetchData();
     }
   }, [orderId]);
 
@@ -82,57 +82,9 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
                     <ContentsLayout>
                       <PageTitle>貸出詳細</PageTitle>
                       <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
-                        {/* 画像ギャラリー */}
-                        <Tab.Group as="div" className="flex flex-col-reverse">
-                          <div className="mx-auto mt-6 hidden w-full max-w-sm sm:block lg:max-w-none">
-                            <Tab.List className="grid grid-cols-5 gap-6">
-                              {order[0].items_copy?.pictures.map(
-                                (picture, index) => (
-                                  <Tab
-                                    key={index}
-                                    className="relative flex h-24 cursor-pointer items-center justify-center bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
-                                  >
-                                    {({ selected }) => (
-                                      <>
-                                        <span className="absolute inset-0 overflow-hidden">
-                                          <img
-                                            src={picture}
-                                            alt={
-                                              order[0].items_copy?.info?.name
-                                            }
-                                            className="h-full w-full object-cover object-center"
-                                          />
-                                        </span>
-                                        <span
-                                          className={classNames(
-                                            selected
-                                              ? "ring-indigo-100"
-                                              : "ring-transparent",
-                                            "pointer-events-none absolute inset-0 ring-2 ring-offset-2"
-                                          )}
-                                          aria-hidden="true"
-                                        />
-                                      </>
-                                    )}
-                                  </Tab>
-                                )
-                              )}
-                            </Tab.List>
-                          </div>
-
-                          <Tab.Panels className="aspect-w-1 aspect-h-1 w-full">
-                            {order[0].items_copy?.pictures.map(
-                              (picture, index) => (
-                                <Tab.Panel key={index}>
-                                  <img
-                                    src={picture}
-                                    className="h-full w-full object-cover object-center"
-                                  />
-                                </Tab.Panel>
-                              )
-                            )}
-                          </Tab.Panels>
-                        </Tab.Group>
+                        <ImageGallery alt={order[0].items_copy?.info?.name}>
+                          {order[0].items_copy?.pictures}
+                        </ImageGallery>
 
                         <div className="">
                           {/* 物品詳細 */}

@@ -28,7 +28,7 @@ const Mypage = ({}: UserProps) => {
       return;
     }
     const userId = user.id;
-    const fetchDate = async () => {
+    const fetchData = async () => {
       const res = await (
         await axiosInstance.get(`/users/${userId}`, {
           withCredentials: true,
@@ -38,7 +38,7 @@ const Mypage = ({}: UserProps) => {
       setUserInfo(res);
       setLoading(false);
     };
-    fetchDate();
+    fetchData();
   }, []);
 
   if (!hydrated) return null;
@@ -75,7 +75,8 @@ const Mypage = ({}: UserProps) => {
                           </a>
                         </div>
                         <div className="font-bold mb-2">支払方法</div>
-                        <div className="">{userInfo.info?.account}</div>
+                        <div className="">クレジットカード</div>
+                        {/* <div className="">{userInfo.info?.account}</div> */}
                       </div>
                     </div>
                   </div>

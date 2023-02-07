@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { axiosInstance } from "@/lib/axiosInstance";
-import { FieldValues, useForm } from 'react-hook-form';
+import { FieldValues, useForm } from "react-hook-form";
 import DatePicker, { registerLocale } from "react-datepicker";
 import ja from "date-fns/locale/ja";
 import { Item } from "@/types/item";
@@ -12,9 +12,9 @@ import { classNames } from "@/lib/class-names";
 import { getNumberOfDays } from "@/utils/getNumberOfDays";
 import { getStringFromDate } from "@/utils/getStringFromData";
 import { getTotalAmount } from "@/utils/getTotalAmount";
-import { Tab } from '@headlessui/react'
+import ImageGallery from "@/components/elements/details/ImageGallery";
 import Button from "@/components/elements/Button";
-import PageTitle from "@/components/elements/PageTitle";
+// import PageTitle from "@/components/elements/PageTitle";
 import Loading from "@/components/elements/Loading";
 
 const ItemDetail = () => {
@@ -25,9 +25,9 @@ const ItemDetail = () => {
   const [dateRange, setDateRange] = useState<any>([null, null]);
   const [startDate, endDate] = dateRange;
   const today = new Date();
-  registerLocale('ja', ja);
+  registerLocale("ja", ja);
 
-  const itemId = router.query.id || router.asPath.split('/')[3]; // URLからIDを取得
+  const itemId = router.query.id || router.asPath.split("/")[3]; // URLからIDを取得
   const {
     handleSubmit,
     // formState: { errors },
@@ -66,7 +66,7 @@ const ItemDetail = () => {
       payment: { total: total, method: paymentMethod, status: paymentStatus },
       lender: { id: lenderId, evaluation: "" },
       borrower: { id: borrowerId, evaluation: "" },
-      status: orderStatus
+      status: orderStatus,
     };
 
     await axiosInstance
@@ -83,15 +83,15 @@ const ItemDetail = () => {
           quantity: days,
           metadata: {
             item_id: itemId,
-            reservation_id: res.data._id
-          }
+            reservation_id: res.data._id,
+          },
         };
 
         return createStripeCheckoutSession(stripeCheckoutData);
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
   };
 
   const createStripeCheckoutSession = async (data: any) => {
@@ -111,116 +111,100 @@ const ItemDetail = () => {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <PageTitle>物品詳細</PageTitle>
-        <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
-          {/* 画像ギャラリー */}
-          <Tab.Group as="div" className="flex flex-col-reverse">
-            {/* 画像選択 */}
-            <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
-              <Tab.List className="grid grid-cols-4 gap-6">
-                {item?.info?.pictures?.map((picture, index) => (
-                  <Tab
-                    key={index}
-                    className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
-                  >
-                    {({ selected }) => (
-                      <>
-                        <span className="absolute inset-0 overflow-hidden rounded-md">
-                          <img src={picture} alt={item?.info?.name} className="h-full w-full object-cover object-center" />
-                        </span>
-                        <span
-                          className={classNames(
-                            selected ? 'ring-indigo-100' : 'ring-transparent',
-                            'pointer-events-none absolute inset-0 rounded-md ring-2 ring-offset-2'
-                          )}
-                          aria-hidden="true"
-                        />
-                      </>
-                    )}
-                  </Tab>
-                ))}
-              </Tab.List>
-            </div>
-
-            <Tab.Panels className="aspect-w-1 aspect-h-1 w-full">
-              {item?.info?.pictures?.map((picture, index) => (
-                <Tab.Panel key={index}>
-                  <img
-                    src={picture}
-                    className="h-full w-full object-cover object-center sm:rounded-lg"
-                  />
-                </Tab.Panel>
-              ))}
-            </Tab.Panels>
-          </Tab.Group>
+      <div className="mx-auto max-w-2xl py-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+        {/* <PageTitle>物品詳細</PageTitle> */}
+          <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
+            <ImageGallery alt={item?.info?.name}>
+              {item?.info?.pictures}
+            </ImageGallery>
 
           {/* 物品情報 */}
           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">{item?.info?.name}</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+              {item?.info?.name}
+            </h1>
 
             <div className="mt-3">
-              <p className="text-3xl tracking-tight text-gray-900">{Number(item?.info?.price).toLocaleString()} 円</p>
+              <p className="text-3xl tracking-tight text-gray-900">
+                {Number(item?.info?.price).toLocaleString()} 円
+              </p>
             </div>
 
-            <section aria-labelledby="details-heading" className="mt-12">
+            <section aria-labelledby="details-heading" className="mt-8">
               <h2 id="details-heading" className="text-xl my-2">
                 詳細情報
               </h2>
               <div className="border-t py-2">
-                <div className="mb-4">
-                  <h3>詳細</h3>
-                  <p>{item?.info?.detail}</p>
+                {/* 物品詳細 */}
+                <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+                  <h3 className="text-sm font-bold text-gray-900 mb-2">
+                    詳細
+                  </h3>
+                  <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                    <p>{item?.info?.detail}</p>
+                  </div>
                 </div>
-                <div className="mb-4">
-                  <h3>条件</h3>
-                  <p>{item?.info?.requirements}</p>
+
+                <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+                  <h3 className="text-sm font-bold text-gray-900 mb-2">
+                    条件
+                  </h3>
+                  <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                    <p>{item?.info?.requirements ? (item?.info?.requirements) : "なし"}</p>
+                  </div>
                 </div>
-                <div className="mb-4">
-                  <h3>持ち出し</h3>
-                  <p>{item?.info?.take_out ? "可" : "不可"}</p>
+
+                <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+                  <h3 className="text-sm font-bold text-gray-900 mb-2">
+                    持ち出し
+                  </h3>
+                  <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                    <p>{item?.info?.take_out ? "可" : "不可"}</p>
+                  </div>
                 </div>
               </div>
             </section>
 
-            <section aria-labelledby="details-heading" className="mt-12">
+            <section aria-labelledby="details-heading" className="mt-2">
               <h2 id="details-heading" className="text-xl my-2">
                 企業情報
               </h2>
               <div className="border-t py-2">
-                <div className="mb-4">
-                  <h3>企業名</h3>
-                  <p>{item?.lender?.company_name}</p>
+                <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+                  <h3 className="text-sm font-bold text-gray-900 mb-2">
+                    企業名
+                  </h3>
+                  <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                    <p>{item?.lender?.company_name}</p>
+                  </div>
                 </div>
-                <div className="mb-4">
-                  <h3>貸出場所</h3>
-                  <p>{item?.info?.address}</p>
+
+                <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+                  <h3 className="text-sm font-bold text-gray-900 mb-2">
+                    貸出場所
+                  </h3>
+                  <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                    <p>{item?.info?.address}</p>
+                  </div>
                 </div>
-                {/* <div className="mb-4">
-                  <h3>条件</h3>
-                  <p>{item?.info?.requirements}</p>
-                </div>
-                <div className="mb-4">
-                  <h3>持ち出し</h3>
-                  <p>{item?.info?.take_out ? "可" : "不可"}</p>
-                </div> */}
               </div>
             </section>
 
-            <section aria-labelledby="details-heading" className="mt-12">
+            <section aria-labelledby="details-heading" className="mt-2">
               <h2 id="details-heading" className="text-xl my-2">
                 利用期間
               </h2>
               <div className="border-t py-2">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="mb-2 w-full">
-                    <DatePicker className="w-full"
+                    <DatePicker
+                      className="w-full"
                       dateFormat="yyyy/MM/dd"
                       selectsRange={true}
                       startDate={startDate}
                       endDate={endDate}
                       minDate={today}
-                      locale='ja'
+                      locale="ja"
                       onChange={(update) => {
                         setDateRange(update);
                       }}
@@ -237,7 +221,6 @@ const ItemDetail = () => {
                 </form>
               </div>
             </section>
-
           </div>
         </div>
       </div>

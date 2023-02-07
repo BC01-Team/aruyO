@@ -57,9 +57,11 @@ def get_search_both(data) -> list:
                         {"info.requirements": {"$regex": key}},
                     ]
                 },
-                # 距離検索を併用。検索範囲は10000ｍ。
+                # 距離検索を併用。検索範囲の単位はｍ。
                 {
-                    "location": SON([("$nearSphere", location), ("$maxDistance", 10000)])
+                    "location": {"$nearSphere": {
+                    "$geometry": {"type": "Point", "coordinates": location},
+                    "$maxDistance": 10000}}
                 }
             ]
         }
