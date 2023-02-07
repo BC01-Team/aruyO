@@ -10,8 +10,7 @@ import QrGenerator from "@/components/layouts/mypage/orders/QrGenerator";
 import Button from "@/components/elements/Button";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../../../lib/atom";
-import { Tab } from "@headlessui/react";
-import { classNames } from "@/lib/class-names";
+import ImageGallery from "@/components/elements/details/ImageGallery";
 import Loading from "@/components/elements/Loading";
 import Link from "next/link";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
@@ -73,51 +72,9 @@ const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
               <ContentsLayout>
                 <PageTitle>予約詳細</PageTitle>
                 <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
-                  {/* 画像ギャラリー */}
-                  <Tab.Group as="div" className="flex flex-col-reverse">
-                    <div className="mx-auto mt-6 hidden w-full max-w-sm sm:block lg:max-w-none">
-                      <Tab.List className="grid grid-cols-5 gap-6">
-                        {order[0].items_copy?.pictures.map((picture, index) => (
-                          <Tab
-                            key={index}
-                            className="relative flex h-24 cursor-pointer items-center justify-center bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
-                          >
-                            {({ selected }) => (
-                              <>
-                                <span className="absolute inset-0 overflow-hidden">
-                                  <img
-                                    src={picture}
-                                    alt={order[0].items_copy?.info?.name}
-                                    className="h-full w-full object-cover object-center"
-                                  />
-                                </span>
-                                <span
-                                  className={classNames(
-                                    selected
-                                      ? "ring-indigo-100"
-                                      : "ring-transparent",
-                                    "pointer-events-none absolute inset-0 ring-2 ring-offset-2"
-                                  )}
-                                  aria-hidden="true"
-                                />
-                              </>
-                            )}
-                          </Tab>
-                        ))}
-                      </Tab.List>
-                    </div>
-
-                    <Tab.Panels className="aspect-w-1 aspect-h-1 w-full">
-                      {order[0].items_copy?.pictures.map((picture, index) => (
-                        <Tab.Panel key={index}>
-                          <img
-                            src={picture}
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </Tab.Panel>
-                      ))}
-                    </Tab.Panels>
-                  </Tab.Group>
+                  <ImageGallery alt={order[0].items_copy?.info?.name}>
+                    {order[0].items_copy?.pictures}
+                  </ImageGallery>
 
                   <div className="">
                     {/* 物品詳細 */}
