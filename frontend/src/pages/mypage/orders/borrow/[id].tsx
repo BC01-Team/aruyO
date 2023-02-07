@@ -151,7 +151,7 @@ const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
                               qrText={`予約番号：${order[0]._id},
                                 品名:${order[0].items_copy?.name},
                                 貸出日:${order[0].period?.start},
-                                返却日:${order[0].period.start}`}
+                                返却日:${order[0].period?.end}`}
                             />
                           </div>
                         </div>

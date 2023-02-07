@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Button from "@/components/elements/Button";
 
-
 const EvaluationButton = ({ type }: any) => {
   const [value, setValue] = useState<string>("5");
   const router = useRouter();
@@ -23,17 +22,17 @@ const EvaluationButton = ({ type }: any) => {
         .put(`/reserves/status/${orderId}`, data)
         .then((res) => router.push(`/mypage/orders/lend`));
     } else if (type === "lender") {
-            const orderId = (id as string).split("&")[0];
-            const lenderId = (id as string).split("&")[1];
-            const data = {
-              lender: {
-                id: lenderId,
-                evaluation: value,
-              },
-            };
-            axiosInstance
-              .put(`/reserves/status/${orderId}`, data)
-              .then((res) => router.push(`/mypage/orders/borrow`));
+      const orderId = (id as string).split("&")[0];
+      const lenderId = (id as string).split("&")[1];
+      const data = {
+        lender: {
+          id: lenderId,
+          evaluation: value,
+        },
+      };
+      axiosInstance
+        .put(`/reserves/status/${orderId}`, data)
+        .then((res) => router.push(`/mypage/orders/borrow`));
     }
   };
 
@@ -41,7 +40,7 @@ const EvaluationButton = ({ type }: any) => {
   //`/mypage/orders/lend/evaluation/${orderId}&${borrowerId}`
   return (
     <>
-      {/* <div className="flex flex-col w-auto h-auto mt-64 items-center"> */}
+      <div className="flex flex-col w-auto h-auto mt-6 items-center">
         <div className="flex justify-between h-12 w-64 rounded-none bg-transparent">
           <button
             type="button"
@@ -88,7 +87,7 @@ const EvaluationButton = ({ type }: any) => {
         <div className="mt-12 text-center">
           <Button onClick={handleSubmit}>送信</Button>
         </div>
-      {/* </div> */}
+      </div>
     </>
   );
 };
