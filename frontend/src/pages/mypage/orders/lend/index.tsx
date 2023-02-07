@@ -29,7 +29,7 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
       return;
     }
     const lenderId = user.id;
-    const fetchDate = async () => {
+    const fetchData = async () => {
       const res = await (
         await axiosInstance.get(`/users/${lenderId}/lent`, {
           withCredentials: true,
@@ -38,7 +38,7 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
       setLoading(false);
       setOrders(res);
     };
-    fetchDate();
+    fetchData();
   }, []);
 
   if (!hydrated) return null;
@@ -103,7 +103,7 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
                               </div>
                             </div>
 
-                            {/* カラム4 ステータス */}
+                            {/* カラム4 ステータス TODO componetに差替*/}
                             <div className="items-center  text-sm font-bold">
                               <span className="border border-black border-solid rounded px-4 py-2 my-2">
                                 {order?.status}
