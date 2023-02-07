@@ -14,7 +14,7 @@ import { getStringFromDate } from "@/utils/getStringFromData";
 import { getTotalAmount } from "@/utils/getTotalAmount";
 import ImageGallery from "@/components/elements/details/ImageGallery";
 import Button from "@/components/elements/Button";
-import PageTitle from "@/components/elements/PageTitle";
+// import PageTitle from "@/components/elements/PageTitle";
 import Loading from "@/components/elements/Loading";
 
 const ItemDetail = () => {
@@ -111,8 +111,8 @@ const ItemDetail = () => {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <PageTitle>物品詳細</PageTitle>
+      <div className="mx-auto max-w-2xl py-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+        {/* <PageTitle>物品詳細</PageTitle> */}
           <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
             <ImageGallery alt={item?.info?.name}>
               {item?.info?.pictures}
@@ -126,43 +126,67 @@ const ItemDetail = () => {
               <p className="text-3xl tracking-tight text-gray-900">{Number(item?.info?.price).toLocaleString()} 円</p>
             </div>
 
-            <section aria-labelledby="details-heading" className="mt-12">
+            <section aria-labelledby="details-heading" className="mt-8">
               <h2 id="details-heading" className="text-xl my-2">
                 詳細情報
               </h2>
               <div className="border-t py-2">
-                <div className="mb-4">
-                  <h3>詳細</h3>
-                  <p>{item?.info?.detail}</p>
+                {/* 物品詳細 */}
+                <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+                  <h3 className="text-sm font-bold text-gray-900 mb-2">
+                    詳細
+                  </h3>
+                  <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                    <p>{item?.info?.detail}</p>
+                  </div>
                 </div>
-                <div className="mb-4">
-                  <h3>条件</h3>
-                  <p>{item?.info?.requirements}</p>
+
+                <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+                  <h3 className="text-sm font-bold text-gray-900 mb-2">
+                    条件
+                  </h3>
+                  <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                    <p>{item?.info?.requirements ? (item?.info?.requirements) : "なし"}</p>
+                  </div>
                 </div>
-                <div className="mb-4">
-                  <h3>持ち出し</h3>
-                  <p>{item?.info?.take_out ? "可" : "不可"}</p>
+
+                <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+                  <h3 className="text-sm font-bold text-gray-900 mb-2">
+                    持ち出し
+                  </h3>
+                  <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                    <p>{item?.info?.take_out ? "可" : "不可"}</p>
+                  </div>
                 </div>
               </div>
             </section>
 
-            <section aria-labelledby="details-heading" className="mt-12">
+            <section aria-labelledby="details-heading" className="mt-2">
               <h2 id="details-heading" className="text-xl my-2">
                 企業情報
               </h2>
               <div className="border-t py-2">
-                <div className="mb-4">
-                  <h3>企業名</h3>
-                  <p>{item?.lender?.company_name}</p>
+                <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+                  <h3 className="text-sm font-bold text-gray-900 mb-2">
+                    企業名
+                  </h3>
+                  <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                    <p>{item?.lender?.company_name}</p>
+                  </div>
                 </div>
-                <div className="mb-4">
-                  <h3>貸出場所</h3>
-                  <p>{item?.info?.address}</p>
+
+                <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+                  <h3 className="text-sm font-bold text-gray-900 mb-2">
+                    貸出場所
+                  </h3>
+                  <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                    <p>{item?.info?.address}</p>
+                  </div>
                 </div>
               </div>
             </section>
 
-            <section aria-labelledby="details-heading" className="mt-12">
+            <section aria-labelledby="details-heading" className="mt-2">
               <h2 id="details-heading" className="text-xl my-2">
                 利用期間
               </h2>
