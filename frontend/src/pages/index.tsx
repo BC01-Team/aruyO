@@ -16,7 +16,7 @@ export default function Home() {
     setLoading(true);
 
     const fetchData = async () => {
-      const items = await axiosInstance.get(`/items`).then((res) => res.data);
+      const items = await axiosInstance.get(`/items/`).then((res) => res.data);
       setItems(items);
       setLoading(false);
 
@@ -30,7 +30,6 @@ export default function Home() {
   if (loading) return <Loading />;
 
   return (
-    <ProtectRoute>
       <>
         {!loading && items && (
           <>
@@ -101,6 +100,5 @@ export default function Home() {
           </>
         )}
       </>
-    </ProtectRoute>
   );
 }

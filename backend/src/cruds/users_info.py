@@ -36,7 +36,7 @@ def create_item(data: dict) -> Union[dict, bool]:
 def get_user_items(id: str):
     logger.debug(id)
     # mongoDB findでドキュメント取得し、listに追加
-    items = collection_items.find({"company_id": id})
+    items = collection_items.find({"lender.company_id": id})
     items_list = []
     for document in items:
         items_list.append(db_collection_serializer(document))
