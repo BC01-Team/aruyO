@@ -10,7 +10,6 @@ import MypageLayout from "@/components/layouts/mypage/MypageLayout";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import PageTitle from "@/components/layouts/mypage/PageTitle";
 import Status from "@/components/layouts/mypage/item/Status";
-import ItemDetailBold from "@/components/layouts/mypage/item/ItemDetailBold";
 import Loading from "@/components/elements/Loading";
 import Button from "@/components/elements/Button";
 
@@ -62,7 +61,7 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
                     <Button style="primary">借りるものをみる</Button>
                   </Link>
                 </div>
-                <div className="">
+                <div>
                   {orders.map((order, index: number) => {
                     return (
                       <>
@@ -75,9 +74,9 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
                         >
                           <div
                             key={index}
-                            className="flex shrink-0 flex-col md:flex-row ms:place-content-evenly justify-between items-center rounded border-none h-28 my-4 px-4 py-4 max-w-6xl bg-slate-100 text-sm text-gray-900"
+                            className="flex flex-1 flex-col md:flex-row justify-between items-center rounded border-none h-28 my-4 p-4 max-w-6xl bg-slate-100 text-sm text-gray-900"
                           >
-                            <div className="flex flex-row">
+                            {/* <div className="flex flex-row"> */}
                               <img
                                 className="h-20 aspect-square object-center object-fill"
                                 src={order?.items_copy.pictures[0]}
@@ -99,7 +98,7 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
                                   円
                                 </div>
                               </div>
-                            </div>
+                            {/* </div> */}
 
                             <div className="flex flex-row shrink-0 my-4">
                               <Status>{order?.status}</Status>

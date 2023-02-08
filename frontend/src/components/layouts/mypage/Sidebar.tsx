@@ -6,8 +6,8 @@ const navigation = [
   {
     name: "取引一覧",
     children: [
-      { name: "借りる取引", href: "/mypage/orders/borrow", current: false, },
-      { name: "貸す取引", href: "/mypage/orders/lend", current: false, },
+      { name: "借りるもの", href: "/mypage/orders/borrow", current: false, },
+      { name: "貸すもの", href: "/mypage/orders/lend", current: false, },
     ],
   },
   { name: "登録物品一覧", href: '/mypage/items', current: false }
