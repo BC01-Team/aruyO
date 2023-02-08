@@ -64,7 +64,7 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
                 <div>
                   {orders.map((order, index: number) => {
                     return (
-                      <>
+                      <div key={index}>
                         <Link
                           as={`/mypage/orders/lend/${order._id}`}
                           href={{
@@ -72,41 +72,43 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
                             query: order._id,
                           }}
                         >
-                          <div
-                            key={index}
-                            className="flex flex-1 flex-col md:flex-row justify-between items-center rounded border-none h-28 my-4 p-4 max-w-6xl bg-slate-100 text-sm text-gray-900"
-                          >
-                            {/* <div className="flex flex-row"> */}
-                              <img
-                                className="h-20 aspect-square object-center object-fill"
-                                src={order?.items_copy.pictures[0]}
-                                alt={order?.items_copy?.name}
-                              />
-                              <div className="mx-4">
-                                <div className="mb-2">
-                                  {order?.items_copy?.name}
+                          <div className="flex flex-col md:flex-row items-center p-2 sm:px-6">
+                            <div className="flex flex-1 justify-between rounded border-none p-4 bg-slate-100 max-w-6xl min-w-full h-28 text-sm text-gray-900">
+                              <div className="flex flex-row">
+                                <img
+                                  className="h-20 aspect-square object-center object-fill"
+                                  src={order?.items_copy.pictures[0]}
+                                  alt={order?.items_copy?.name}
+                                />
+                              </div>
+
+                              <div className="min-w-0 flex-1 mx-2 md:grid md:grid-cols-2 md:gap-4">
+                                <div>
+                                  <div className="mb-2">
+                                    {order?.items_copy?.name}
+                                  </div>
+                                  <div className="mb-2">
+                                    貸出期間 {order?.period?.start} ～{" "}
+                                    {order?.period?.end}
+                                  </div>
+                                  <div className="mb-2">
+                                    金額{" "}
+                                    {Number(
+                                      order?.payment?.total
+                                    ).toLocaleString()}
+                                    円
+                                  </div>
                                 </div>
-                                <div className="mb-2">
-                                  貸出期間 {order?.period?.start} ～{" "}
-                                  {order?.period?.end}
-                                </div>
-                                <div className="mb-2">
-                                  金額{" "}
-                                  {Number(
-                                    order?.payment?.total
-                                  ).toLocaleString()}
-                                  円
+
+                                <div className="flex flex-row shrink-0 items-center">
+                                  <Status>{order?.status}</Status>
+                                  <Status>{order?.payment?.status}</Status>
                                 </div>
                               </div>
-                            {/* </div> */}
-
-                            <div className="flex flex-row shrink-0 my-4">
-                              <Status>{order?.status}</Status>
-                              <Status>{order?.payment?.status}</Status>
                             </div>
                           </div>
                         </Link>
-                      </>
+                      </div>
                     );
                   })}
                 </div>

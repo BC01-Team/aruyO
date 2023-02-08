@@ -63,60 +63,60 @@ const MyPageOrdersBorrower = ({}: OrdersProps) => {
                   </Link>
                 </div>
                 <div>
-                    {orders.map((order, index: number) => {
-                      return (
-                        <div key={index}>
-                          <Link
-                            as={`/mypage/orders/borrow/${order._id}`}
-                            href={{
-                              pathname: `/mypage/orders/borrow/[id]`,
-                              query: order._id,
-                            }}
-                          >
-                            <div className="flex flex-col md:flex-row items-center p-2 sm:px-6">
-                              <div className="flex flex-1 justify-between rounded border-none p-4 bg-slate-100 max-w-6xl min-w-full h-28 text-sm text-gray-900">
-                                <div className="flex flex-row">
-                                  <img
-                                    className="h-20 aspect-square object-center object-fill"
-                                    src={order?.items_copy.pictures[0]}
-                                    alt={order?.items_copy?.name}
-                                  />
-                                </div>
-                                <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
-                                  <div>
-                                    <div className="mb-2">
-                                      {order?.items_copy?.name}
-                                    </div>
-                                    <div className="mb-2">
-                                      貸出期間 {order?.period?.start} ～{" "}
-                                      {order?.period?.end}
-                                    </div>
-                                    <div className="mb-2">
-                                      金額{" "}
-                                      {Number(
-                                        order?.payment?.total
-                                      ).toLocaleString()}
-                                      円
-                                    </div>
-                                  </div>
+                  {orders.map((order, index: number) => {
+                    return (
+                      <div key={index}>
+                        <Link
+                          as={`/mypage/orders/borrow/${order._id}`}
+                          href={{
+                            pathname: `/mypage/orders/borrow/[id]`,
+                            query: order._id,
+                          }}
+                        >
+                          <div className="flex flex-col md:flex-row items-center p-2 sm:px-6">
+                            <div className="flex flex-1 justify-between rounded border-none p-4 bg-slate-100 max-w-6xl min-w-full h-28 text-sm text-gray-900">
+                              <div className="flex flex-row">
+                                <img
+                                  className="h-20 aspect-square object-center object-fill"
+                                  src={order?.items_copy.pictures[0]}
+                                  alt={order?.items_copy?.name}
+                                />
+                              </div>
 
-                                  <div className="flex flex-row shrink-0 my-4">
-                                    <Status>{order?.status}</Status>
-                                    <Status>{order?.payment?.status}</Status>
+                              <div className="min-w-0 flex-1 mx-2 md:grid md:grid-cols-2 md:gap-4">
+                                <div>
+                                  <div className="mb-2">
+                                    {order?.items_copy?.name}
                                   </div>
+                                  <div className="mb-2">
+                                    貸出期間 {order?.period?.start} ～{" "}
+                                    {order?.period?.end}
+                                  </div>
+                                  <div className="mb-2">
+                                    金額{" "}
+                                    {Number(
+                                      order?.payment?.total
+                                    ).toLocaleString()}
+                                    円
+                                  </div>
+                                </div>
+
+                                <div className="flex flex-row shrink-0 items-center">
+                                  <Status>{order?.status}</Status>
+                                  <Status>{order?.payment?.status}</Status>
                                 </div>
                               </div>
                             </div>
-                          </Link>
-                        </div>
-                      );
-                    })}
+                          </div>
+                        </Link>
+                      </div>
+                    );
+                  })}
                 </div>
               </ContentsLayout>
             </MypageLayout>
           </div>
         )}
-        {/* {loading && <div>ロード中</div>} */}
       </>
     </ProtectRoute>
   );
