@@ -1,16 +1,17 @@
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import { userState } from "../../../../lib/atom";
 import { axiosInstance } from "@/lib/axiosInstance";
+import { useRecoilValue } from "recoil";
 import { Order } from "@/types/order";
+import Link from "next/link";
+import ProtectRoute from "@/components/layouts/ProtectRoute";
 import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
-import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
-import Button from "@/components/elements/Button";
-import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { userState } from "../../../../lib/atom";
+import PageTitle from "@/components/layouts/mypage/PageTitle";
+import Status from "@/components/layouts/mypage/item/Status";
 import Loading from "@/components/elements/Loading";
-import ProtectRoute from "@/components/layouts/ProtectRoute";
+import Button from "@/components/elements/Button";
 
 type OrdersProps = {
   orders: Order[];
@@ -57,13 +58,13 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
               <ContentsLayout>
                 <div className="my-8">
                   <Link href="/mypage/orders/borrow">
-                    <Button>借りるものをみる</Button>
+                    <Button style="primary">借りるものをみる</Button>
                   </Link>
                 </div>
-                <div className="overflow-x-auto">
+                <div>
                   {orders.map((order, index: number) => {
                     return (
-                      <>
+                      <div key={index}>
                         <Link
                           as={`/mypage/orders/lend/${order._id}`}
                           href={{
@@ -71,51 +72,43 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
                             query: order._id,
                           }}
                         >
-                          <div
-                            key={index}
-                            className="flex flex-1 md:grid md:grid-cols-4 md:gap-4 rounded border-none my-4 px-4 py-4 sm:px-6 max-w-6xl bg-slate-100 text-sm text-gray-900"
-                          >
-                            {/* カラム1 画像 */}
-                            <div className="flex-shrink-0 h-20 w-20">
-                              <img src={order?.items_copy.pictures[0]} alt="" />
-                            </div>
-
-                            {/* カラム2 物品名 */}
-                            <div>
-                              <div className="font-bold mb-2">物品名</div>
-                              <div className="mb-2">
-                                {order?.items_copy?.name}
+                          <div className="flex flex-col md:flex-row items-center p-2 sm:px-6">
+                            <div className="flex flex-1 justify-between rounded border-none p-4 bg-slate-100 max-w-6xl min-w-full h-28 text-sm text-gray-900">
+                              <div className="flex flex-row">
+                                <img
+                                  className="h-20 aspect-square object-center object-fill"
+                                  src={order?.items_copy.pictures[0]}
+                                  alt={order?.items_copy?.name}
+                                />
                               </div>
-                            </div>
 
-                            {/* カラム3 貸出期間、金額 */}
-                            <div>
-                              <div className="font-bold mb-2">貸出期間</div>
-                              <div className="mb-2">
+                              <div className="min-w-0 flex-1 mx-2 md:grid md:grid-cols-2 md:gap-4">
                                 <div>
-                                  {order?.period?.start} ～ {order?.period?.end}
+                                  <div className="mb-2">
+                                    {order?.items_copy?.name}
+                                  </div>
+                                  <div className="mb-2">
+                                    貸出期間 {order?.period?.start} ～{" "}
+                                    {order?.period?.end}
+                                  </div>
+                                  <div className="mb-2">
+                                    金額{" "}
+                                    {Number(
+                                      order?.payment?.total
+                                    ).toLocaleString()}
+                                    円
+                                  </div>
+                                </div>
+
+                                <div className="flex flex-row shrink-0 items-center">
+                                  <Status>{order?.status}</Status>
+                                  <Status>{order?.payment?.status}</Status>
                                 </div>
                               </div>
-                              <div className="font-bold mb-2">金額</div>
-                              <div className="mb-2">
-                                {Number(order?.payment?.total).toLocaleString()}
-                                円
-                              </div>
-                            </div>
-
-                            {/* カラム4 ステータス TODO componetに差替*/}
-                            <div className="items-center  text-sm font-bold">
-                              <span className="border border-black border-solid rounded px-4 py-2 my-2">
-                                {order?.status}
-                              </span>
-                              <br/>
-                              <span className="border border-black border-solid rounded px-4 py-2 my-2">
-                                {order?.payment?.status}
-                              </span>
                             </div>
                           </div>
                         </Link>
-                      </>
+                      </div>
                     );
                   })}
                 </div>

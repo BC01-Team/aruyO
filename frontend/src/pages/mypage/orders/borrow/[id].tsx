@@ -7,13 +7,14 @@ import MypageLayout from "@/components/layouts/mypage/MypageLayout";
 import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
 import QrGenerator from "@/components/layouts/mypage/orders/QrGenerator";
+import Status from "@/components/layouts/mypage/item/Status";
+import ItemDetailBold from "@/components/layouts/mypage/item/ItemDetailBold";
 import Button from "@/components/elements/Button";
-import { useRecoilValue } from "recoil";
-import { userState } from "../../../../lib/atom";
 import ImageGallery from "@/components/elements/details/ImageGallery";
 import Loading from "@/components/elements/Loading";
-import Link from "next/link";
 import ProtectRoute from "@/components/layouts/ProtectRoute";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../../../lib/atom";
 
 type OrderProps = {
   result: Order;
@@ -76,61 +77,39 @@ const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
                     {order[0].items_copy?.pictures}
                   </ImageGallery>
 
-                  <div className="">
-                    {/* 物品詳細 */}
-                    <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-                      <div className="text-sm font-bold text-gray-900 mb-2">
-                        予約番号
-                      </div>
-                      <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                  {/* 物品詳細 */}
+                  <div>
+                    <div className="text-sm font-normal text-gray-900 mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+                      <ItemDetailBold>予約番号</ItemDetailBold>
+                      <div className="mt-2 mb-7">
                         <div>{orderId}</div>
                       </div>
 
-                      <div className="text-sm font-bold text-gray-900 my-2">
-                        物品名
-                      </div>
-                      <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
+                      <ItemDetailBold>物品名</ItemDetailBold>
+                      <div className="mt-2 mb-7">
                         {order[0].items_copy?.name}
                       </div>
 
-                      <div className="text-sm font-bold text-gray-900 my-2">
-                        貸出企業
-                      </div>
-                      <div className="text-sm font-normal text-gray-900 mt-2 mb-1">
-                        {order[1].info?.name}
-                      </div>
-                      <div className="text-sm font-normal text-gray-900 mb-7">
-                        連絡先 {order[1].info?.phone}
+                      <ItemDetailBold>貸出元企業</ItemDetailBold>
+                      <div className="mt-2">{order[1].info?.name}</div>
+                      <div className="mt-2 mb-7">
+                        連絡先：{order[1].info?.phone}
                       </div>
 
-                      <div className="text-sm font-bold text-gray-900 my-2">
-                        貸出期間
-                      </div>
-                      <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
-                        <div>
-                          {order[0].period?.start} ～ {order[0].period?.end}
-                        </div>
+                      <ItemDetailBold>貸出期間</ItemDetailBold>
+                      <div className="mt-2 mb-7">
+                        {order[0].period?.start} ～ {order[0].period?.end}
                       </div>
 
-                      <div className="text-sm font-bold text-gray-900 my-2">
-                        金額
-                      </div>
-                      <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
-                        <div>
-                          {Number(order[0].payment?.total).toLocaleString()}円
-                        </div>
+                      <ItemDetailBold>金額</ItemDetailBold>
+                      <div className="mt-2 mb-7">
+                        {Number(order[0].payment?.total).toLocaleString()}円
                       </div>
 
-                      <div className="text-sm font-bold text-gray-900 my-2">
-                        ステータス
-                      </div>
-                      <div className="my-6">
-                        <span className="text-sm text-gray-900 font-bold border border-black border-solid rounded px-4 py-2 mr-4">
-                          {order[0].payment?.status}
-                        </span>
-                        <span className="text-sm text-gray-900 font-bold border border-black border-solid rounded px-4 py-2">
-                          {order[0].status}
-                        </span>
+                      <ItemDetailBold>ステータス</ItemDetailBold>
+                      <div className="flex my-5">
+                        <Status>{order[0].payment?.status}</Status>
+                        <Status>{order[0].status}</Status>
                       </div>
                     </div>
 
