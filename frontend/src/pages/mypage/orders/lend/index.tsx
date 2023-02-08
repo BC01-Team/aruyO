@@ -1,16 +1,18 @@
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import { userState } from "../../../../lib/atom";
 import { axiosInstance } from "@/lib/axiosInstance";
+import { useRecoilValue } from "recoil";
 import { Order } from "@/types/order";
+import Link from "next/link";
+import ProtectRoute from "@/components/layouts/ProtectRoute";
 import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
-import PageTitle from "@/components/layouts/mypage/PageTitle";
 import ContentsLayout from "@/components/layouts/mypage/ContentsLayout";
-import Button from "@/components/elements/Button";
-import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
-import { userState } from "../../../../lib/atom";
+import PageTitle from "@/components/layouts/mypage/PageTitle";
+import Status from "@/components/layouts/mypage/item/Status";
+import ItemDetailBold from "@/components/layouts/mypage/item/ItemDetailBold";
 import Loading from "@/components/elements/Loading";
-import ProtectRoute from "@/components/layouts/ProtectRoute";
+import Button from "@/components/elements/Button";
 
 type OrdersProps = {
   orders: Order[];
@@ -57,10 +59,10 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
               <ContentsLayout>
                 <div className="my-8">
                   <Link href="/mypage/orders/borrow">
-                    <Button>借りるものをみる</Button>
+                    <Button style="primary">借りるものをみる</Button>
                   </Link>
                 </div>
-                <div className="overflow-x-auto">
+                <div className="">
                   {orders.map((order, index: number) => {
                     return (
                       <>
@@ -73,45 +75,35 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
                         >
                           <div
                             key={index}
-                            className="flex flex-1 md:grid md:grid-cols-4 md:gap-4 rounded border-none my-4 px-4 py-4 sm:px-6 max-w-6xl bg-slate-100 text-sm text-gray-900"
+                            className="flex shrink-0 flex-col md:flex-row ms:place-content-evenly justify-between items-center rounded border-none h-28 my-4 px-4 py-4 max-w-6xl bg-slate-100 text-sm text-gray-900"
                           >
-                            {/* カラム1 画像 */}
-                            <div className="flex-shrink-0 h-20 w-20">
-                              <img src={order?.items_copy.pictures[0]} alt="" />
-                            </div>
-
-                            {/* カラム2 物品名 */}
-                            <div>
-                              <div className="font-bold mb-2">物品名</div>
-                              <div className="mb-2">
-                                {order?.items_copy?.name}
-                              </div>
-                            </div>
-
-                            {/* カラム3 貸出期間、金額 */}
-                            <div>
-                              <div className="font-bold mb-2">貸出期間</div>
-                              <div className="mb-2">
-                                <div>
-                                  {order?.period?.start} ～ {order?.period?.end}
+                            <div className="flex flex-row">
+                              <img
+                                className="h-20 aspect-square object-center object-fill"
+                                src={order?.items_copy.pictures[0]}
+                                alt={order?.items_copy?.name}
+                              />
+                              <div className="mx-4">
+                                <div className="mb-2">
+                                  {order?.items_copy?.name}
+                                </div>
+                                <div className="mb-2">
+                                  貸出期間 {order?.period?.start} ～{" "}
+                                  {order?.period?.end}
+                                </div>
+                                <div className="mb-2">
+                                  金額{" "}
+                                  {Number(
+                                    order?.payment?.total
+                                  ).toLocaleString()}
+                                  円
                                 </div>
                               </div>
-                              <div className="font-bold mb-2">金額</div>
-                              <div className="mb-2">
-                                {Number(order?.payment?.total).toLocaleString()}
-                                円
-                              </div>
                             </div>
 
-                            {/* カラム4 ステータス TODO componetに差替*/}
-                            <div className="items-center  text-sm font-bold">
-                              <span className="border border-black border-solid rounded px-4 py-2 my-2">
-                                {order?.status}
-                              </span>
-                              <br/>
-                              <span className="border border-black border-solid rounded px-4 py-2 my-2">
-                                {order?.payment?.status}
-                              </span>
+                            <div className="flex flex-row shrink-0 my-4">
+                              <Status>{order?.status}</Status>
+                              <Status>{order?.payment?.status}</Status>
                             </div>
                           </div>
                         </Link>

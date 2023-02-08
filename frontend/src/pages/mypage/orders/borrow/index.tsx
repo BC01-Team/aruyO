@@ -58,7 +58,7 @@ const MyPageOrdersBorrower = ({}: OrdersProps) => {
               <ContentsLayout>
                 <div className="my-8">
                   <Link href="/mypage/orders/lend">
-                    <Button>貸すものをみる</Button>
+                    <Button style="primary">貸すものをみる</Button>
                   </Link>
                 </div>
                 <div className="overflow-hidden">
