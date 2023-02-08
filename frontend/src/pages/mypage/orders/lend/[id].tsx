@@ -76,74 +76,70 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
         ) : (
           <>
             {!loading && order && user && order[0].lender.id === user.id && (
-              <>
-                <div className="flex">
-                  <Sidebar />
-                  <MypageLayout>
-                    <ContentsLayout>
-                      <PageTitle>貸出詳細</PageTitle>
-                      <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
-                        <ImageGallery alt={order[0].items_copy?.info?.name}>
-                          {order[0].items_copy?.pictures}
-                        </ImageGallery>
+              <div className="flex">
+                <Sidebar />
+                <MypageLayout>
+                  <ContentsLayout>
+                    <PageTitle>貸出詳細</PageTitle>
+                    <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
+                      <ImageGallery alt={order[0].items_copy?.info?.name}>
+                        {order[0].items_copy?.pictures}
+                      </ImageGallery>
 
-                        {/* 物品詳細 */}
-                        <div>
-                          <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-                            <ItemDetailBold>予約番号</ItemDetailBold>
-                            <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
-                              <div>{orderId}</div>
-                            </div>
-                            <ItemDetailBold>物品名</ItemDetailBold>
-                            <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
-                              {order[0].items_copy?.name}
-                            </div>
-                            <ItemDetailBold>借りる企業</ItemDetailBold>
-                            <div className="text-sm font-normal text-gray-900 mt-2 mb-1">
-                              {order[1].info?.name}
-                            </div>
-                            <div className="text-sm font-normal text-gray-900 mb-7">
-                              連絡先：{order[1].info?.phone}
-                            </div>
-                            <ItemDetailBold>貸出期間</ItemDetailBold>
-                            <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
-                              {order[0].period?.start} ～ {order[0].period?.end}
-                            </div>
-                            <ItemDetailBold>金額</ItemDetailBold>
-                            <div className="text-sm font-normal text-gray-900 mt-2 mb-7">
-                              <div>
-                                {Number(
-                                  order[0].payment?.total
-                                ).toLocaleString()}
-                                円
-                              </div>
-                            </div>
-                            <ItemDetailBold>ステータス</ItemDetailBold>
-                            <div className="flex my-5">
-                              <Status>{order[0].payment?.status}</Status>
-                              <Status>{order[0].status}</Status>
-                            </div>
+                      {/* 物品詳細 */}
+                      <div>
+                        <div className="text-sm font-normal text-gray-900 mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+                          <ItemDetailBold>予約番号</ItemDetailBold>
+                          <div className="mt-2 mb-7">
+                            <div>{orderId}</div>
                           </div>
 
-                          {/* チェックイン/チェックアウトのボタンでカメラ起動 */}
-                          <div className="mt-12">
-                            {order[0].status !== "予約確定" &&
-                            order[0].status !== "貸出中" ? (
-                              <></>
-                            ) : (
-                              <QrReader
-                                result={result}
-                                setResult={setResult}
-                                status={order[0].status}
-                              />
-                            )}
+                          <ItemDetailBold>物品名</ItemDetailBold>
+                          <div className="mt-2 mb-7">
+                            {order[0].items_copy?.name}
+                          </div>
+
+                          <ItemDetailBold>借りる企業</ItemDetailBold>
+                          <div className="mt-2">{order[1].info?.name}</div>
+                          <div className="mt-2 mb-7">
+                            連絡先：{order[1].info?.phone}
+                          </div>
+
+                          <ItemDetailBold>貸出期間</ItemDetailBold>
+                          <div className="mt-2 mb-7">
+                            {order[0].period?.start} ～ {order[0].period?.end}
+                          </div>
+
+                          <ItemDetailBold>金額</ItemDetailBold>
+                          <div className="mt-2 mb-7">
+                            {Number(order[0].payment?.total).toLocaleString()}円
+                          </div>
+
+                          <ItemDetailBold>ステータス</ItemDetailBold>
+                          <div className="flex my-5">
+                            <Status>{order[0].payment?.status}</Status>
+                            <Status>{order[0].status}</Status>
                           </div>
                         </div>
+
+                        {/* チェックイン/チェックアウトのボタンでカメラ起動 */}
+                        <div className="mt-12">
+                          {order[0].status !== "予約確定" &&
+                          order[0].status !== "貸出中" ? (
+                            <></>
+                          ) : (
+                            <QrReader
+                              result={result}
+                              setResult={setResult}
+                              status={order[0].status}
+                            />
+                          )}
+                        </div>
                       </div>
-                    </ContentsLayout>
-                  </MypageLayout>
-                </div>
-              </>
+                    </div>
+                  </ContentsLayout>
+                </MypageLayout>
+              </div>
             )}
           </>
         )}
