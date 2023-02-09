@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { axiosInstance } from "@/lib/axiosInstance";
 import { Order } from "@/types/order";
+import Link from "next/link";
 import Sidebar from "@/components/layouts/mypage/Sidebar";
 import MypageLayout from "@/components/layouts/mypage/MypageLayout";
 import PageTitle from "@/components/layouts/mypage/PageTitle";
@@ -124,7 +125,7 @@ const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
                           <div className="text-sm font-bold text-gray-900 mb-2">
                             チェックイン/チェックアウト用QR
                           </div>
-                          {/* TODO QRサイズ調整できていない、背景色要調整 */}
+                          {/* TODO QRサイズ調整、背景色を白に */}
                           <div className="max-h-30">
                             <QrGenerator
                               qrText={`予約番号：${order[0]._id},
@@ -160,7 +161,6 @@ const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
             </MypageLayout>
           </div>
         )}
-        {/* {loading && <div>ロード中</div>} */}
       </>
     </ProtectRoute>
   );

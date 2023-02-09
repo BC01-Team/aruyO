@@ -56,12 +56,12 @@ const MyPageItems = ({}: ItemProps) => {
             <MypageLayout>
               <PageTitle>登録物品 {items.length} 件</PageTitle>
               <ContentsLayout>
-                <div className="overflow-hidden">
-                  <ul role="list" className="">
+                <div>
+                  <div role="list">
                     {items &&
                       items.map((item, index: number) => {
                         return (
-                          <li key={index}>
+                          <div key={index}>
                             <Link
                               as={`/mypage/items/${item._id}`}
                               href={{
@@ -69,48 +69,40 @@ const MyPageItems = ({}: ItemProps) => {
                                 query: item._id,
                               }}
                             >
-                              <div className="flex flex-col md:flex-row items-center px-4 py-2 sm:px-6">
-                                <div className="flex flex-1 item-center rounded border-none p-4 bg-slate-100 max-w-6xl min-w-full h-28">
-                                  <div className="flex-shrink-0">
+                              <div className="flex flex-col md:flex-row items-center p-2 sm:px-6">
+                                <div className="flex flex-1 justify-between rounded border-none p-4 bg-slate-100 max-w-6xl min-w-full h-28 text-sm text-gray-900">
+                                  <div className="flex flex-row">
                                     <img
-                                      className="h-20 w-20"
+                                      className="h-20 w-20 aspect-square object-center object-fill"
                                       src={item.info?.pictures[0]}
                                       alt={item.info?.name}
                                     />
                                   </div>
-                                  <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+
+                                  <div className="min-w-0 flex-1 mx-2 md:grid md:grid-cols-2 md:gap-4">
                                     <div>
-                                      <p className="truncate text-sm font-medium text-amber-600">
-                                        {item.info?.name}
-                                      </p>
-                                      <p className="mt-2 flex items-center text-sm text-gray-900">
-                                        <span className="truncate">
-                                          金額
-                                          {Number(
-                                            item.info?.price
-                                          ).toLocaleString()}
-                                          円
-                                        </span>
-                                      </p>
-                                    </div>
-                                    <div className="hidden md:block">
-                                      <div>
-                                        <p className="text-sm text-gray-900">
-                                          表示させる項目は要検討
-                                        </p>
-                                        <p className="mt-2 flex items-center text-sm text-gray-900">
-                                          {item.info?.address}
-                                        </p>
+                                      <div className="mb-2">
+                                        {item?.info?.name}
+                                      </div>
+                                      <div className="mb-2">
+                                        金額{" "}
+                                        {Number(
+                                          item?.info?.price
+                                        ).toLocaleString()}
+                                        円/日
+                                      </div>
+                                      <div className="mb-2">
+                                        {item?.info?.address}
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </Link>
-                          </li>
+                          </div>
                         );
                       })}
-                  </ul>
+                  </div>
                 </div>
               </ContentsLayout>
             </MypageLayout>

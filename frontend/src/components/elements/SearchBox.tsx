@@ -18,7 +18,6 @@ const SearchBox = () => {
   // 検索API呼び出し onClickでうごく
   const Search = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(keyword);
     // 検索APIに渡すdataSetの作成
     const dataSet: DataSet = {
       key: keyword,
@@ -30,7 +29,6 @@ const SearchBox = () => {
       dataSet.info = {
         location: user.location,
       };
-      console.log("location:", dataSet.info.location);
     }
 
     axiosInstance
@@ -61,9 +59,7 @@ const SearchBox = () => {
         />
         {/* 型エラー要修正 */}
         <button className="absolute right-0 top-0 mt-3 mr-4" onClick={Search}>
-          {/* <Button style="primary"  */}
-            <img src="/img/searchMark.png"/ >
-          {/* </Button> */}
+          <img src="/img/searchMark.png" />
         </button>
       </div>
     </form>

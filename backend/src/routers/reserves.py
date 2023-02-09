@@ -16,7 +16,6 @@ router = APIRouter(
 
 # API_No.10 予約登録
 @router.post("/")
-# @router.post("/", response_model=reserve_schema.ReserveCreateResponse)
 def create_reserve(
     data: reserve_schema.ReserveCreate, session_id: Optional[str] = Cookie(None)
 ):

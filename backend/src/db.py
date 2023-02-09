@@ -1,11 +1,14 @@
 from pymongo import MongoClient
 import os
+from src.utils.logger.logger import setup_logger
+
+logger = setup_logger(__name__)
 
 MONGO_DATABASE_URL = os.environ.get("MONGO_DATABASE_URL") 
 
 DATABASE_URL=MONGO_DATABASE_URL
 
-print(DATABASE_URL)
+logger.debug(DATABASE_URL)
 
 client = MongoClient(DATABASE_URL)
 

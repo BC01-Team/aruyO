@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { GoogleMap, InfoWindowF, MarkerF } from "@react-google-maps/api";
 import { useLoadScript } from "@react-google-maps/api";
 
-
 // 地図描画範囲の初期値を設定。今後、ログイン状態ではユーザー位置情報を中心とした描画範囲に設定したい。
 const initialBounds = [
   {
@@ -37,13 +36,8 @@ function Map(props) {
 
   // 検索結果がある場合、検索結果から必要項目を抜き出してmakersに配列として入れる
   const results = props.results;
-  // console.log(results);
   const markers = [];
   results?.map((result) => {
-    // console.log("reult._id", reult._id);
-    // console.log("reult.info.name", reult.info.name);
-    // console.log("lat", reult.location.coordinates[0]);
-    // console.log("lng", reult.location.coordinates[1]);
     const location = result.location.coordinates;
     markers.push({
       id: result._id,
@@ -55,7 +49,6 @@ function Map(props) {
       },
     });
   });
-  console.log("markers", markers);
 
   // InfoWindow(吹き出し)用にどのマーカーがアクティブかを判断する
   const [activeMarker, setActiveMarker] = useState();
@@ -63,7 +56,6 @@ function Map(props) {
     if (marker === activeMarker) {
       return;
     }
-    console.log(marker);
     setActiveMarker(marker);
   };
 
