@@ -38,7 +38,7 @@ const ItemDetail = () => {
         setItem(res.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
 
     setHydrated(true);
@@ -70,7 +70,6 @@ const ItemDetail = () => {
     await axiosInstance
       .post("/reserves/", orderData, { withCredentials: true })
       .then((res) => {
-        console.log(res);
 
         const stripeCheckoutData = {
           account: connectedId,
@@ -88,7 +87,7 @@ const ItemDetail = () => {
         return createStripeCheckoutSession(stripeCheckoutData);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -96,11 +95,10 @@ const ItemDetail = () => {
     await axiosInstance
       .post("create-checkout-session", data, { withCredentials: true })
       .then((res) => {
-        console.log(res);
         router.push(res.data.checkout_session_url);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

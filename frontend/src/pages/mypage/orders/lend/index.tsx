@@ -45,8 +45,6 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
   if (!hydrated) return null;
   if (loading) return <Loading />;
 
-  console.log(orders);
-
   return (
     <ProtectRoute>
       <>

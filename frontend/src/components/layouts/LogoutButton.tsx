@@ -5,9 +5,7 @@ const LogoutButton = () => {
   const { logout } = useAuth();
 
   const onSubmitButton = async () => {
-    await logout()
-
-    console.log("logoutボタンがクリックされました");
+    await logout();
   };
 
   return (
