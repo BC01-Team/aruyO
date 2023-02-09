@@ -8,13 +8,11 @@ import ja from "date-fns/locale/ja";
 import { Item } from "@/types/item";
 import { useRecoilValue } from "recoil";
 import { userState } from "@/lib/atom";
-import { classNames } from "@/lib/class-names";
 import { getNumberOfDays } from "@/utils/getNumberOfDays";
 import { getStringFromDate } from "@/utils/getStringFromData";
 import { getTotalAmount } from "@/utils/getTotalAmount";
 import ImageGallery from "@/components/elements/details/ImageGallery";
 import Button from "@/components/elements/Button";
-// import PageTitle from "@/components/elements/PageTitle";
 import Loading from "@/components/elements/Loading";
 
 const ItemDetail = () => {
