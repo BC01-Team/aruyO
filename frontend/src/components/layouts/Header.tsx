@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <>
       <header className="z-50 border-b border-gray-400 mb-16">
-        <div className="container flex items-center md:h-20  p-5 flex-col md:flex-row">
+        <div className="container flex items-center md:h-20 p-5 flex-col md:flex-row">
           <div className="flex lg:order-1">
             <a href="/">
               <img className="h-9" src="/img/aruyoIcon.png" />
@@ -31,14 +31,23 @@ const Header = () => {
               {/* ログイン時と未ログイン時でボタンの表示を切り替え */}
               {user ? (
                 <div className="flex justify-between">
-                  <Link href="/" className="mx-2 text-sm font-bold text-gray-900">
+                  <Link
+                    href="/"
+                    className="mx-2 text-sm font-bold text-gray-900"
+                  >
                     借りる
                   </Link>
                   {/* ↓新規物品登録画面が作成できたらリンク先要変更 */}
-                  <Link href="/" className="mx-2 text-sm font-bold text-gray-900">
+                  <Link
+                    href="/mypage/items"
+                    className="mx-2 text-sm font-bold text-gray-900"
+                  >
                     貸す
                   </Link>
-                  <Link href="/mypage" className="mx-2 text-sm font-bold text-gray-900">
+                  <Link
+                    href="/mypage"
+                    className="mx-2 text-sm font-bold text-gray-900"
+                  >
                     マイページ
                   </Link>
                 </div>

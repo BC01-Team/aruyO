@@ -79,7 +79,7 @@ const MyPageItems = ({}: ItemProps) => {
                                     />
                                   </div>
 
-                                  <div className="min-w-0 flex-1 mx-2 md:grid md:grid-cols-2 md:gap-4">
+                                  <div className="min-w-0 flex-1 mx-2">
                                     <div>
                                       <div className="mb-2">
                                         {item?.info?.name}

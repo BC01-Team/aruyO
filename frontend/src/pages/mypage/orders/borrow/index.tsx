@@ -99,7 +99,7 @@ const MyPageOrdersBorrower = ({}: OrdersProps) => {
                                   </div>
                                 </div>
 
-                                <div className="flex flex-row shrink-0 items-center">
+                                <div className="flex flex-row shrink-0 items-center justify-end">
                                   <Status>{order?.status}</Status>
                                   <Status>{order?.payment?.status}</Status>
                                 </div>
