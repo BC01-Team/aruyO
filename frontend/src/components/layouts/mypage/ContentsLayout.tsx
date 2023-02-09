@@ -4,7 +4,7 @@ type Props = { children: ReactNode };
 
 const ContentsLayout = ({ children }: Props) => {
   return (
-    <div>
+    <div className="h-full">
       {children}
     </div>
   );

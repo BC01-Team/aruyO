@@ -50,7 +50,7 @@ const Mypage = ({}: UserProps) => {
     <ProtectRoute>
       <>
         {!loading && userInfo && (
-          <div className="flex">
+          <div className="flex h-full">
             <Sidebar />
             <MypageLayout>
               <ContentsLayout>

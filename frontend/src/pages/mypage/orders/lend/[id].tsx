@@ -76,7 +76,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
         ) : (
           <>
             {!loading && order && user && order[0].lender.id === user.id && (
-              <div className="flex">
+              <div className="flex h-full">
                 <Sidebar />
                 <MypageLayout>
                   <ContentsLayout>

@@ -50,7 +50,7 @@ const MyPageOrdersBorrower = ({}: OrdersProps) => {
     <ProtectRoute>
       <>
         {!loading && orders && (
-          <div className="flex">
+          <div className="flex h-full">
             <Sidebar />
             <MypageLayout>
               <PageTitle>借りるもの {orders.length} 件</PageTitle>

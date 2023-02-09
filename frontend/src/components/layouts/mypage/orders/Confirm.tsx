@@ -51,7 +51,7 @@ const Confirm = ({ result, status, setStatus, orderId, borrowerId }: Props) => {
   };
 
   return status === "予約確定" ? (
-    <div>
+    <div className="h-full">
       <div className="bg-white">
         <div className="flex flex-col items-center">
           <PageTitle>取引詳細</PageTitle>
@@ -73,7 +73,7 @@ const Confirm = ({ result, status, setStatus, orderId, borrowerId }: Props) => {
       </div>
     </div>
   ) : (
-    <div className="bg-white">
+    <div className="bg-white h-full">
       <div className="flex flex-col items-center">
         <PageTitle>取引詳細</PageTitle>
         <div className="border-t-4 w-6 py-2 border-black"></div>

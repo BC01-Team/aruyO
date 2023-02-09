@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="relative bottom-0 mt-10 md:h-20 bg-[#EBEBEB]">
+    <footer className="bottom-0 mt-10 md:h-20 bg-[#EBEBEB]">
       <div className="w-screen flex flex-col justify-center px-6 py-3 text-center text-xs">
         <p className="text-center leading-5">
           利用規約 | プライバシーポリシー | プライバシーステートメント |

@@ -49,7 +49,7 @@ const MyPageOrdersLender = ({}: OrdersProps) => {
     <ProtectRoute>
       <>
         {!loading && orders && (
-          <div className="flex">
+          <div className="flex h-full">
             <Sidebar />
             <MypageLayout>
               <PageTitle>貸すもの {orders.length} 件</PageTitle>
