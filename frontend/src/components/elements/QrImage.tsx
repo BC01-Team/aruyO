@@ -1,6 +1,4 @@
-import { ReactNode } from "react";
 import { useQRCode } from "next-qrcode";
-
 
 type Props = { qrText: string };
 
@@ -16,7 +14,7 @@ const QrImage = ({ qrText }: Props) => {
         width: 200,
         color: {
           dark: "#000000",
-          light: "#FFBF60F", // TODO 色検討
+          light: "#FFFFFF",
         },
       }}
     />
