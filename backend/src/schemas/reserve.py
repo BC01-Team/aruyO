@@ -8,7 +8,6 @@ from typing import Optional
 
 
 # TODO 調査一時停止。_idだとrequirement=true(必須)にならないが、idだと必須になる。
-# TODO strの見直し。決済に合わせる
 
 
 class Items_Copy(BaseModel):

@@ -1,7 +1,10 @@
 from src.utils.serializer.serializer import db_collection_serializer
 from src.db import db
 from passlib.context import CryptContext
+from src.utils.logger.logger import setup_logger
 
+
+logger = setup_logger(__name__)
 # companyコレクション
 collection = db.companies
 
@@ -14,9 +17,9 @@ def verify_password(plain_password: str, hashed_password: str):
 
 def get_user(email: str):
     find_user = {"staff": {"$elemMatch": {"email": email}}}
-    print("find_user", find_user)
+    logger.debug("find_user", find_user)
     user = collection.find_one(find_user)
-    print("user", user)
+    logger.debug(user)
     if not user:
         return False
     return db_collection_serializer(user)
@@ -27,7 +30,7 @@ def authenticate_user(email: str, password: str):
     if not user:
         return False
     hashed_password = user["staff"][0]["password"]
-    print("ck", hashed_password)
+    logger.debug("ck", hashed_password)
     if not verify_password(password, hashed_password):
         return False
     return user

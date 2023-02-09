@@ -25,7 +25,7 @@ const MyPageOrderDetailLender = ({}: OrderProps) => {
   const [loading, setLoading] = useState(false);
   const [order, setOrder] = useState<any>();
   const [result, setResult] = useState<string>("");
-  const [status, setStatus] = useState<string>(""); //TODO 不要？
+  const [status, setStatus] = useState<string>(""); 
 
   const user = useRecoilValue(userState);
 
