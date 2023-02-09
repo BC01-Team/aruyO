@@ -11,13 +11,7 @@ import { userState } from "@/lib/atom";
 import { axiosInstance } from "@/lib/axiosInstance";
 import { Item } from "@/types/item";
 
-type ItemProps = {
-  items: Item[];
-  item: Item;
-};
-
-// TODO 型の使い方確認
-const MyPageItems = ({}: ItemProps) => {
+const MyPageItems = () => {
   const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState(null);
@@ -46,7 +40,6 @@ const MyPageItems = ({}: ItemProps) => {
   if (!hydrated) return null;
   if (loading) return <Loading />;
 
-  // TODOレスポンシブCSS nav barが上に重なる
   return (
     <ProtectRoute>
       <>
@@ -79,7 +72,7 @@ const MyPageItems = ({}: ItemProps) => {
                                     />
                                   </div>
 
-                                  <div className="min-w-0 flex-1 mx-2 md:grid md:grid-cols-2 md:gap-4">
+                                  <div className="min-w-0 flex-1 mx-2">
                                     <div>
                                       <div className="mb-2">
                                         {item?.info?.name}

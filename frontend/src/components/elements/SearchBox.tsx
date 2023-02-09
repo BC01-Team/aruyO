@@ -34,12 +34,11 @@ const SearchBox = () => {
     axiosInstance
       .post("/search/", dataSet)
       .then((res) => {
-        console.log(res.data);
         setResult(res.data);
         router.push({ pathname: "/search", query: { keyword: keyword } });
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

@@ -1,13 +1,8 @@
-import {
-  createContext,
-  ReactNode,
-  useState,
-  useContext,
-} from "react";
+import { createContext, ReactNode, useState, useContext } from "react";
 import { axiosInstance } from "../lib/axiosInstance";
 import { useRouter } from "next/router";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { userState } from "../lib/atom"
+import { useRecoilState } from "recoil";
+import { userState } from "../lib/atom";
 
 type User = {
   id: string;
@@ -21,15 +16,14 @@ type UserType = User | null;
 
 type AuthProps = {
   children: ReactNode;
-}
+};
 
 type AuthContextType = {
   user: UserType;
   setUser: React.Dispatch<React.SetStateAction<UserType>>;
-  login: any
+  login: any;
   logout: () => void;
 };
-
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
@@ -51,27 +45,26 @@ export const AuthProvider = (props: AuthProps) => {
       password: password,
     };
     axiosInstance
-      .post("/login", data, {withCredentials: true
-})
+      .post("/login", data, { withCredentials: true })
       .then((res) => {
         setUser(res.data.user);
         router.back();
       })
       .catch((e) => {
-        console.log(e);
         alert("メールアドレスまたはパスワードを確認してください");
       });
   };
 
-
   const logout = () => {
     axiosInstance
-      .post("/logout",{logout}, { withCredentials: true })
+      .post("/logout", { logout }, { withCredentials: true })
       .then((res) => {
         setUser(null);
         router.push("/");
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        // console.log(e);
+      });
   };
 
   const value = {
@@ -83,4 +76,3 @@ export const AuthProvider = (props: AuthProps) => {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-

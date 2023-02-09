@@ -24,8 +24,6 @@ const Confirm = ({ result, status, setStatus, orderId, borrowerId }: Props) => {
   const handleStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const QrOrderId = result.split(",")[0].substring(5);
-    console.log(result);
-    console.log(QrOrderId);
 
     //読み込みしたQRとorderIdの一致確認する
     if (orderId !== QrOrderId) {

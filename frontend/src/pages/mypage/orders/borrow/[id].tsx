@@ -125,7 +125,6 @@ const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
                           <div className="text-sm font-bold text-gray-900 mb-2">
                             チェックイン/チェックアウト用QR
                           </div>
-                          {/* TODO QRサイズ調整、背景色を白に */}
                           <div className="max-h-30">
                             <QrGenerator
                               qrText={`予約番号：${order[0]._id},

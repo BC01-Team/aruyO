@@ -7,7 +7,7 @@ from typing import Optional
 # pydantic 名前:type宣言=値設定。Fieldの第一引数はデフォルト値, 省略（...）時は必須項目になる
 
 
-# TODO 調査一時停止。_idだとrequirement=true(必須)にならないが、idだと必須になる。
+# TODO _idだとrequirement=true(必須)にならないが、idだと必須になる。
 
 
 class Items_Copy(BaseModel):

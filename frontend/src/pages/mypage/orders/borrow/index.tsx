@@ -39,14 +39,12 @@ const MyPageOrdersBorrower = ({}: OrdersProps) => {
 
       setLoading(false);
       setOrders(res);
-      console.log(orders);
     };
     fetchData();
   }, []);
 
   if (!hydrated) return null;
   if (loading) return <Loading />;
-  console.log(orders);
 
   return (
     <ProtectRoute>
@@ -101,7 +99,7 @@ const MyPageOrdersBorrower = ({}: OrdersProps) => {
                                   </div>
                                 </div>
 
-                                <div className="flex flex-row shrink-0 items-center">
+                                <div className="flex flex-row shrink-0 items-center justify-end">
                                   <Status>{order?.status}</Status>
                                   <Status>{order?.payment?.status}</Status>
                                 </div>
