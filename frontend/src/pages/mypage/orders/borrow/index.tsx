@@ -77,7 +77,7 @@ const MyPageOrdersBorrower = ({}: OrdersProps) => {
                             <div className="flex flex-1 justify-between rounded border-none p-4 bg-slate-100 max-w-6xl min-w-full h-28 text-sm text-gray-900">
                               <div className="flex flex-row">
                                 <img
-                                  className="h-20 aspect-square object-center object-fill"
+                                  className="h-20 w-20 aspect-square object-center object-fill"
                                   src={order?.items_copy.pictures[0]}
                                   alt={order?.items_copy?.name}
                                 />
