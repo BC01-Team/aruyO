@@ -51,7 +51,7 @@ const MyPageItemDetail = () => {
     <ProtectRoute>
       <>
         {!loading && item && (
-          <div className="flex">
+          <div className="flex h-full">
             <Sidebar />
             <MypageLayout>
               <ContentsLayout>

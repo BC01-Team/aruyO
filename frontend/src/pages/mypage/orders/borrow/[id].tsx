@@ -68,7 +68,7 @@ const MyPageOrderDetailBorrower = ({ result }: OrderProps) => {
     <ProtectRoute>
       <>
         {!loading && order && user && order[0].borrower.id === user.id && (
-          <div className="flex">
+          <div className="flex h-full">
             <Sidebar />
             <MypageLayout>
               <ContentsLayout>

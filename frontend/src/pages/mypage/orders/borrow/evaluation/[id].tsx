@@ -19,7 +19,7 @@ const Evaluation = () => {
   return (
     <ProtectRoute>
       <>
-        <div className="bg-white">
+        <div className="bg-white h-full">
           <div className="flex flex-col items-center">
             <PageTitle>取引評価</PageTitle>
             <div className="text-lg mt-5 font-semibold">

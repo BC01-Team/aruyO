@@ -44,7 +44,7 @@ const MyPageItems = () => {
     <ProtectRoute>
       <>
         {!loading && items && (
-          <div className="flex">
+          <div className="flex h-full">
             <Sidebar />
             <MypageLayout>
               <PageTitle>登録物品 {items.length} 件</PageTitle>
