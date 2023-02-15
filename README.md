@@ -3,7 +3,7 @@
 
 ![image](https://user-images.githubusercontent.com/107560126/219029888-8e5d1704-4ff0-4eac-97b1-40e4bf89183e.png)
 
-# Features
+## 機能
 - セッション認証
 - ログイン
 - 検索機能（キーワード部分一致・距離）
@@ -15,7 +15,10 @@
 - 取引のチェックイン（QR生成）・チェックアウト（QR Reader）
 - 取引相手の評価
 
-# Built With
+## 使い方
+
+![2023210 MsE Stage - aruyo (1)](https://user-images.githubusercontent.com/107560126/219031322-fedb9899-fa67-429c-bd01-c88ba9e8a80c.png)
+
 - TypeScript: 4.9.4
 - Node.js: 18.14.0
 - NEXT.js: 13.1.4
@@ -28,11 +31,6 @@
 - MongoDB: 4.0
 - Docker: 20.10.17
 - AWS EC2, DocumentDB, ElastiCache(redis)
-
-# Getting Started
-
-
-![2023210 MsE Stage - aruyo (1)](https://user-images.githubusercontent.com/107560126/219031322-fedb9899-fa67-429c-bd01-c88ba9e8a80c.png)
 
 
 ![2023210 MsE Stage - aruyo](https://user-images.githubusercontent.com/107560126/219030911-827628ee-f668-48b1-9320-6c3eb16ec96c.png)
