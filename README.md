@@ -19,12 +19,12 @@
 
 1.リポジトリのクローン
 ```
-$ git clone https://github.com/kimagure-inc/femeats.git
+$ git clone https://github.com/BC01-Team/aruyO.git
 ```
 
 2.ルートディレクトリへ移動
 ```
-$ cd femeats
+$ cd auyO
 ```
 
 3.dockerコマンドを入力
