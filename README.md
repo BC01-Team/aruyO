@@ -17,6 +17,26 @@
 
 ## 使い方
 
+1.リポジトリのクローン
+```
+$ git clone https://github.com/kimagure-inc/femeats.git
+```
+
+2.ルートディレクトリへ移動
+```
+$ cd femeats
+```
+
+3.dockerコマンドを入力
+```
+$ docker-compose up
+```
+
+4.アプリにアクセスする
+```
+http://localhost:3000
+```
+
 ![2023210 MsE Stage - aruyo (1)](https://user-images.githubusercontent.com/107560126/219031322-fedb9899-fa67-429c-bd01-c88ba9e8a80c.png)
 
 - TypeScript: 4.9.4
