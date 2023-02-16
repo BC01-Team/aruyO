@@ -1,6 +1,9 @@
 # aruyO
 使用頻度が低いものを地域の企業/住民同士で貸し借りしあえるマッチングサービス
 
+![0210_本番用バックアップ_AdobeExpress](https://user-images.githubusercontent.com/107560126/219248055-1d12724d-d03f-4c6d-a5c7-7f5b1bfaee28.gif)
+
+
 ![image](https://user-images.githubusercontent.com/107560126/219029888-8e5d1704-4ff0-4eac-97b1-40e4bf89183e.png)
 
 ## 機能
@@ -28,6 +31,10 @@ $ cd auyO
 ```
 
 3.dockerコマンドを入力
+```
+docker-compose run -w /usr/src/app --rm frontend npm install
+```
+
 ```
 $ docker-compose up
 ```
