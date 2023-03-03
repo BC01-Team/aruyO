@@ -26,9 +26,9 @@ def test_is_prime():
 #         "info": {
 #             "name": "検索テスト　3Dプリンター",
 #             "pictures": [
-#                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/3Dprinter_front.png",
-#                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/3Dprinter_side.png",
-#                 "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/3Dprinter_specification.png",
+#                 "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/3Dprinter_front.png",
+#                 "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/3Dprinter_side.png",
+#                 "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/3Dprinter_specification.png",
 #             ],
 #             "detail": "材料はご準備ください。",
 #             "take_out": "false",
