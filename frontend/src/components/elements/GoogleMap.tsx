@@ -6,22 +6,18 @@ import { useLoadScript } from "@react-google-maps/api";
 const initialBounds = [
   {
     id: 1,
-    name: "グリー株式会社",
     position: { lat: 35.658756, lng: 139.731986 },
   },
   {
     id: 2,
-    name: "株式会社メルカリ",
     position: { lat: 35.660205, lng: 139.729202 },
   },
   {
     id: 3,
-    name: "株式会社カッシーナ・イクスシー",
     position: { lat: 35.6705225, lng: 139.7036485 },
   },
   {
     id: 4,
-    name: "㈱ビームス 本社（BEAMS）",
     position: { lat: 35.6706882, lng: 139.6891846 },
   },
 ];
