@@ -5,8 +5,8 @@ no_keyword = [
         "info": {
             "name": "検索テスト　ホワイトボード",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-front.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-back.jpg"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/white-board-front.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/white-board-back.jpg"
             ],
             "detail": "使用後は書いたものを消してください",
             "requirements": "平日日中のみ",
@@ -22,7 +22,7 @@ no_keyword = [
         "info": {
             "name": "検索テスト　裁断機",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/裁断機.gif"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/裁断機.gif"
             ],
             "detail": "A2まで裁断可能。",
             "requirements": "平日日中のみ",
@@ -38,8 +38,8 @@ no_keyword = [
         "info": {
             "name": "検索テスト　送風機",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/buggufann.png",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/buggufann2.png"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/buggufann.png",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/buggufann2.png"
             ],
             "detail": "口径:200φ、電源:単相100ｖ、風量:17ｍ3/min(50Hz)、重量:9kg、羽枚数:5枚",
             "take_out": "true",
@@ -54,9 +54,9 @@ no_keyword = [
         "info": {
             "name": "検索テスト　3Dプリンター",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/3Dprinter_front.png",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/3Dprinter_side.png",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/3Dprinter_specification.png"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/3Dprinter_front.png",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/3Dprinter_side.png",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/3Dprinter_specification.png"
             ],
             "detail": "材料はご準備ください。",
             "take_out": "false",
@@ -71,9 +71,9 @@ no_keyword = [
         "info": {
             "name": "検索テスト　イベント・催事用に！冷蔵ケーキ用ショーケース",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/cake_showcase.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/cake_showcase2.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/cake_showcase3.jpg"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/cake_showcase.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/cake_showcase2.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/cake_showcase3.jpg"
             ],
             "detail": "",
             "requirements": "屋内利用限定。食品用のため衛生面に注意して使用してください。利用後は、 テープなどはきれいに剥がし、ガラス面をきれいに拭いてください。",
@@ -89,9 +89,9 @@ no_keyword = [
         "info": {
             "name": "検索テスト　洗車用脚立",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/car_kyatatsu.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/car_kyatatsu_2.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/car_kyatatsu_3.jpg"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/car_kyatatsu.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/car_kyatatsu_2.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/car_kyatatsu_3.jpg"
             ],
             "detail": "転落に注意してください。",
             "requirements": "",
@@ -107,11 +107,11 @@ no_keyword = [
         "info": {
             "name": "検索テスト　イベント・催事用に！揚げ物用ホットケース1段",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/hot_case.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/hot_case2.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/hot_case3.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/hot_case4.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/hot_case.jpg"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/hot_case.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/hot_case2.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/hot_case3.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/hot_case4.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/hot_case.jpg"
             ],
             "detail": "使用中は熱くなりますので火傷に注意してください。",
             "requirements": "使用後は分解してキレイに洗浄してください。",
@@ -127,9 +127,9 @@ no_keyword = [
         "info": {
             "name": "検索テスト　イベント・催事用に！揚げ物用ホットケース2段",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/hot_case_2F.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/hot_case_2F_2.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/hot_case_2F_3.jpg"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/hot_case_2F.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/hot_case_2F_2.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/hot_case_2F_3.jpg"
             ],
             "detail": "使用中は熱くなりますので火傷に注意してください。",
             "requirements": "使用後は分解してキレイに洗浄してください。",
@@ -145,8 +145,8 @@ no_keyword = [
         "info": {
             "name": "検索テスト　草刈り機",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/kusakariki.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/kusakariki2.png"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/kusakariki.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/kusakariki2.png"
             ],
             "detail": "刃物ですので安全に注意してください。",
             "requirements": "土日のみ貸出可能",
@@ -162,8 +162,8 @@ no_keyword = [
         "info": {
             "name": "検索テスト　イベント・催事用に！冷蔵ストッカー３段",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/showcase3F.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/showcase_3F_2.jpg"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/showcase3F.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/showcase_3F_2.jpg"
             ],
             "detail": "",
             "requirements": "利用後は水気を拭き取って乾かしてから返却してください。",
@@ -179,8 +179,8 @@ no_keyword = [
         "info": {
             "name": "検索テスト　イベント・催事用に！店舗用什器",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/store_jyuki.png",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/store_jyuki2.png"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/store_jyuki.png",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/store_jyuki2.png"
             ],
             "detail": "キャスター付きのため、軽い商品ならそのまま移動できます。",
             "requirements": "屋内利用限定。利用後は、テープなどをきれいに剥がしてください。",
@@ -198,8 +198,8 @@ name1 = [{
     "info": {
         "name": "検索テスト　イベント・催事用に！冷蔵ストッカー３段",
         "pictures": [
-            "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/showcase3F.jpg",
-            "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/showcase_3F_2.jpg"
+            "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/showcase3F.jpg",
+            "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/showcase_3F_2.jpg"
         ],
         "detail": "",
         "requirements": "利用後は水気を拭き取って乾かしてから返却してください。",
@@ -217,8 +217,8 @@ name2 = [{
     "info": {
         "name": "検索テスト　イベント・催事用に！冷蔵ストッカー３段",
         "pictures": [
-            "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/showcase3F.jpg",
-            "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/showcase_3F_2.jpg"
+            "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/showcase3F.jpg",
+            "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/showcase_3F_2.jpg"
         ],
         "detail": "",
         "requirements": "利用後は水気を拭き取って乾かしてから返却してください。",
@@ -234,9 +234,9 @@ name2 = [{
         "info": {
             "name": "検索テスト　イベント・催事用に！冷蔵ケーキ用ショーケース",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/cake_showcase.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/cake_showcase2.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/cake_showcase3.jpg"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/cake_showcase.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/cake_showcase2.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/cake_showcase3.jpg"
             ],
             "detail": "",
             "requirements": "屋内利用限定。食品用のため衛生面に注意して使用してください。利用後は、 テープなどはきれいに剥がし、ガラス面をきれいに拭いてください。",
@@ -254,8 +254,8 @@ detail = [{
         "info": {
             "name": "検索テスト　送風機",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/buggufann.png",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/buggufann2.png"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/buggufann.png",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/buggufann2.png"
             ],
             "detail": "口径:200φ、電源:単相100ｖ、風量:17ｍ3/min(50Hz)、重量:9kg、羽枚数:5枚",
             "take_out": "true",
@@ -272,9 +272,9 @@ requirements = [{
         "info": {
             "name": "検索テスト　イベント・催事用に！冷蔵ケーキ用ショーケース",
             "pictures": [
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/cake_showcase.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/cake_showcase2.jpg",
-                "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/cake_showcase3.jpg"
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/cake_showcase.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/cake_showcase2.jpg",
+                "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/cake_showcase3.jpg"
             ],
             "detail": "",
             "requirements": "屋内利用限定。食品用のため衛生面に注意して使用してください。利用後は、テープなどはきれいに剥がし、ガラス面をきれいに拭いてください。",

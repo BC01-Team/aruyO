@@ -87,8 +87,8 @@ class ReserveCreateResponse(ReserveCreate):
                     "_id": "63d607e9f7e435916eb7ae51",
                     "name": "ホワイトボード",
                     "pictures": [
-                        "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-front.jpg",
-                        "https://bc1-w2-haruko.s3.ap-northeast-1.amazonaws.com/white-board-back.jpg",
+                        "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/white-board-front.jpg",
+                        "https://s3.ap-northeast-1.amazonaws.com/aruyo.inc/white-board-back.jpg",
                     ],
                     "detail": "使用後は書いたものを消してください",
                     "requirements": "平日日中のみ受け付けています",
